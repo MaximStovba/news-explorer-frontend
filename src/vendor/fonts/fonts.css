@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'Inter';
+  src: url("inter-regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url("roboto-black.woff") format("woff"),
+       url("roboto-medium.woff") format("woff"),
+       url("roboto-regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url("robotoslab-regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url("sourcesanspro-regular.woff") format("woff");
+}
