@@ -6,7 +6,7 @@ import './SearchForm.css';
 function SearchForm() {
   return (
     <form className="search-form">
-      <h1>Search Form!</h1>
+      
     </form>
   );
 }

@@ -1,8 +1,25 @@
 .header {
+  /* расположение в сетке main */
+  z-index: 1;
+  grid-column: 1;
+  grid-row: 1/2;
+  /* декоротивный элемент снизу */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  /* сетка header */
+  display: grid;
+  grid-template-columns: 2fr;
+  grid-template-rows: 1fr;
+}
+
+.header__logo {
+  margin: 30px 0 0 104px;
   font-family: Roboto Slab;
   font-style: normal;
-  font-weight: normal;
-  font-size: 30px;
-  line-height: 34px;
-  color: #1A1B22;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+  color: #FFFFFF;
+  /* расположение в сетке header */
+  grid-column: 1/2;
+  grid-row: 1;
 }

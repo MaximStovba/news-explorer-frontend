@@ -1,3 +1,54 @@
 .navigation {
-  
+  margin-right: 104px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 24px;
+  color: #FFFFFF;
+  /* расположение в сетке header */
+  grid-column: 2/3;
+  grid-row: 1;
+  /* выравнивание по вертикале */
+  align-items: center;
+}
+
+.navigation_status_signin {
+  /* сетка navigation */
+  display: grid;
+  grid-template-columns: repeat(3, min-content);
+  grid-template-rows: 1fr;
+  grid-template-areas:
+  "navigation__link_type_main navigation__link_type_article navigation__btn";
+}
+
+.navigation_status_signout {
+  /* сетка navigation */
+  display: grid;
+  grid-template-columns: repeat(2, min-content);
+  grid-template-rows: 1fr;
+  grid-template-areas:
+  "navigation__link_type_main navigation__btn";
+}
+
+.navigation__link {
+  margin: 0;
+}
+
+.navigation__link_type_main {
+  /* расположение в сетке navigation */
+  grid-area: navigation__link_type_main;
+  margin-right: 34px;
+}
+
+.navigation__link_type_article {
+  /* расположение в сетке navigation */
+  grid-area: navigation__link_type_article;
+  margin-right: 32px;
+}
+
+.navigation__btn {
+  margin: 0;
+  /* расположение в сетке navigation */
+  grid-area: navigation__btn;
 }
