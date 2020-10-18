@@ -1,10 +1,12 @@
 .navigation {
-  margin-right: 104px;
+  margin: 0;
   /* расположение в сетке header */
   grid-column: 2/3;
   grid-row: 1;
   /* выравнивание по вертикале */
   align-items: center;
+  /* выравнивание сетки navigation */
+  justify-content: end;
 }
 
 .navigation_status_signin {

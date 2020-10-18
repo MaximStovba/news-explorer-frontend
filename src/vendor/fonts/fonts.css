@@ -5,9 +5,11 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: url("roboto-black.woff") format("woff"),
-       url("roboto-medium.woff") format("woff"),
-       url("roboto-regular.woff") format("woff");
+  src: url("roboto-regular.woff") format("woff");
+      /*
+      url("roboto-black.woff") format("woff"),
+      url("roboto-medium.woff") format("woff"),
+      */
 }
 
 @font-face {

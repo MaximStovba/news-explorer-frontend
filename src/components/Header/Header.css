@@ -1,4 +1,6 @@
 .header {
+  /* боковые отступы */
+  padding: 0 104px;
   /* расположение в сетке main */
   z-index: 1;
   grid-column: 1;
@@ -7,12 +9,14 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   /* сетка header */
   display: grid;
-  grid-template-columns: 2fr;
+  grid-template-columns: repeat(2, 1fr);;
   grid-template-rows: 1fr;
+  /* выравнивание по вертикале */
+  align-items: center;
 }
 
 .header__logo {
-  margin: 30px 0 0 104px;
+  margin: 0;
   font-family: Roboto Slab;
   font-style: normal;
   font-weight: bold;
