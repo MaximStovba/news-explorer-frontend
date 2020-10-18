@@ -8,11 +8,9 @@ function SearchForm() {
     <form name="search" method="POST" action="#" className="search-form" noValidate>
       <h1 className="search-form__title">Что творится в мире?</h1>
       <p className="search-form__text">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.</p>
-      <input
-        type="text"
-        name="search"
+      <input type="text"
+        name="text"
         placeholder="Введите тему новости"
-        id="search-input"
         className="search-form__input"
         minLength="2"
         maxLength="30"
