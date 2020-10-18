@@ -1,8 +1,76 @@
 .footer {
-  font-family: Roboto Slab;
+  /* боковые отступы */
+  padding: 0 104px;
+  /* сетка footer */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);;
+  grid-template-rows: 80px;
+  grid-template-areas:
+  "footer__copyright footer__column-links";
+  /* выравнивание содержимого по вертикале */
+  align-items: center;
+}
+
+.footer__copyright {
+  margin: 0;
+  /* расположение в сетке footer */
+  grid-area: footer__copyright;
+  /* стилизация текста */
+  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 30px;
-  line-height: 34px;
+  font-size: 16px;
+  line-height: 22px;
+  color: #B6BCBF;
+}
+
+.footer__column-links {
+  /* расположение в сетке footer */
+  grid-area: footer__column-links;
+  /* ul / li */
+  margin-left: 0; /* Отступ слева в браузере IE и Opera */
+  padding-left: 0; /* Отступ слева в браузере Firefox, Safari, Chrome */
+  list-style-type: none; /* Убираем маркеры */
+  /* сетка footer__column-links */
+  display: grid;
+  grid-template-columns: repeat(4, min-content);
+  grid-template-rows: 1fr;
+  grid-template-areas:
+    "footer__link_name_main footer__link_name_yap footer__link_name_fb footer__link_name_gh";
+  /* выравнивание сетки footer__column-links */
+  justify-content: end;
+}
+
+.footer__link_type_text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
   color: #1A1B22;
+  text-decoration: none;
+}
+
+.footer__link_name_main {
+  grid-area: footer__link_name_main;
+  margin-right: 30px;
+}
+
+.footer__link_name_yap {
+  grid-area: footer__link_name_yap;
+  margin-right: 35px;
+}
+
+.footer__link_name_fb {
+  grid-area: footer__link_name_fb;
+  margin-right: 26px;
+}
+
+.footer__link_name_gh {
+  grid-area: footer__link_name_gh;
+}
+
+.footer__social-icon {
+  width: 24px;
+  height: 24px;
 }
