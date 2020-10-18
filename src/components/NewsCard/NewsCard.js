@@ -6,7 +6,7 @@ import './NewsCard.css';
 function NewsCard() {
   return (
     <div className="news-card">
-      <h1>News Card!</h1>
+      <h2 className="news-card__text">News Card!</h2>
     </div>
   );
 }

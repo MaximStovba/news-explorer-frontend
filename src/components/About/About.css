@@ -1,10 +1,10 @@
 .about {
+  margin: 80px 0 80px 104px;
   /* сетка about */
   display: grid;
   grid-template-columns: 464px fit-content(600px);
   grid-template-rows: min-content 1fr;
   column-gap: 56px;
-  margin: 80px 0 80px 104px;
   grid-template-areas:
   "about__img-container about__title"
   "about__img-container about__article";
