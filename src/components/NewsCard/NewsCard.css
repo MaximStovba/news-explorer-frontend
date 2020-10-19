@@ -1,13 +1,170 @@
-.news-card {
-  
+.card {
+  margin: 0;
+  background-color: #ffffff;
+  border-radius: 16px;
+  /* сетка card */
+  display: grid;
+  grid-template-columns: 136px 200px 64px;
+  grid-template-rows:
+    repeat(3, min-content)
+    minmax(min-content, max-content)
+    1fr
+    54px;
+  grid-template-areas:
+    "card__keyword card__hint card__btn"
+    ". . ."
+    "card__date card__date card__date"
+    "card__title card__title card__title"
+    "card__text card__text card__text"
+    "card__source card__source card__source";
+  /* выравнивание сетки card */
+  align-content: space-between;
+}
+.card__image {
+  width: 400px;
+  height: 272px;
+  border-radius: 10px 10px 0px 0px;
+  /* расположение в сетке card */
+  grid-column: 1/-1;
+  grid-row: 1/3;
 }
 
-.news-card__text {
-  margin: 0;
+.card__title {
+  margin: 12px 24px 0 24px;
+  /* расположение в сетке card */
+  grid-area: card__title;
+  /* стилизация */
   font-family: Roboto Slab;
   font-style: normal;
   font-weight: normal;
   font-size: 26px;
   line-height: 30px;
   color: #1A1B22;
+}
+
+.card__title_overflow {
+  max-height: 90px;
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
+  text-overflow: ellipsis; /* Добавляем многоточие */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.card__date {
+  margin: 20px 0 0 24px;
+  /* расположение в сетке card */
+  grid-area: card__date;
+  /* стилизация */
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #B6BCBF;
+}
+
+.card__text {
+  margin: 16px 24px 0 24px;
+  /* расположение в сетке card */
+  grid-area: card__text;
+  /* стилизация */
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: #1A1B22;
+}
+
+.card__text_overflow {
+  max-height: 88px;
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
+  text-overflow: ellipsis; /* Добавляем многоточие */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.card__source {
+  margin: 10px 0 24px 24px;
+  /* расположение в сетке card */
+  grid-area: card__source;
+  justify-self: start;
+  align-self: end;
+  /* стилизация */
+  font-family: Roboto Slab;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #B6BCBF;
+}
+
+.card__keyword {
+  margin: 0;
+  /* расположение в сетке card */
+  grid-area: card__keyword;
+  justify-self: start;
+  align-self: start;
+  margin-top: 24px;
+  margin-left: 24px;
+  /* стилизация */
+  padding: 0 10px;
+  height: 40px;
+  max-width: 112px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+}
+
+.card__hint {
+  margin: 0;
+  /* расположение в сетке card */
+  grid-area: card__hint;
+  justify-self: end;
+  align-self: start;
+  margin-top: 24px;
+  margin-right: 5px;
+  /* стилизация */
+  padding: 0 10px;
+  height: 40px;
+  max-width: 182px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+}
+
+.card__btn {
+  padding: 0;
+  /* расположение в сетке card */
+  grid-area: card__btn;
+  justify-self: end;
+  align-self: start;
+  margin-top: 24px;
+  margin-right: 24px;
+  /* стилизация */
+  background: #FFFFFF;
+  border-radius: 8px;
+  border-width: 0;
+  width: 40px;
+  height: 40px;
 }

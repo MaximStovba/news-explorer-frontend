@@ -13,7 +13,6 @@
 
 .news-cardlist__titel {
   margin: 0;
-  margin-bottom: 64px;
   grid-area: news-cardlist__titel;
   font-family: Roboto Slab;
   font-style: normal;
@@ -25,6 +24,16 @@
 
 .news-cardlist__container {
   grid-area: news-cardlist__container;
+  /* сетка news-cardlist__container */
+  margin: 64px auto 0;
+  max-width: 1232px;
+  display: grid;
+  grid-template-columns: repeat(3, 400px);
+  grid-template-rows: repeat(2, 576px);
+  grid-auto-rows: 576px;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  justify-content: center;
 }
 
 .news-cardlist__btn {
