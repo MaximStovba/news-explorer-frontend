@@ -7,6 +7,7 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 import About from '../About/About';
 import Footer from '../Footer/Footer';
 import Preloader from '../Preloader/Preloader';
+import NotFound from '../NotFound/NotFound';
 import './Main.css';
 
 function Main() {
@@ -16,6 +17,7 @@ function Main() {
       <SearchForm />
       <Preloader />
       <NewsCardList />
+      <NotFound />
       <About />
       <Footer />
     </div>
