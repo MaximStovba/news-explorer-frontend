@@ -110,7 +110,7 @@
 .navigation__btn_logout:after {
   content: '';
   position: absolute;
-  width: 17.41px;
+  width: 18px;
   height: 16px;
   background-image: url(../../images/logout_black.svg);
   background-position: center;

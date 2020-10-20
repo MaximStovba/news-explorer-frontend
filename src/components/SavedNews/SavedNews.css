@@ -1,4 +1,5 @@
 .saved-news {
+  /* сетка saved-news */
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows:

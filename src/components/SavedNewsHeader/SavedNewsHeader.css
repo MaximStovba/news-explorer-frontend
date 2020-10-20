@@ -1,1 +1,58 @@
+.saved-news-header {
+  /* расположение в сетке saved-news */
+  grid-column: 1;
+  grid-row: 2/3;
+  /* сетка saved-news-header*/
+  display: grid;
+  grid-template-columns: 800px;
+  grid-template-rows: repeat(3, min-content);
+  grid-template-areas:
+    "saved-news-header__title"
+    "saved-news-header__statistics"
+    "saved-news-header__keyword";
+  /* выравнивание сетки saved-news-header */
+  justify-content: start;
+  align-content: start;
+  margin: 40px 0 0 104px;
+}
 
+.saved-news-header__title {
+  margin: 0;
+  /* расположение в сетке saved-news-header  */
+  grid-area: saved-news-header__title;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(26, 27, 34, 0.5);
+}
+
+.saved-news-header__statistics {
+  max-width: 530px;
+  margin: 28px 0 0;
+  /* расположение в сетке saved-news-header  */
+  grid-area: saved-news-header__statistics;
+  font-family: Roboto Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 46px;
+  color: #1A1B22;
+}
+
+.saved-news-header__keyword {
+  margin: 28px 0 0;
+  /* расположение в сетке saved-news-header  */
+  grid-area: saved-news-header__keyword;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1A1B22;
+}
+
+.saved-news-header__span-accent {
+  font-weight: bold;
+}
