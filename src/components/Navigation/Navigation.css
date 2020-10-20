@@ -35,18 +35,24 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
-  color: #B6BCBF;
+  /* --> style_white/black */
   text-decoration: none;
 }
 
-.navigation__link_hidden {
-  display: none;
+.navigation__link_style_white {
+  color: #FFFFFF;
+  border-bottom: white;
+}
+
+.navigation__link_style_black {
+  color: #1A1B22;
+  border-bottom: #1A1B22;
 }
 
 .navigation__link_status_active {
   line-height: 77px;
-  color: #FFFFFF;
-  border-bottom: 3px white solid;
+  /* --> style_white/black */
+  border-bottom: 3px solid;
 }
 
 .navigation__link_type_main {
@@ -61,6 +67,10 @@
   margin-right: 32px;
 }
 
+.navigation__link_hidden {
+  display: none;
+}
+
 .navigation__btn {
   /* расположение в сетке navigation */
   grid-area: navigation__btn;
@@ -69,7 +79,7 @@
   width: auto;
   height: 48px;
   background-color: transparent;
-  border: 1px solid #FFFFFF;
+  border: 1px solid;
   box-sizing: border-box;
   border-radius: 100px;
   /* надпись кнопки */
@@ -79,7 +89,16 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
+}
+
+.navigation__btn_style_white {
   color: #FFFFFF;
+  border-color: #FFFFFF;
+}
+
+.navigation__btn_style_black {
+  color: #1A1B22;
+  border-color: #1A1B22;
 }
 
 .navigation__btn_logout {
@@ -93,7 +112,7 @@
   position: absolute;
   width: 17.41px;
   height: 16px;
-  background-image: url(../../images/logout.svg);
+  background-image: url(../../images/logout_black.svg);
   background-position: center;
   right: 12px;
   top: 16px;

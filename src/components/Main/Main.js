@@ -10,11 +10,11 @@ import Preloader from '../Preloader/Preloader';
 import NotFound from '../NotFound/NotFound';
 import './Main.css';
 
-function Main() {
+function Main( {loggedIn} ) {
   return (
     <div className="main">
       <SearchForm />
-      <Header />
+      <Header loggedIn={loggedIn} />
       <Preloader />
       <NewsCardList />
       <NotFound />

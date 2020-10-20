@@ -7,8 +7,9 @@
   text-rendering: optimizeLegibility;
   /* Основной код для desctop */
   font-family: 'Inter', 'Roboto', 'Roboto Slab', 'Source Sans Pro', 'Arial', sans-serif;
+  max-width: 1440px;
+  margin: auto;
 /*
-
   padding-top: 45px;
   min-width: 300px;
 */

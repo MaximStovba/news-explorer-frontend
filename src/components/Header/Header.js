@@ -4,11 +4,11 @@ import React from 'react';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
 
-function Header() {
+function Header({ loggedIn }) {
   return (
     <header className="header">
       <p className="header__logo header__logo_style_white">NewsExplorer</p>
-      <Navigation />
+      <Navigation loggedIn={loggedIn} />
     </header>
   );
 }

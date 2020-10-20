@@ -1,0 +1,7 @@
+.saved-news {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows:
+    80px
+    repeat(2, min-content);
+}
