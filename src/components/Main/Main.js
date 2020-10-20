@@ -13,8 +13,8 @@ import './Main.css';
 function Main() {
   return (
     <div className="main">
-      <Header />
       <SearchForm />
+      <Header />
       <Preloader />
       <NewsCardList />
       <NotFound />

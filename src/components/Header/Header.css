@@ -22,8 +22,15 @@
   font-weight: bold;
   font-size: 20px;
   line-height: 24px;
-  color: #FFFFFF;
   /* расположение в сетке header */
   grid-column: 1/2;
   grid-row: 1;
+}
+
+.header__logo_style_black {
+  color: #1A1B22;
+}
+
+.header__logo_style_white {
+  color: #FFFFFF;
 }
