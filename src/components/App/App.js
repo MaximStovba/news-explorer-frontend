@@ -5,7 +5,7 @@ import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import './App.css';
 
-const loggedIn = false;
+const loggedIn = true;
 
 function App() {
   return (

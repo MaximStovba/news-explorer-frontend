@@ -19,6 +19,8 @@
     "card__source card__source card__source";
   /* выравнивание сетки card */
   align-content: space-between;
+  /* курсор */
+  cursor: pointer;
 }
 .card__image {
   width: 400px;
@@ -156,6 +158,7 @@
 }
 
 .card__btn {
+  z-index: 1;
   padding: 0;
   /* расположение в сетке card */
   grid-area: card__btn;
@@ -164,17 +167,16 @@
   margin-top: 24px;
   margin-right: 24px;
   /* стилизация */
-  background: #FFFFFF;
+  background-color: #FFFFFF;
   box-sizing: border-box;
   border-radius: 8px;
   border-width: 0;
   width: 40px;
   height: 40px;
   cursor: pointer;
-}
-
-.card__btn:hover {
-  /* кнопка при наведении мыши плавно становиться немного прозрачной */
-  opacity: 0.7;
-  transition: opacity 1s ease;
+  /* дизайн кнопки фоновым изображением
+  background-image - задается динамически */
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-position: center;
 }

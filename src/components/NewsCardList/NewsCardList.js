@@ -18,11 +18,11 @@ function NewsCardList({ loggedIn }) {
        `}>Результаты поиска
       </h2>
       <div className={`news-cardlist__container news-cardlist__container_status_${loggedIn ? 'login' : 'logout'}`}>
-        <NewsCard loggedIn={loggedIn} />
-        <NewsCard loggedIn={loggedIn} />
-        <NewsCard loggedIn={loggedIn} />
-        <NewsCard loggedIn={loggedIn} />
-        <NewsCard loggedIn={loggedIn} />
+        <NewsCard loggedIn={loggedIn} isLiked={false} />
+        <NewsCard loggedIn={loggedIn} isLiked={true} />
+        <NewsCard loggedIn={loggedIn} isLiked={false} />
+        <NewsCard loggedIn={loggedIn} isLiked={true} />
+        <NewsCard loggedIn={loggedIn} isLiked={false} />
       </div>
       <button
           type="submit"

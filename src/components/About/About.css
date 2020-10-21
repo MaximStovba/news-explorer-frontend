@@ -48,8 +48,10 @@
   /* фоновое изображение */
   height: 464px;
   width: 464px;
+  border-radius: 1000px;
   background:
-    url(../../images/about-img.png)
+    url(../../images/about-img.jpeg)
     no-repeat
     center;
+    background-size: cover;
 }
