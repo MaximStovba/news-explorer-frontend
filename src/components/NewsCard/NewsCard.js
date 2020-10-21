@@ -3,9 +3,10 @@
 import React from 'react';
 import './NewsCard.css';
 import img from '../../images/card_image.png';
-import btn_icon from '../../images/btn_like_marked.svg';
+import like_marked from '../../images/btn_like_marked.svg';
+import trash_enbl from '../../images/btn_trash_enbl.svg';
 
-function NewsCard() {
+function NewsCard({ loggedIn }) {
   return (
     <div className="card">
       <img className="card__image" src={img} alt="img" />
@@ -14,8 +15,8 @@ function NewsCard() {
       <p className="card__text card__text_overflow">Фотограф отвлеклась от освещения суровой политической реальности Мексики , чтобы запечатлеть ускользающую красоту.</p>
       <p className="card__source">Медуза</p>
       <p className="card__keyword">Природа</p>
-      <p className="card__hint">Войдите, чтобы сохранять статьи</p>
-      <button className="card__btn"><img className="card__btn-icon" src={btn_icon} alt="btn_icon" /></button>
+      <p className="card__hint">{`${loggedIn ? 'Убрать из сохранённых' : 'Войдите, чтобы сохранять статьи'}`}</p>
+      <button className="card__btn"><img className="card__btn-icon" src={loggedIn ? trash_enbl : like_marked } alt="Кнопка" /></button>
     </div>
   );
 }

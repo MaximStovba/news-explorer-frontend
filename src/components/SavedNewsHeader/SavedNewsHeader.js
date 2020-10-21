@@ -3,7 +3,7 @@
 import React from 'react';
 import './SavedNewsHeader.css';
 
-const userName = "Грета";
+const userName = "Максим";
 const numSavedArticles = "5";
 const firstKeyWord = "Природа";
 const secondKeyWord = "Тайга";

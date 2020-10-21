@@ -16,7 +16,7 @@ function Main( {loggedIn} ) {
       <SearchForm />
       <Header loggedIn={loggedIn} />
       <Preloader />
-      <NewsCardList />
+      <NewsCardList loggedIn={loggedIn} />
       <NotFound />
       <About />
       <Footer />

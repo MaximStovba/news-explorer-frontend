@@ -1,9 +1,21 @@
 .news-cardlist {
   background: #F5F6F7;
-  padding: 80px 104px;
   /* сетка news-cardlist  */
   display: grid;
   grid-template-columns: 1fr;
+}
+
+.news-cardlist_status_login {
+  padding: 0 104px;
+  grid-template-rows: repeat(3, min-content);
+  grid-template-areas:
+    "."
+    "news-cardlist__container"
+    ".";
+}
+
+.news-cardlist_status_logout {
+  padding: 80px 104px;
   grid-template-rows: repeat(3, min-content);
   grid-template-areas:
     "news-cardlist__titel"
@@ -13,7 +25,6 @@
 
 .news-cardlist__titel {
   margin: 0;
-  grid-area: news-cardlist__titel;
   font-family: Roboto Slab;
   font-style: normal;
   font-weight: normal;
@@ -22,10 +33,17 @@
   color: #1A1B22;
 }
 
+.news-cardlist__titel_status_login {
+  display: none;
+}
+
+.news-cardlist__titel_status_logout {
+  grid-area: news-cardlist__titel;
+}
+
 .news-cardlist__container {
   grid-area: news-cardlist__container;
   /* сетка news-cardlist__container */
-  margin: 64px auto 0;
   max-width: 1232px;
   display: grid;
   grid-template-columns: repeat(3, 400px);
@@ -36,8 +54,15 @@
   justify-content: center;
 }
 
+.news-cardlist__container_status_login {
+  margin: 62px auto;
+}
+
+.news-cardlist__container_status_logout {
+  margin: 64px auto 0;
+}
+
 .news-cardlist__btn {
-  grid-area: news-cardlist__btn;
   padding: 0;
   margin-top: 64px;
   width: 288px;
@@ -57,4 +82,12 @@
 
 .news-cardlist__btn_hidden {
   display: none;
+}
+
+.news-cardlist__btn_status_login {
+  display: none;
+}
+
+.news-cardlist__btn_status_logout {
+  grid-area: news-cardlist__btn;
 }

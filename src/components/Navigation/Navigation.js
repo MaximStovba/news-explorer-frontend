@@ -3,6 +3,8 @@
 import React from 'react';
 import './Navigation.css';
 
+const userName = "Максим";
+
 function Navigation({ loggedIn }) {
   return (
     <nav className={`navigation navigation_status_${loggedIn ? 'signin' : 'signout'}`}>
@@ -27,7 +29,7 @@ function Navigation({ loggedIn }) {
          `navigation__btn
           navigation__btn_style_${loggedIn ? 'black' : 'white'}
           ${loggedIn ? 'navigation__btn_logout' : ''}`
-      }>Авторизоваться</button>
+        }>{`${loggedIn ? userName : 'Авторизоваться'}`}</button>
     </nav>
   );
 }

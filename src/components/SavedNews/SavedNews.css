@@ -4,5 +4,5 @@
   grid-template-columns: 1fr;
   grid-template-rows:
     80px
-    repeat(2, min-content);
+    repeat(3, min-content);
 }

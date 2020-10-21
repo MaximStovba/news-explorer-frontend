@@ -13,7 +13,7 @@
   /* выравнивание сетки saved-news-header */
   justify-content: start;
   align-content: start;
-  margin: 40px 0 0 104px;
+  margin: 40px 0 56px 104px;
 }
 
 .saved-news-header__title {
