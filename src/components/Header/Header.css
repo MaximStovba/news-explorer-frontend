@@ -33,6 +33,14 @@
   /* расположение в сетке header */
   grid-column: 1/2;
   grid-row: 1;
+  text-decoration: none;
+}
+
+.header__logo:hover {
+  /* лого при наведении мыши плавно становиться немного прозрачной */
+  opacity: 0.7;
+  transition: opacity 1s ease;
+  cursor: pointer;
 }
 
 .header__logo_style_black {

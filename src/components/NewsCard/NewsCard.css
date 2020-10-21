@@ -151,6 +151,8 @@
   align-items: center;
   text-align: center;
   color: #000000;
+  /* видимость по умолчанию */
+  visibility: hidden;
 }
 
 .card__btn {
@@ -163,8 +165,16 @@
   margin-right: 24px;
   /* стилизация */
   background: #FFFFFF;
+  box-sizing: border-box;
   border-radius: 8px;
   border-width: 0;
   width: 40px;
   height: 40px;
+  cursor: pointer;
+}
+
+.card__btn:hover {
+  /* кнопка при наведении мыши плавно становиться немного прозрачной */
+  opacity: 0.7;
+  transition: opacity 1s ease;
 }

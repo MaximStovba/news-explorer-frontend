@@ -6,7 +6,20 @@ import img from '../../images/card_image.png';
 import like_marked from '../../images/btn_like_marked.svg';
 import trash_enbl from '../../images/btn_trash_enbl.svg';
 
+
 function NewsCard({ loggedIn }) {
+  // Переменная состояния
+  const [hintStyle, setHintStyle] = React.useState('');
+  const style = { visibility: hintStyle };
+
+  function handleMouseEnter() {
+    setHintStyle('visible');
+  }
+
+  function handleMouseLeave() {
+    setHintStyle('hidden');
+  }
+
   return (
     <div className="card">
       <img className="card__image" src={img} alt="img" />
@@ -15,8 +28,13 @@ function NewsCard({ loggedIn }) {
       <p className="card__text card__text_overflow">Фотограф отвлеклась от освещения суровой политической реальности Мексики , чтобы запечатлеть ускользающую красоту.</p>
       <p className="card__source">Медуза</p>
       <p className="card__keyword">Природа</p>
-      <p className="card__hint">{`${loggedIn ? 'Убрать из сохранённых' : 'Войдите, чтобы сохранять статьи'}`}</p>
-      <button className="card__btn"><img className="card__btn-icon" src={loggedIn ? trash_enbl : like_marked } alt="Кнопка" /></button>
+      <p className="card__hint" style={ style }>{`${loggedIn ? 'Убрать из сохранённых' : 'Войдите, чтобы сохранять статьи'}`}</p>
+      <button
+        className="card__btn"
+        onMouseEnter={ handleMouseEnter }
+        onMouseLeave={ handleMouseLeave }>
+          <img className="card__btn-icon" src={loggedIn ? trash_enbl : like_marked } alt="Кнопка" />
+      </button>
     </div>
   );
 }

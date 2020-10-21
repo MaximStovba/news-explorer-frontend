@@ -41,6 +41,12 @@
   justify-content: end;
 }
 
+.footer__link:hover {
+  /* ссылка при наведении мыши плавно становиться немного прозрачной */
+  opacity: 0.7;
+  transition: opacity 1s ease;
+}
+
 .footer__link_type_text {
   font-family: Roboto;
   font-style: normal;

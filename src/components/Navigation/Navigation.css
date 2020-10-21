@@ -39,6 +39,12 @@
   text-decoration: none;
 }
 
+.navigation__link:hover {
+  /* ссылка при наведении мыши плавно становиться немного прозрачной */
+  opacity: 0.7;
+  transition: opacity 1s ease;
+}
+
 .navigation__link_style_white {
   color: #FFFFFF;
   border-bottom: white;
@@ -89,6 +95,13 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
+  cursor: pointer;
+}
+
+.navigation__btn:hover {
+  /* кнопка при наведении мыши плавно становиться немного прозрачной */
+  opacity: 0.7;
+  transition: opacity 1s ease;
 }
 
 .navigation__btn_style_white {
