@@ -4,8 +4,13 @@ import React from 'react';
 import './Login.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import InputElement from '../InputElement/InputElement';
+import ButtonElement from '../ButtonElement/ButtonElement';
 
-function Login({isOpen, onClose, onLogin}) {
+function Login({
+  isOpen,
+  onClose,
+  //onLogin,
+}) {
 
   // стейт переменные
   const [email, setEmail] = React.useState('');
@@ -16,8 +21,9 @@ function Login({isOpen, onClose, onLogin}) {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
     // сохраняем значения полей
-    onLogin({email, password});
-    console.log(onLogin);
+    // onLogin({email, password});
+    console.log(email);
+    console.log(password);
     // сбрасываем все поля формы
     e.target.reset();
   }
@@ -61,6 +67,13 @@ function Login({isOpen, onClose, onLogin}) {
           idSpan="password-input-error"
           isInputValid={false}
           validationMessage="Ошибка валидации!"
+        />
+        <ButtonElement
+          isSbmtBtnActiv={true}
+          name="signin"
+          btnText="Войти"
+          link="/sign-up"
+          linkName="Зарегистрироваться"
         />
       </>
       }

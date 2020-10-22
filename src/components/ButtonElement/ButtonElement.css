@@ -1,0 +1,50 @@
+.popup__btn {
+  margin: 39px 36px 16px 36px;
+  padding: 0;
+  border-width: 0;
+  background: #2F71E5;
+  border-radius: 100px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #FFFFFF;
+  text-align: center;
+  height: 64px;
+  pointer-events: initial;
+}
+
+.popup__btn:hover {
+  background: #347EFF;
+  cursor: pointer;
+}
+
+.popup__btn_disabled {
+  background: #E6E8EB;
+  color: #B6BCBF;
+  cursor: default;
+  pointer-events: none;
+}
+
+.login__hint {
+  margin-bottom: 28px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #000000;
+}
+
+.login__link {
+  color: #2F71E5;
+  text-decoration: none;
+}
+
+.login__link:visited {
+  color: #2F71E5;
+  text-decoration: none;
+}
+
