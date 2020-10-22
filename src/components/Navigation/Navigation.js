@@ -5,7 +5,7 @@ import './Navigation.css';
 
 const userName = "Максим";
 
-function Navigation({ loggedIn, isMain }) {
+function Navigation({ loggedIn, isMain, handleLogInClick }) {
   return (
     <nav className={`navigation navigation_status_${loggedIn ? 'signin' : 'signout'}`}>
       <a href="/" className={
@@ -25,6 +25,7 @@ function Navigation({ loggedIn, isMain }) {
     : ""
   }
       <button type="button"
+        onClick={handleLogInClick}
         className={
          `navigation__btn
           navigation__btn_style_${!isMain ? 'black' : 'white'}

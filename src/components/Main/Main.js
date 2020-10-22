@@ -12,11 +12,11 @@ import './Main.css';
 
 const isMain = true;
 
-function Main( {loggedIn} ) {
+function Main( {loggedIn, handleLogInClick} ) {
   return (
     <div className="main">
       <SearchForm />
-      <Header loggedIn={loggedIn} isMain={isMain} />
+      <Header loggedIn={loggedIn} isMain={isMain} handleLogInClick={handleLogInClick} />
       <Preloader />
       <NewsCardList loggedIn={loggedIn} isMain={isMain} />
       <NotFound />
