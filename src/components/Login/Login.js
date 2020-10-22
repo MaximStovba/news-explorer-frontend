@@ -3,13 +3,21 @@
 import React from 'react';
 import './Login.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
+import InputElement from '../InputElement/InputElement';
 
-function Login({isOpen, onClose}) {
+function Login({isOpen, onClose, onLogin}) {
+
+  // стейт переменные
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   // обработчик сабмита формы
   function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
+    // сохраняем значения полей
+    onLogin({email, password});
+    console.log(onLogin);
     // сбрасываем все поля формы
     e.target.reset();
   }
@@ -18,7 +26,44 @@ function Login({isOpen, onClose}) {
     <PopupWithForm
       name="login"
       title="Вход"
-      children=""
+      children={
+      <>
+        <InputElement
+          // <h3> //
+          inputTitle="Email"
+          // <input> //
+          idInput="email-input"
+          type="email"
+          name="email"
+          value={email}
+          handleChangeInput={e => setEmail(e.target.value)}
+          placeholder="Введите почту"
+          minLength="2"
+          maxLength="30"
+          // <span> //
+          idSpan="email-input-error"
+          isInputValid={false}
+          validationMessage="Ошибка валидации!"
+        />
+        <InputElement
+          // <h3> //
+          inputTitle="Пароль"
+          // <input> //
+          idInput="password-input"
+          type="password"
+          name="password"
+          value={password}
+          handleChangeInput={e => setPassword(e.target.value)}
+          placeholder="Введите пароль"
+          minLength="8"
+          maxLength="24"
+          // <span> //
+          idSpan="password-input-error"
+          isInputValid={false}
+          validationMessage="Ошибка валидации!"
+        />
+      </>
+      }
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
