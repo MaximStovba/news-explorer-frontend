@@ -130,3 +130,20 @@
   right: 12px;
   top: 16px;
 }
+
+.navigation__btn_logout_main {
+  position: relative;
+  text-align: left;
+  padding-right: 38px;
+}
+
+.navigation__btn_logout_main:after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  background-image: url(../../images/logout_white.svg);
+  background-position: center;
+  right: 12px;
+  top: 16px;
+}

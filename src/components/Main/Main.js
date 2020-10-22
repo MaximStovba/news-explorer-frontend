@@ -10,13 +10,15 @@ import Preloader from '../Preloader/Preloader';
 import NotFound from '../NotFound/NotFound';
 import './Main.css';
 
+const isMain = true;
+
 function Main( {loggedIn} ) {
   return (
     <div className="main">
       <SearchForm />
-      <Header loggedIn={loggedIn} />
+      <Header loggedIn={loggedIn} isMain={isMain} />
       <Preloader />
-      <NewsCardList loggedIn={loggedIn} />
+      <NewsCardList loggedIn={loggedIn} isMain={isMain} />
       <NotFound />
       <About />
       <Footer />

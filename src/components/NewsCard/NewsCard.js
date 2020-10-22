@@ -10,7 +10,7 @@ import trash_enbl from '../../images/btn_trash_enbl.svg';
 import trash_dsbl from '../../images/btn_trash_dsbl.svg';
 
 
-function NewsCard({ loggedIn, isLiked }) {
+function NewsCard({ loggedIn, isLiked, isMain }) {
   // переменная состояния (всплывающая подсказка)
   const [hintStyle, setHintStyle] = React.useState('');
   // задаем переменную стиля для всплывающей подсказки
@@ -24,7 +24,7 @@ function NewsCard({ loggedIn, isLiked }) {
   React.useEffect(() => {
     function decorateCardBtn() {
       if (loggedIn) {setTrashStyle(trash_dsbl)}
-      if (isLiked) {
+      if (isLiked && loggedIn) {
         setLikeStyle(like_marked);
       } else {
         setLikeStyle(like_normal);
@@ -33,16 +33,26 @@ function NewsCard({ loggedIn, isLiked }) {
     decorateCardBtn();
   }, [isLiked, loggedIn]);
 
+  // обрабатываем событие наведения курсора мыши
   function handleMouseEnter() {
     setHintStyle('visible');
     if (loggedIn) {setTrashStyle(trash_enbl)}
     if (!isLiked) { setLikeStyle(like_hover) }
   }
 
+  // обрабатываем событие снятия курсора мыши
   function handleMouseLeave() {
     setHintStyle('hidden');
     if (loggedIn) {setTrashStyle(trash_dsbl)}
     if (!isLiked) {setLikeStyle(like_normal)}
+  }
+
+  // выбор надписи подсказки для кнопки лайка
+  function likeMessage() {
+    if (isMain && !isLiked) {
+      return 'Сохранить'
+    }
+    return 'Убрать из сохранённых'
   }
 
   return (
@@ -53,10 +63,10 @@ function NewsCard({ loggedIn, isLiked }) {
       <p className="card__text card__text_overflow">Фотограф отвлеклась от освещения суровой политической реальности Мексики , чтобы запечатлеть ускользающую красоту.</p>
       <p className="card__source">Медуза</p>
       <p className="card__keyword">Природа</p>
-      <p className="card__hint" style={ style }>{`${loggedIn ? 'Убрать из сохранённых' : 'Войдите, чтобы сохранять статьи'}`}</p>
+      <p className="card__hint" style={ style }>{`${loggedIn ? likeMessage() : 'Войдите, чтобы сохранять статьи'}`}</p>
       <button
         className="card__btn"
-        style={{ backgroundImage: `url(${ loggedIn ? trashStyle : likeStyle })` }}
+        style={{ backgroundImage: `url(${ loggedIn && !isMain ? trashStyle : likeStyle })` }}
         onMouseEnter={ handleMouseEnter }
         onMouseLeave={ handleMouseLeave }>
       </button>
