@@ -1,7 +1,7 @@
 // App.js
 
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Login from '../Login/Login';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
@@ -13,12 +13,14 @@ import './App.css';
 
   const loggedIn = false;
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
+  const history = useHistory();
 
   // обработчик открытия попапа "добавления новой карточки"
   function handleLogInClick() {
-    console.log('open');
     // открываем попап
     setIsLoginPopupOpen(true);
+    // переадресовываем на окно аутентификации
+    history.push('/sign-in');
   }
 
   // обработчик закрытия всех попапов
@@ -44,13 +46,15 @@ import './App.css';
           loggedIn={loggedIn}
           handleLogInClick={handleLogInClick}
         />
-        <Login
-          isOpen={isLoginPopupOpen}
-          onClose={closeAllPopups}
-        />
       </Route>
       }
     </Switch>
+    <Route path="/sign-in">
+      <Login
+        isOpen={isLoginPopupOpen}
+        onClose={closeAllPopups}
+      />
+    </Route>
     </div>
   );
 }
