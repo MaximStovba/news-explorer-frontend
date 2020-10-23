@@ -9,12 +9,9 @@ import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import './App.css';
 
-
-
   function App() {
 
-  // const loggedIn = false;
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);

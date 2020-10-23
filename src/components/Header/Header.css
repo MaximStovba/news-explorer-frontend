@@ -50,3 +50,21 @@
 .header__logo_style_white {
   color: #FFFFFF;
 }
+
+@media all and (max-width : 800px) { /* 768 */
+  .header {
+    /* боковые отступы */
+    padding: 0 40px;
+  }
+}
+
+@media all and (max-width : 400px) { /* 320 */
+  .header {
+    /* боковые отступы */
+    padding: 0 16px;
+  }
+  .header__logo {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

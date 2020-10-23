@@ -123,12 +123,12 @@
 .navigation__btn_logout:after {
   content: '';
   position: absolute;
-  width: 18px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   background-image: url(../../images/logout_black.svg);
   background-position: center;
   right: 12px;
-  top: 16px;
+  top: calc((48px - 24px) / 2);
 }
 
 .navigation__btn_logout_main {
@@ -140,10 +140,39 @@
 .navigation__btn_logout_main:after {
   content: '';
   position: absolute;
-  width: 18px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   background-image: url(../../images/logout_white.svg);
   background-position: center;
   right: 12px;
-  top: 16px;
+  top: calc((48px - 24px) / 2);
+}
+
+@media all and (max-width : 800px) { /* 768 */
+  .navigation__link {
+    font-size: 16px;
+  }
+  .navigation__link_status_active {
+    line-height: 63px;
+  }
+  .navigation__link_type_main {
+    margin-right: 16px;
+  }
+  .navigation__link_type_article {
+    margin-right: 16px;
+  }
+  .navigation__btn {
+    height: 40px;
+    font-size: 16px;
+  }
+  .navigation__btn_logout:after {
+    top: calc((40px - 24px) / 2);
+  }
+  .navigation__btn_logout_main:after {
+    top: calc((40px - 24px) / 2);
+  }
+}
+
+@media all and (max-width : 400px) { /* 320 */
+
 }
