@@ -10,6 +10,7 @@ function Login({
   isOpen,
   onClose,
   handleSignUpLinkClick,
+  authorizationUser,
   //onLogin,
 }) {
 
@@ -25,8 +26,8 @@ function Login({
     // onLogin({email, password});
     console.log(email);
     console.log(password);
-    // закрываем попап
-    onClose();
+    // авторизуем
+    authorizationUser();
     // сбрасываем все поля формы
     e.target.reset();
   }

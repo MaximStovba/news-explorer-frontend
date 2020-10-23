@@ -13,7 +13,8 @@ import './App.css';
 
   function App() {
 
-  const loggedIn = false;
+  // const loggedIn = false;
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
@@ -46,6 +47,13 @@ import './App.css';
     history.push('/success');
   }
 
+  // авторизация
+  function authorizationUser() {
+    setLoggedIn(true);
+    // переадресовываем
+    history.push('/saved-news');
+  }
+
   // обработчик закрытия всех попапов
   function closeAllPopups() {
     // закрываем попап
@@ -62,7 +70,7 @@ import './App.css';
       ?
       <>
         <Route path="/saved-news"><SavedNews loggedIn={loggedIn} /></Route>
-        <Route path="/"><Main loggedIn={loggedIn} /></Route>
+        <Route exact path="/"><Main loggedIn={loggedIn} /></Route>
       </>
       :
       <Route path="/">
@@ -78,6 +86,7 @@ import './App.css';
         isOpen={isLoginPopupOpen}
         onClose={closeAllPopups}
         handleSignUpLinkClick={handleSignUpLinkClick}
+        authorizationUser={authorizationUser}
       />
     </Route>
     <Route path="/sign-up">
