@@ -25,6 +25,8 @@ function Login({
     // onLogin({email, password});
     console.log(email);
     console.log(password);
+    // закрываем попап
+    onClose();
     // сбрасываем все поля формы
     e.target.reset();
   }

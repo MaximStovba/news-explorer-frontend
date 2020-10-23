@@ -4,6 +4,7 @@ import React from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import './App.css';
@@ -15,20 +16,22 @@ import './App.css';
   const loggedIn = false;
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
   const history = useHistory();
 
-  // обработчик открытия попапа "добавления новой карточки"
+  // обработчик открытия попапа "аутентификации"
   function handleLogInClick() {
     // открываем попап
     setIsLoginPopupOpen(true);
-    // переадресовываем на окно аутентификации
+    // переадресовываем
     history.push('/sign-in');
   }
 
+  // обработчик открытия попапа "регистрации"
   function handleSignUpLinkClick() {
     // открываем попап
     setIsRegisterPopupOpen(true);
-    // переадресовываем на окно аутентификации
+    // переадресовываем
     history.push('/sign-up');
   }
 
@@ -36,11 +39,19 @@ import './App.css';
     handleLogInClick();
   }
 
+  // обработчик открытия попапа "информации об успешной регистрации"
+  function handleInfoLinkClick() {
+    setIsInfoTooltipPopupOpen(true);
+    // переадресовываем
+    history.push('/success');
+  }
+
   // обработчик закрытия всех попапов
   function closeAllPopups() {
     // закрываем попап
     setIsLoginPopupOpen(false);
     setIsRegisterPopupOpen(false);
+    setIsInfoTooltipPopupOpen(false);
   }
 
   return (
@@ -74,6 +85,13 @@ import './App.css';
         isOpen={isRegisterPopupOpen}
         onClose={closeAllPopups}
         handleSignInLinkClick={handleSignInLinkClick}
+        handleInfoLinkClick={handleInfoLinkClick}
+      />
+    </Route>
+    <Route path="/success">
+      <InfoTooltip
+        isOpen={isInfoTooltipPopupOpen}
+        onClose={closeAllPopups}
       />
     </Route>
     </div>

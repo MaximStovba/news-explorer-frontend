@@ -10,6 +10,7 @@ function Register({
   isOpen,
   onClose,
   handleSignInLinkClick,
+  handleInfoLinkClick,
   //onLogin,
 }) {
 
@@ -18,7 +19,7 @@ function Register({
   const [password, setPassword] = React.useState('');
   const [name, setName] = React.useState('');
 
-  // обработчик сабмита формы
+  // обработчик сабмита формы регистрации
   function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
@@ -27,6 +28,8 @@ function Register({
     console.log(email);
     console.log(password);
     console.log(name);
+    // открываем попап информации
+    handleInfoLinkClick();
     // сбрасываем все поля формы
     e.target.reset();
   }
