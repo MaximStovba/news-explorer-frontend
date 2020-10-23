@@ -1,5 +1,5 @@
 .popup__btn {
-  margin: 39px 36px 16px 36px;
+  margin: 8px 36px 16px 36px;
   padding: 0;
   border-width: 0;
   background: #2F71E5;
@@ -27,24 +27,14 @@
   pointer-events: none;
 }
 
-.login__hint {
-  margin-bottom: 28px;
+.popup__btn-error {
+  margin: 1px 36px 0px 36px;
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 12px;
+  line-height: 15px;
   text-align: center;
-  color: #000000;
+  color: #FF0000;
+  text-align: center;
 }
-
-.login__link {
-  color: #2F71E5;
-  text-decoration: none;
-}
-
-.login__link:visited {
-  color: #2F71E5;
-  text-decoration: none;
-}
-

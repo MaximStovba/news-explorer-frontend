@@ -9,6 +9,7 @@ import ButtonElement from '../ButtonElement/ButtonElement';
 function Register({
   isOpen,
   onClose,
+  handleSignInLinkClick,
   //onLogin,
 }) {
 
@@ -91,9 +92,11 @@ function Register({
           isSbmtBtnActiv={true}
           name="signup"
           btnText="Зарегистрироваться"
-          link="/sign-in"
-          linkName="Войти"
         />
+        <h3
+          className="register__hint">
+          или <span className="register__link" onClick={handleSignInLinkClick}>Войти</span>
+        </h3>
       </>
       }
       isOpen={isOpen}

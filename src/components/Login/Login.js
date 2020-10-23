@@ -9,6 +9,7 @@ import ButtonElement from '../ButtonElement/ButtonElement';
 function Login({
   isOpen,
   onClose,
+  handleSignUpLinkClick,
   //onLogin,
 }) {
 
@@ -72,9 +73,11 @@ function Login({
           isSbmtBtnActiv={true}
           name="signin"
           btnText="Войти"
-          link="/sign-up"
-          linkName="Зарегистрироваться"
         />
+        <h3
+          className="login__hint">
+          или <span className="login__link" onClick={handleSignUpLinkClick}>Зарегистрироваться</span>
+        </h3>
       </>
       }
       isOpen={isOpen}

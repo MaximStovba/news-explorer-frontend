@@ -7,20 +7,15 @@ function ButtonElement({
   isSbmtBtnActiv,
   btnName,
   btnText,
-  link,
-  linkName,
 }) {
   return (
     <>
+      <span className="popup__btn-error">Такой пользователь уже есть!</span>
       <button
         disabled={isSbmtBtnActiv ? false : true}
         type="submit"
         className={`popup__btn popup__btn_action_${btnName} ${isSbmtBtnActiv ? '' : 'popup__btn_disabled'}`}>{btnText}
       </button>
-      <h3
-        className="login__hint">
-        или <a className="login__link" href={link}>{linkName}</a>
-      </h3>
     </>
   );
 }
