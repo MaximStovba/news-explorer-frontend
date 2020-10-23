@@ -4,6 +4,7 @@
     url(../../images/search_bg.png)
     no-repeat
     center;
+  background-size: cover;
   /* расположение в сетке main */
   grid-column: 1;
   grid-row: 1/3;

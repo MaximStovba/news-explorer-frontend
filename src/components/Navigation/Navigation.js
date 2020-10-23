@@ -32,6 +32,8 @@ function Navigation({ loggedIn, isMain, handleLogInClick }) {
           ${loggedIn ? 'navigation__btn_logout' : ''}
           ${loggedIn && isMain ? 'navigation__btn_logout_main' : ''}`
         }>{`${loggedIn ? userName : 'Авторизоваться'}`}</button>
+
+      <button className="navigation__mini-btn"></button>
     </nav>
   );
 }
