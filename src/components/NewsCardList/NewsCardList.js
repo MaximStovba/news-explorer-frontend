@@ -21,8 +21,6 @@ function NewsCardList({ loggedIn, isMain }) {
         <NewsCard loggedIn={loggedIn} isLiked={false} isMain={isMain} />
         <NewsCard loggedIn={loggedIn} isLiked={true} isMain={isMain} />
         <NewsCard loggedIn={loggedIn} isLiked={false} isMain={isMain} />
-        <NewsCard loggedIn={loggedIn} isLiked={true} isMain={isMain} />
-        <NewsCard loggedIn={loggedIn} isLiked={false} isMain={isMain} />
       </div>
       <button
           type="submit"
