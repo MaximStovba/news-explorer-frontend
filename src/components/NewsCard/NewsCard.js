@@ -59,8 +59,8 @@ function NewsCard({ loggedIn, isLiked, isMain }) {
     <div className="card">
       <img className="card__image" src={img} alt="img" />
       <p className="card__date">2 августа, 2019</p>
-      <h2 className="card__title card__title_overflow">Лесные огоньки: история одной красивой фотографии</h2>
-      <p className="card__text card__text_overflow">Фотограф отвлеклась от освещения суровой политической реальности Мексики , чтобы запечатлеть ускользающую красоту.</p>
+      <h2 className="card__title card__title_overflow">Лесные огоньки: история одной фотографии</h2>
+      <p className="card__text card__text_overflow">Фотограф отвлеклась от освещения суровой политической реальности Мексики чтобы запечатлеть ускользающую красоту. Чтобы запечатлеть ускользающую красоту.</p>
       <p className="card__source">Медуза</p>
       <p className="card__keyword">Природа</p>
       <p className="card__hint" style={ style }>{`${loggedIn ? likeMessage() : 'Войдите, чтобы сохранять статьи'}`}</p>

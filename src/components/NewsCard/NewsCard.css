@@ -4,7 +4,7 @@
   border-radius: 16px;
   /* сетка card */
   display: grid;
-  grid-template-columns: 136px 200px 64px;
+  grid-template-columns: 136px 200px 64px; /* sum=400 */
   grid-template-rows:
     repeat(3, min-content)
     minmax(min-content, max-content)
@@ -89,7 +89,7 @@
 }
 
 .card__source {
-  margin: 10px 0 24px 24px;
+  margin: 10px 24px 24px 24px;
   /* расположение в сетке card */
   grid-area: card__source;
   justify-self: start;
@@ -107,12 +107,12 @@
 
 .card__keyword {
   margin: 0;
+  margin-top: 24px;
+  margin-left: 24px;
   /* расположение в сетке card */
   grid-area: card__keyword;
   justify-self: start;
   align-self: start;
-  margin-top: 24px;
-  margin-left: 24px;
   /* стилизация */
   padding: 0 10px;
   height: 40px;
@@ -179,4 +179,81 @@
   background-size: 24px 24px;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+@media all and (max-width : 800px) { /* 768 */
+  .card {
+    grid-template-columns: 136px 40px 48px; /* sum=224 */
+    grid-template-rows:
+      repeat(3, min-content)
+      minmax(min-content, max-content)
+      1fr
+      48px; /*48*/
+  }
+  .card__image {
+    width: 224px;
+    height: 150px;
+  }
+  .card__date {
+    margin: 16px 0 0 16px;
+  }
+  .card__title {
+    margin: 12px 16px 0 16px;
+    font-size: 22px;
+    line-height: 24px;
+  }
+  .card__title_overflow {
+    max-height: calc(24px * 3);
+  }
+  .card__text {
+    margin: 10px 16px 0 16px;
+  }
+  .card__source {
+    margin: 12px 16px 16px 16px;
+  }
+  .card__keyword {
+    margin-top: 8px;
+    margin-left: 8px;
+  }
+  .card__hint {
+    display: none;
+  }
+  .card__btn {
+    margin-top: 8px;
+    margin-right: 8px;
+  }
+}
+
+@media all and (max-width : 600px) { /* 320 */
+  .card {
+    grid-template-columns: 136px 96px 56px; /* sum=288 */
+    grid-template-rows:
+      repeat(3, min-content)
+      minmax(min-content, max-content)
+      1fr
+      44px; /*44*/
+  }
+  .card__image {
+    width: 288px;
+    height: 196px;
+  }
+  .card__title {
+    margin: 10px 16px 0 16px;
+    font-size: 22px;
+    line-height: 26px;
+  }
+  .card__title_overflow {
+    max-height: calc(26px * 3);
+  }
+  .card__source {
+    margin: 8px 16px 16px 16px;
+  }
+  .card__keyword {
+    margin-top: 16px;
+    margin-left: 16px;
+  }
+  .card__btn {
+    margin-top: 16px;
+    margin-right: 16px;
+  }
 }

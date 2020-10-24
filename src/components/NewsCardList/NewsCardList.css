@@ -129,7 +129,7 @@
   }
 }
 
-@media all and (max-width : 400px) { /* 320 */
+@media all and (max-width : 600px) { /* 320 */
   .news-cardlist_status_logout {
     padding: 32px 16px;
   }
