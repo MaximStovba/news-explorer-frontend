@@ -16,7 +16,7 @@
   }
 }
 
-@media all and (max-width : 400px) { /* 320 */
+@media all and (max-width : 470px) { /* 320 */
   .main {
     grid-template-rows:
       56px
