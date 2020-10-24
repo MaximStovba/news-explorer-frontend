@@ -8,6 +8,7 @@
   /* Основной код для desctop */
   font-family: 'Inter', 'Roboto', 'Roboto Slab', 'Source Sans Pro', 'Arial', sans-serif;
   max-width: 1440px;
+  min-width: 320px;
   margin: auto;
 /*
   padding-top: 45px;
