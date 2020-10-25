@@ -1,4 +1,7 @@
 .main {
+  /* фон */
+  background: #F5F6F7;
+  /* сетка */
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows:
