@@ -1,8 +1,8 @@
 .news-cardlist {
   /* сетка news-cardlist  */
+  place-items: center;
   display: grid;
   grid-template-columns: 40px 1fr 40px;
-
   /* выравниваем содержимое сетки по центру */
   justify-items: center;
 }
