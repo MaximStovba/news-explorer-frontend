@@ -5,15 +5,6 @@
   grid-template-columns: 1fr;
 }
 
-.news-cardlist_status_login {
-  padding: 0 104px;
-  grid-template-rows: repeat(3, min-content);
-  grid-template-areas:
-    "."
-    "news-cardlist__container"
-    ".";
-}
-
 .news-cardlist_status_logout {
   padding: 80px 104px;
   grid-template-rows: repeat(3, min-content);
@@ -21,6 +12,15 @@
     "news-cardlist__titel"
     "news-cardlist__container"
     "news-cardlist__btn";
+}
+
+.news-cardlist_status_login {
+  padding: 0 104px;
+  grid-template-rows: repeat(3, min-content);
+  grid-template-areas:
+    "."
+    "news-cardlist__container"
+    ".";
 }
 
 .news-cardlist__titel {

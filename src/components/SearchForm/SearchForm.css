@@ -1,4 +1,6 @@
 .search-form {
+  max-width: 1440px;
+  width: 100%;
   /* фоновое изображение */
   background:
     url(../../images/search_bg.png)
@@ -10,12 +12,12 @@
   grid-row: 1/3;
   /* сетка search-form */
   display: grid;
-  grid-template-columns: calc(608px - 168px) 168px;
+  grid-template-columns: 40px calc(608px - 168px) 168px 40px;
   grid-template-rows: repeat(2, min-content) 64px;
   grid-template-areas:
-    "search-form__title search-form__title"
-    "search-form__text search-form__text"
-    ". .";
+    ". search-form__title search-form__title ."
+    ". search-form__text search-form__text ."
+    ". . . .";
   /* выровнить сетку */
   justify-content: center;
   align-content: start;
@@ -49,7 +51,7 @@
   padding: 0;
   padding-left: 24px;
   /* расположение в сетке search-form */
-  grid-column: 1/3;
+  grid-column: 2/4;
   grid-row: 3/4;
   /* стилизация поля */
   background: #FFFFFF;
@@ -79,7 +81,7 @@
   z-index: 1;
   padding: 0;
   /* расположение в сетке search-form */
-  grid-column: 2/3;
+  grid-column: 3/4;
   grid-row: 3/4;
   /* стилизация кнопки */
   background: #2F71E5;
@@ -105,7 +107,7 @@
   .search-form {
     padding-top: 104px;
     padding-bottom: 48px;
-    grid-template-columns: calc(448px - 160px) 160px;
+    grid-template-columns: 40px calc(448px - 160px) 160px 40px;
     grid-template-rows: repeat(2, min-content) 56px;
   }
   .search-form__title {
@@ -118,7 +120,7 @@
   }
 }
 
-@media all and (max-width : 470px) { /* 320 */
+@media all and (max-width : 550px) { /* 320 */
   .search-form {
     padding-top: 86px;
     padding-bottom: 32px;

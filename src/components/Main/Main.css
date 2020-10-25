@@ -5,6 +5,8 @@
     80px
     calc(576px - 80px)
     repeat(3, min-content);
+  /* выравниваем содаржимое сетки main по центру */
+  justify-items: center;
 }
 
 @media all and (max-width : 800px) { /* 768 */
@@ -16,7 +18,7 @@
   }
 }
 
-@media all and (max-width : 470px) { /* 320 */
+@media all and (max-width : 550px) { /* 320 */
   .main {
     grid-template-rows:
       56px

@@ -1,7 +1,7 @@
 .navigation {
   margin: 0;
   /* расположение в сетке header */
-  grid-column: 2/3;
+  grid-column: 3/4;
   grid-row: 1;
   /* выравнивание по вертикале */
   align-items: center;
