@@ -11,12 +11,23 @@ import NotFound from '../NotFound/NotFound';
 import PopupMini from '../PopupMini/PopupMini';
 import './Main.css';
 
-const isMain = true;
 
-function Main( {loggedIn, handleLogInClick, isOpen} ) {
+function Main({
+  loggedIn,
+  handleLogInClick,
+  handleMenuOpenClick,
+  isOpen,
+  onClose,
+}) {
+  const isMain = true;
   return (
     <div className="main">
-      <Header loggedIn={loggedIn} isMain={isMain} handleLogInClick={handleLogInClick} />
+      <Header
+        loggedIn={loggedIn}
+        isMain={isMain}
+        handleLogInClick={handleLogInClick}
+        handleMenuOpenClick={handleMenuOpenClick}
+      />
       <SearchForm />
       <Preloader />
       <NotFound />
@@ -26,7 +37,8 @@ function Main( {loggedIn, handleLogInClick, isOpen} ) {
       <PopupMini
           loggedIn={loggedIn}
           isMain={isMain}
-          isOpen={true}
+          isOpen={isOpen}
+          onClose={onClose}
         />
       {/**/}
     </div>

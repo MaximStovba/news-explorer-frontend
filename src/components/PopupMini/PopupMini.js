@@ -9,9 +9,11 @@ import Navigation from '../Navigation/Navigation';
 function PopupMini({
   onSubmit,
   isOpen,
+  onClose,
   loggedIn,
   isMain,
   handleLogInClick,
+  handleMenuOpenClick,
 }){
   return (
     <section className={`popup popup__mini ${isOpen ? 'popup_opened' : ''}`}>
@@ -27,6 +29,8 @@ function PopupMini({
           isMain={isMain}
           handleLogInClick={handleLogInClick}
           isOpen={isOpen}
+          onClose={onClose}
+          handleMenuOpenClick={handleMenuOpenClick}
         />
 
         <Navigation

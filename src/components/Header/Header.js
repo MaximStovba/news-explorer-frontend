@@ -9,6 +9,8 @@ function Header({
   isMain,
   handleLogInClick,
   isOpen,
+  onClose,
+  handleMenuOpenClick,
 }) {
   return (
     <header className={`header header_style_${!isMain ? 'black' : 'white'}`}>
@@ -19,7 +21,9 @@ function Header({
           isMain={isMain}
           handleLogInClick={handleLogInClick}
           isOpen={isOpen}
+          onClose={onClose}
           isVertical={false}
+          handleMenuOpenClick={handleMenuOpenClick}
         />
       </div>
     </header>

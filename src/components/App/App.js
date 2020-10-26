@@ -16,6 +16,7 @@ import './App.css';
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
+  const [isPopupMiniOpen, setIsPopupMiniOpen] = React.useState(false);
   const history = useHistory();
 
   // обработчик открытия попапа "аутентификации"
@@ -32,6 +33,12 @@ import './App.css';
     setIsRegisterPopupOpen(true);
     // переадресовываем
     history.push('/sign-up');
+  }
+
+  // обработчик открытия попапа "вертикального меню"
+  function handleMenuOpenClick() {
+    // открываем попап
+    setIsPopupMiniOpen(true);
   }
 
   function handleSignInLinkClick() {
@@ -58,6 +65,7 @@ import './App.css';
     setIsLoginPopupOpen(false);
     setIsRegisterPopupOpen(false);
     setIsInfoTooltipPopupOpen(false);
+    setIsPopupMiniOpen(false);
   }
 
   return (
@@ -75,6 +83,9 @@ import './App.css';
         <Main
           loggedIn={loggedIn}
           handleLogInClick={handleLogInClick}
+          handleMenuOpenClick={handleMenuOpenClick}
+          isOpen={isPopupMiniOpen}
+          onClose={closeAllPopups}
         />
       </Route>
       }

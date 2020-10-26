@@ -10,8 +10,11 @@ function Navigation({
   isMain,
   handleLogInClick,
   isOpen,
+  onClose,
   isVertical,
+  handleMenuOpenClick,
 }) {
+
   return (
     <nav className={`navigation ${isVertical ? 'navigation_vertical' : ''} navigation_status_${loggedIn ? 'signin' : 'signout'}`}>
       <a href="/" className={
@@ -39,16 +42,35 @@ function Navigation({
           ${loggedIn && isMain ? 'navigation__btn_logout_main' : ''}`
         }>{`${loggedIn ? userName : 'Авторизоваться'}`}
       </button>
-  {
-    isVertical
-    ? <nav className="nav-vertical">
-      <a href="/" className="nav-vertical__link nav-vertical__link_type_main">Главная</a>
-      <a href="/saved-news" className="nav-vertical__link nav-vertical__link_type_article">Сохранённые&nbsp;статьи</a>
-      <button className="nav-vertical__btn" type="button">Авторизоваться</button>
-    </nav>
-
-    : <button className={`navigation__mini-btn navigation__mini-btn_type_${isOpen ? 'close' : 'open'}`}></button>
-  }
+      {
+        isVertical && loggedIn
+        ?
+        <nav className="nav-vertical">
+          <a href="/" className="nav-vertical__link nav-vertical__link_type_main">Главная</a>
+          <a href="/saved-news" className="nav-vertical__link nav-vertical__link_type_article">Сохранённые&nbsp;статьи</a>
+          <button className="nav-vertical__btn" type="button">Авторизоваться</button>
+        </nav>
+        : ""
+      }
+      {
+        isVertical && !loggedIn
+        ?
+        <nav className="nav-vertical">
+          <a href="/" className="nav-vertical__link nav-vertical__link_type_main">Главная</a>
+          <button className="nav-vertical__btn" type="button">Авторизоваться</button>
+        </nav>
+        : ""
+      }
+      {
+        !isVertical && !isOpen
+        ? <button onClick={handleMenuOpenClick} className="navigation__mini-btn navigation__mini-btn_type_open"></button>
+        : ""
+      }
+      {
+        !isVertical && isOpen
+        ? <button onClick={onClose} className="navigation__mini-btn navigation__mini-btn_type_close"></button>
+        : ""
+      }
     </nav>
   );
 }
