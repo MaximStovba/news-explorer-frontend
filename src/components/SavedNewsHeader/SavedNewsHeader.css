@@ -4,8 +4,11 @@
   width: 100%;
   background-color: white;
   /* расположение в сетке saved-news */
-  grid-column: 1;
-  grid-row: 2/3;
+  grid-area: news-header;
+
+  /*grid-column: 1;
+  grid-row: 2/3;*/
+
   /* сетка saved-news-header */
   display: grid;
   grid-template-columns: 1fr;

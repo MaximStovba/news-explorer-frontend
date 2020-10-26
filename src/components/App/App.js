@@ -12,7 +12,7 @@ import './App.css';
 
   function App() {
 
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isMiniOpen, setIsMiniOpen] = React.useState(false);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);

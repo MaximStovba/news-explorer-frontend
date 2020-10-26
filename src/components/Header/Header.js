@@ -15,7 +15,7 @@ function Header({
   handleMenuOpenClick,
 }) {
   return (
-    <header className={`header header_style_${isMain || isOpen ? 'white' : 'black'}`}>
+    <header className={`header header_style_${isMain || isOpen ? 'white' : 'black'} ${isMain ? '' : 'header_fixed'}`}>
       <div className="header__container">
         <a href="/" className={`header__logo header__logo_style_${isMain || isOpen  ? 'white' : 'black'}`}>NewsExplorer</a>
         <Navigation

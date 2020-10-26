@@ -1,4 +1,5 @@
 .news-cardlist {
+  grid-area: news-list;
   /* сетка news-cardlist  */
   place-items: center;
   display: grid;

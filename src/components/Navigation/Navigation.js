@@ -78,6 +78,7 @@ function Navigation({
         ?
         <nav className="nav-vertical">
           <a href="/" className="nav-vertical__link nav-vertical__link_type_main">Главная</a>
+          <a href="/" className="nav-vertical__link nav-vertical__link_type_article">Сохранённые&nbsp;статьи</a>
           <button onClick={onClickMini} className="nav-vertical__btn" type="button">Авторизоваться</button>
         </nav>
         : ""

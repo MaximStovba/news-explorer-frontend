@@ -8,6 +8,12 @@
     80px
     calc(576px - 80px)
     repeat(3, min-content);
+  grid-template-areas:
+    "header"
+    "."
+    "news-list"
+    "about"
+    "footer";
   /* выравниваем содаржимое сетки main по центру */
   justify-items: center;
 }

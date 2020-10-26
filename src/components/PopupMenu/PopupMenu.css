@@ -26,7 +26,7 @@
       56px
       min-content;
       grid-template-areas:
-        "."
+        "header"
         "nav-vertical";
     /* выравниваем содаржимое сетки main по центру */
     justify-items: center;

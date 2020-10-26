@@ -7,6 +7,11 @@
   grid-template-rows:
     80px
     repeat(3, min-content);
+  grid-template-areas:
+    "header"
+    "news-header"
+    "news-list"
+    "footer";
 }
 
 @media all and (max-width : 800px) { /* 768 */
@@ -17,7 +22,7 @@
   }
 }
 
-@media all and (max-width : 550px) { /* 320 */
+@media all and (max-width : 600px) { /* 320 */
   .saved-news {
     grid-template-rows:
       56px
