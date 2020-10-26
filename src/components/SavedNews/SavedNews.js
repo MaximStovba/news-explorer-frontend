@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Header from '../Header/Header';
-// import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
+import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import Footer from '../Footer/Footer';
 import PopupMenu from '../PopupMenu/PopupMenu';
@@ -39,7 +39,7 @@ function SavedNews({
         handleLogInClick={handleLogInClick}
         handleMiniClick={handleMiniClick}
       />
-      {/* <SavedNewsHeader /> */}
+      <SavedNewsHeader />
     </div>
   );
 }
