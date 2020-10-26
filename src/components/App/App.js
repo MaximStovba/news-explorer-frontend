@@ -4,6 +4,7 @@ import React from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';

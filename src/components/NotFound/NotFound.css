@@ -4,7 +4,7 @@
   background: #F5F6F7;
   /* сетка preloader */
   display: grid;
-  grid-template-columns: 340px;
+  grid-template-columns: 1fr;
   grid-template-rows: 96px repeat(2, min-content);
   grid-template-areas:
   "not-found__img"
@@ -42,4 +42,5 @@
   line-height: 24px;
   text-align: center;
   color: #B6BCBF;
+  max-width: 288px;
 }
