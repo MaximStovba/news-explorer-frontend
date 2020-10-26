@@ -8,7 +8,9 @@ function Header({
   loggedIn,
   isMain,
   handleLogInClick,
+  handleMiniClick,
   isOpen,
+  isMiniOpen,
   onClose,
   handleMenuOpenClick,
 }) {
@@ -20,7 +22,9 @@ function Header({
           loggedIn={loggedIn}
           isMain={isMain}
           handleLogInClick={handleLogInClick}
+          handleMiniClick={handleMiniClick}
           isOpen={isOpen}
+          isMiniOpen={isMiniOpen}
           onClose={onClose}
           isVertical={false}
           handleMenuOpenClick={handleMenuOpenClick}

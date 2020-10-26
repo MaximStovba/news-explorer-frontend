@@ -1,20 +1,20 @@
-.popup__mini {
+.popup-menu {
   display: none;
 }
 
 @media all and (max-width : 800px) { /* 768 */
-  .popup__mini {
+  .popup-menu {
     display: none;
   }
 }
 
 @media all and (max-width : 600px) { /* 320 */
-  .popup__mini {
+  .popup-menu {
     display: flex;
     justify-content: flex-start;
   }
 
-  .popup__container_formtype_mini {
+  .popup__container_formtype_menu {
     background: black;
     min-width: 320px;
     width: 100%;

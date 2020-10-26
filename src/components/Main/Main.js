@@ -8,7 +8,7 @@ import About from '../About/About';
 import Footer from '../Footer/Footer';
 import Preloader from '../Preloader/Preloader';
 import NotFound from '../NotFound/NotFound';
-import PopupMini from '../PopupMini/PopupMini';
+import PopupMenu from '../PopupMenu/PopupMenu';
 import './Main.css';
 
 
@@ -17,7 +17,9 @@ function Main({
   handleLogInClick,
   handleMenuOpenClick,
   isOpen,
+  isMiniOpen,
   onClose,
+  handleMiniClick,
 }) {
   const isMain = true;
   return (
@@ -25,7 +27,9 @@ function Main({
       <Header
         loggedIn={loggedIn}
         isMain={isMain}
+        isMiniOpen={isMiniOpen}
         handleLogInClick={handleLogInClick}
+        handleMiniClick={handleMiniClick}
         handleMenuOpenClick={handleMenuOpenClick}
       />
       <SearchForm />
@@ -34,11 +38,13 @@ function Main({
       <NewsCardList loggedIn={loggedIn} isMain={isMain} />
       <About />
       <Footer />
-      <PopupMini
+      <PopupMenu
           loggedIn={loggedIn}
           isMain={isMain}
           isOpen={isOpen}
           onClose={onClose}
+          handleLogInClick={handleLogInClick}
+          handleMiniClick={handleMiniClick}
         />
       {/**/}
     </div>

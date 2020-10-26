@@ -16,11 +16,11 @@
   /* плавное закрытие попапа */
   visibility: hidden;
   opacity: 0;
-  -moz-transition: visibility 0.8s, opacity 0.8s linear;
-  -webkit-transition: visibility 0.8s, opacity 0.8s linear;
-  -o-transition: visibility 0.8s, opacity 0.8s linear;
-  -ms-transition: visibility 0.8s, opacity 0.8s linear;
-  transition: visibility 0.8s, opacity 0.8s linear;
+  -moz-transition: visibility 0.1s, opacity 0.1s linear;
+  -webkit-transition: visibility 0.1s, opacity 0.1s linear;
+  -o-transition: visibility 0.1s, opacity 0.1s linear;
+  -ms-transition: visibility 0.1s, opacity 0.1s linear;
+  transition: visibility 0.1s, opacity 0.1s linear;
 }
 
 .popup_opened {
@@ -74,4 +74,30 @@
   opacity: 0.6;
   transition: opacity 0.5s ease;
   cursor: pointer;
+}
+
+@media all and (max-width : 800px) { /* 768 */
+
+}
+
+@media all and (max-width : 600px) { /* 320 */
+  .popup-mini {
+    top: 56px;
+    justify-content: flex-end;
+    align-items: stretch;
+  }
+  .popup-mini__container {
+    width: 100%;
+    height: calc(100vh - 56px);
+    border-radius: 16px 16px 0 0;
+  }
+  .popup-mini__btn-close {
+    transform: rotate(0deg);
+    background-image: url(../../images/icon_menu_close_white.svg);
+    height: 24px;
+    width: 24px;
+    top: -40px;
+    right: 16px;
+    background-size: cover;
+  }
 }

@@ -1,12 +1,12 @@
-// PopupMini.js
+// PopupMenu.js
 
 import React from 'react';
 import '../PopupWithForm/PopupWithForm.css';
-import './PopupMini.css';
+import './PopupMenu.css';
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
 
-function PopupMini({
+function PopupMenu({
   onSubmit,
   isOpen,
   onClose,
@@ -14,15 +14,16 @@ function PopupMini({
   isMain,
   handleLogInClick,
   handleMenuOpenClick,
+  handleMiniClick,
 }){
   return (
-    <section className={`popup popup__mini ${isOpen ? 'popup_opened' : ''}`}>
+    <section className={`popup popup-menu ${isOpen ? 'popup_opened' : ''}`}>
       <form
         name="mini"
         method="POST"
         onSubmit={onSubmit}
         action="#"
-        className="popup__form popup__container popup__container_formtype_mini" noValidate>
+        className="popup__form popup__container popup__container_formtype_menu" noValidate>
 
         <Header
           loggedIn={loggedIn}
@@ -31,12 +32,14 @@ function PopupMini({
           isOpen={isOpen}
           onClose={onClose}
           handleMenuOpenClick={handleMenuOpenClick}
+          handleMiniClick={handleMiniClick}
         />
 
         <Navigation
           loggedIn={loggedIn}
           isMain={isMain}
           handleLogInClick={handleLogInClick}
+          handleMiniClick={handleMiniClick}
           isOpen={isOpen}
           isVertical={true}
         />
@@ -46,4 +49,4 @@ function PopupMini({
   );
 }
 
-export default PopupMini;
+export default PopupMenu;

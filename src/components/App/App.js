@@ -14,10 +14,17 @@ import './App.css';
 
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
+  const [isMiniOpen, setIsMiniOpen] = React.useState(false);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
-  const [isPopupMiniOpen, setIsPopupMiniOpen] = React.useState(false);
+  const [isPopupMenuOpen, setIsPopupMenuOpen] = React.useState(false);
   const history = useHistory();
+
+  // сообзение об открытии мини-попапа
+  function handleMiniClick() {
+    closeAllPopups();
+    setIsMiniOpen(true);
+  }
 
   // обработчик открытия попапа "аутентификации"
   function handleLogInClick() {
@@ -38,7 +45,7 @@ import './App.css';
   // обработчик открытия попапа "вертикального меню"
   function handleMenuOpenClick() {
     // открываем попап
-    setIsPopupMiniOpen(true);
+    setIsPopupMenuOpen(true);
   }
 
   function handleSignInLinkClick() {
@@ -65,7 +72,8 @@ import './App.css';
     setIsLoginPopupOpen(false);
     setIsRegisterPopupOpen(false);
     setIsInfoTooltipPopupOpen(false);
-    setIsPopupMiniOpen(false);
+    setIsPopupMenuOpen(false);
+    setIsMiniOpen(false);
   }
 
   return (
@@ -84,8 +92,10 @@ import './App.css';
           loggedIn={loggedIn}
           handleLogInClick={handleLogInClick}
           handleMenuOpenClick={handleMenuOpenClick}
-          isOpen={isPopupMiniOpen}
+          isOpen={isPopupMenuOpen}
+          isMiniOpen={isMiniOpen}
           onClose={closeAllPopups}
+          handleMiniClick={handleMiniClick}
         />
       </Route>
       }
@@ -93,6 +103,7 @@ import './App.css';
     <Route path="/sign-in">
       <Login
         isOpen={isLoginPopupOpen}
+        isMiniOpen={isMiniOpen}
         onClose={closeAllPopups}
         handleSignUpLinkClick={handleSignUpLinkClick}
         authorizationUser={authorizationUser}
@@ -101,6 +112,7 @@ import './App.css';
     <Route path="/sign-up">
       <Register
         isOpen={isRegisterPopupOpen}
+        isMiniOpen={isMiniOpen}
         onClose={closeAllPopups}
         handleSignInLinkClick={handleSignInLinkClick}
         handleInfoLinkClick={handleInfoLinkClick}
@@ -109,6 +121,7 @@ import './App.css';
     <Route path="/success">
       <InfoTooltip
         isOpen={isInfoTooltipPopupOpen}
+        isMiniOpen={isMiniOpen}
         onClose={closeAllPopups}
       />
     </Route>

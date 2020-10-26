@@ -8,6 +8,7 @@ import ButtonElement from '../ButtonElement/ButtonElement';
 
 function Login({
   isOpen,
+  isMiniOpen,
   onClose,
   handleSignUpLinkClick,
   authorizationUser,
@@ -84,6 +85,7 @@ function Login({
       </>
       }
       isOpen={isOpen}
+      isMiniOpen={isMiniOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
       />

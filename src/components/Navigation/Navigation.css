@@ -267,6 +267,9 @@
     background-color: transparent;
     background-position: center;
   }
+  .navigation__mini-btn_hidden {
+    display: none;
+  }
   .navigation__mini-btn_type_open {
     background-image: url(../../images/icon_menu_open_white.svg);
   }

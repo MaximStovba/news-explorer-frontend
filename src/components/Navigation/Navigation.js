@@ -10,11 +10,16 @@ function Navigation({
   isMain,
   handleLogInClick,
   isOpen,
+  isMiniOpen,
   onClose,
   isVertical,
   handleMenuOpenClick,
+  handleMiniClick,
 }) {
-
+  function onClickMini() {
+    handleLogInClick();
+    handleMiniClick();
+  }
   return (
     <nav className={`navigation ${isVertical ? 'navigation_vertical' : ''} navigation_status_${loggedIn ? 'signin' : 'signout'}`}>
       <a href="/" className={
@@ -48,7 +53,7 @@ function Navigation({
         <nav className="nav-vertical">
           <a href="/" className="nav-vertical__link nav-vertical__link_type_main">Главная</a>
           <a href="/saved-news" className="nav-vertical__link nav-vertical__link_type_article">Сохранённые&nbsp;статьи</a>
-          <button className="nav-vertical__btn" type="button">Авторизоваться</button>
+          <button onClick={onClickMini} className="nav-vertical__btn" type="button">Авторизоваться</button>
         </nav>
         : ""
       }
@@ -57,13 +62,13 @@ function Navigation({
         ?
         <nav className="nav-vertical">
           <a href="/" className="nav-vertical__link nav-vertical__link_type_main">Главная</a>
-          <button className="nav-vertical__btn" type="button">Авторизоваться</button>
+          <button onClick={onClickMini} className="nav-vertical__btn" type="button">Авторизоваться</button>
         </nav>
         : ""
       }
       {
         !isVertical && !isOpen
-        ? <button onClick={handleMenuOpenClick} className="navigation__mini-btn navigation__mini-btn_type_open"></button>
+        ? <button onClick={handleMenuOpenClick} className={`navigation__mini-btn ${isMiniOpen ? 'navigation__mini-btn_hidden' : ''} navigation__mini-btn_type_open`}></button>
         : ""
       }
       {

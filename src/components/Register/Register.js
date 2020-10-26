@@ -8,6 +8,7 @@ import ButtonElement from '../ButtonElement/ButtonElement';
 
 function Register({
   isOpen,
+  isMiniOpen,
   onClose,
   handleSignInLinkClick,
   handleInfoLinkClick,
@@ -103,6 +104,7 @@ function Register({
       </>
       }
       isOpen={isOpen}
+      isMiniOpen={isMiniOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
       />
