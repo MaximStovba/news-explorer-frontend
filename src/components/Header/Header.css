@@ -15,6 +15,7 @@
 }
 
 .header_style_black {
+  background-color: white;
   /* декоротивный элемент снизу */
   border-bottom: 1px solid #D1D2D6;
 }

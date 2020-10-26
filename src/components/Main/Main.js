@@ -39,13 +39,13 @@ function Main({
       <About />
       <Footer />
       <PopupMenu
-          loggedIn={loggedIn}
-          isMain={isMain}
-          isOpen={isOpen}
-          onClose={onClose}
-          handleLogInClick={handleLogInClick}
-          handleMiniClick={handleMiniClick}
-        />
+        loggedIn={loggedIn}
+        isMain={isMain}
+        isOpen={isOpen}
+        onClose={onClose}
+        handleLogInClick={handleLogInClick}
+        handleMiniClick={handleMiniClick}
+      />
       {/**/}
     </div>
   );

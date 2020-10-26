@@ -270,10 +270,13 @@
   .navigation__mini-btn_hidden {
     display: none;
   }
-  .navigation__mini-btn_type_open {
+  .navigation__mini-btn_type_open-white {
     background-image: url(../../images/icon_menu_open_white.svg);
   }
-  .navigation__mini-btn_type_close {
+  .navigation__mini-btn_type_open-black {
+    background-image: url(../../images/icon_menu_open_black.svg);
+  }
+  .navigation__mini-btn_type_close-white {
     background-image: url(../../images/icon_menu_close_white.svg);
   }
   .navigation__mini-btn:hover {

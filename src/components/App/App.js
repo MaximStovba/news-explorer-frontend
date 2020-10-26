@@ -12,7 +12,7 @@ import './App.css';
 
   function App() {
 
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isMiniOpen, setIsMiniOpen] = React.useState(false);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
@@ -83,8 +83,28 @@ import './App.css';
       loggedIn
       ?
       <>
-        <Route path="/saved-news"><SavedNews loggedIn={loggedIn} /></Route>
-        <Route exact path="/"><Main loggedIn={loggedIn} /></Route>
+        <Route path="/saved-news">
+          <SavedNews
+            isOpen={isPopupMenuOpen}
+            onClose={closeAllPopups}
+            loggedIn={loggedIn}
+            isMiniOpen={isMiniOpen}
+            handleLogInClick={handleLogInClick}
+            handleMiniClick={handleMiniClick}
+            handleMenuOpenClick={handleMenuOpenClick}
+          />
+        </Route>
+        <Route exact path="/">
+          <Main
+            loggedIn={loggedIn}
+            handleLogInClick={handleLogInClick}
+            handleMenuOpenClick={handleMenuOpenClick}
+            isOpen={isPopupMenuOpen}
+            isMiniOpen={isMiniOpen}
+            onClose={closeAllPopups}
+            handleMiniClick={handleMiniClick}
+          />
+        </Route>
       </>
       :
       <Route path="/">
