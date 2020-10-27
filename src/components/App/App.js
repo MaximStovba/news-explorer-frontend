@@ -24,13 +24,16 @@ import './App.css';
   // Validation Password
   const [isPasswordValid, setIsPasswordValid] = React.useState(false);
   const [passwordValidationMessage, setPasswordValidationMessage] = React.useState('Введите данные');
+  // Validation Name
+  const [isNameValid, setIsNameValid] = React.useState(false);
+  const [nameValidationMessage, setNameValidationMessage] = React.useState('Введите данные');
 
   // SubmitButton
   const [isSbmtBtnActiv, setIsSbmtBtnActiv] = React.useState(false);
   // History
   const history = useHistory();
 
-  // сообзение об открытии мини-попапа
+  // сообщение об открытии мини-попапа
   function handleMiniClick() {
     closeAllPopups();
     setIsMiniOpen(true);
@@ -53,6 +56,12 @@ import './App.css';
   function handleSignUpLinkClick() {
     // открываем попап
     setIsRegisterPopupOpen(true);
+    // скрываем ошибки валидации при открытии
+    setIsEmailValid(true);
+    setIsPasswordValid(true);
+    setIsNameValid(true);
+    // делаем кнопку сабмита неактивной при открытии
+    setIsSbmtBtnActiv(false);
     // переадресовываем
     history.push('/sign-up');
   }
@@ -91,11 +100,14 @@ import './App.css';
     setIsMiniOpen(false);
   }
 
-  // -------- валидация полей ввода ----------
-  // -------- форма аутентификации -----------
+  // -------- валидация полей ввода -----------------
+  // ----------------------------------------------------
+  // -------- форма аутентификации / регистрации -----------
 
-  // состояние кнопки сабмита
+  // управление состоянием кнопки сабмита
   React.useEffect(() => {
+  if (isLoginPopupOpen) {
+    // попап аутентификации
     if (isEmailValid === true && isPasswordValid === true) {
       setIsSbmtBtnActiv(true);
     } else {
@@ -104,17 +116,39 @@ import './App.css';
     // делаем кнопку сабмита при открытии неактивной
     if (isEmailValid === true &&
       (emailValidationMessage === 'Введите данные' ||
-      passwordValidationMessage === 'Введите данные')) {
+      passwordValidationMessage === 'Введите данные'))
+      {
+        setIsSbmtBtnActiv(false);
+      }
+  }
+  if (isRegisterPopupOpen) {
+    // попап регистрации
+    if (isEmailValid === true && isPasswordValid === true && isNameValid === true ) {
+      setIsSbmtBtnActiv(true);
+    } else {
       setIsSbmtBtnActiv(false);
     }
+    // делаем кнопку сабмита при открытии неактивной
+    if (isEmailValid === true &&
+      (emailValidationMessage === 'Введите данные' ||
+      passwordValidationMessage === 'Введите данные' ||
+      nameValidationMessage === 'Введите данные'))
+      {
+        setIsSbmtBtnActiv(false);
+      }
+  }
   }, [
+    isLoginPopupOpen,
+    isRegisterPopupOpen,
     isEmailValid,
     isPasswordValid,
+    isNameValid,
     emailValidationMessage,
-    passwordValidationMessage]);
+    passwordValidationMessage,
+    nameValidationMessage]);
 
   // Обработчик изменения инпута "email"
-  function handleChangeEmailLogin(e) {
+  function handleChangeEmail(e) {
     if (e.target.validity.valid) {
       setIsEmailValid(true);
       setEmailValidationMessage('0');
@@ -124,7 +158,7 @@ import './App.css';
     }
   }
   // Обработчик изменения инпута "password"
-  function handleChangePasswordLogin(e) {
+  function handleChangePassword(e) {
     if (e.target.validity.valid) {
       setIsPasswordValid(true);
       setPasswordValidationMessage('0');
@@ -133,8 +167,18 @@ import './App.css';
       setPasswordValidationMessage(e.target.validationMessage);
     }
   }
-
-  // -------- форма аутентификации ----------
+    // Обработчик изменения инпута "name"
+  function handleChangeName(e) {
+    if (e.target.validity.valid) {
+      setIsNameValid(true);
+      setNameValidationMessage('0');
+    } else {
+      setIsNameValid(false);
+      setNameValidationMessage(e.target.validationMessage);
+    }
+  }
+  // -------- форма аутентификации / регистрации ----------
+  // ----------------------------------------
 
 
   return (
@@ -189,8 +233,8 @@ import './App.css';
         handleSignUpLinkClick={handleSignUpLinkClick}
         authorizationUser={authorizationUser}
         // валидация
-        handleChangeEmailLogin={handleChangeEmailLogin}
-        handleChangePasswordLogin={handleChangePasswordLogin}
+        handleChangeEmailLogin={handleChangeEmail}
+        handleChangePasswordLogin={handleChangePassword}
         isEmailValid={isEmailValid}
         isPasswordValid={isPasswordValid}
         emailValidationMessage={emailValidationMessage}
@@ -205,6 +249,17 @@ import './App.css';
         onClose={closeAllPopups}
         handleSignInLinkClick={handleSignInLinkClick}
         handleInfoLinkClick={handleInfoLinkClick}
+        // валидация
+        handleChangeEmailRegister={handleChangeEmail}
+        handleChangePasswordRegister={handleChangePassword}
+        handleChangeNameRegister={handleChangeName}
+        isEmailValid={isEmailValid}
+        isPasswordValid={isPasswordValid}
+        isNameValid={isNameValid}
+        emailValidationMessage={emailValidationMessage}
+        passwordValidationMessage={passwordValidationMessage}
+        nameValidationMessage={nameValidationMessage}
+        isSbmtBtnActiv={isSbmtBtnActiv}
       />
     </Route>
     <Route path="/success">

@@ -95,6 +95,8 @@ function Login({
           isSbmtBtnActiv={isSbmtBtnActiv}
           name="signin"
           btnText="Войти"
+          errorMessage="Такой пользователь уже есть!"
+          isError={isSbmtBtnActiv}
         />
         <h3
           className="login__hint">

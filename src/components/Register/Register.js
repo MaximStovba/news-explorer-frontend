@@ -12,7 +12,17 @@ function Register({
   onClose,
   handleSignInLinkClick,
   handleInfoLinkClick,
-  //onLogin,
+  //валидация
+  handleChangeEmailRegister,
+  handleChangePasswordRegister,
+  handleChangeNameRegister,
+  isEmailValid,
+  isPasswordValid,
+  isNameValid,
+  emailValidationMessage,
+  passwordValidationMessage,
+  nameValidationMessage,
+  isSbmtBtnActiv,
 }) {
 
   // стейт переменные
@@ -35,6 +45,22 @@ function Register({
     e.target.reset();
   }
 
+  // обработчик изменения поля email
+  function handleChangeEmail(e) {
+    setEmail(e.target.value);
+    handleChangeEmailRegister(e);
+  }
+  // обработчик изменения поля password
+  function handleChangePassword(e) {
+    setPassword(e.target.value);
+    handleChangePasswordRegister(e);
+  }
+  // обработчик изменения поля name
+  function handleChangeName(e) {
+    setName(e.target.value);
+    handleChangeNameRegister(e);
+  }
+
   return (
     <PopupWithForm
       name="register"
@@ -49,14 +75,14 @@ function Register({
           type="email"
           name="email"
           value={email}
-          handleChangeInput={e => setEmail(e.target.value)}
+          handleChangeInput={handleChangeEmail}
           placeholder="Введите почту"
           minLength="2"
           maxLength="30"
           // <span> //
           idSpan="email-input-error"
-          isInputValid={false}
-          validationMessage="Ошибка валидации!"
+          isInputValid={isEmailValid}
+          validationMessage={emailValidationMessage}
         />
         <InputElement
           // <h3> //
@@ -66,14 +92,14 @@ function Register({
           type="password"
           name="password"
           value={password}
-          handleChangeInput={e => setPassword(e.target.value)}
+          handleChangeInput={handleChangePassword}
           placeholder="Введите пароль"
           minLength="8"
           maxLength="24"
           // <span> //
           idSpan="password-input-error"
-          isInputValid={false}
-          validationMessage="Ошибка валидации!"
+          isInputValid={isPasswordValid}
+          validationMessage={passwordValidationMessage}
         />
         <InputElement
           // <h3> //
@@ -83,19 +109,21 @@ function Register({
           type="text"
           name="name"
           value={name}
-          handleChangeInput={e => setName(e.target.value)}
+          handleChangeInput={handleChangeName}
           placeholder="Введите свое имя"
           minLength="2"
           maxLength="20"
           // <span> //
           idSpan="name-input-error"
-          isInputValid={false}
-          validationMessage="Ошибка валидации!"
+          isInputValid={isNameValid}
+          validationMessage={nameValidationMessage}
         />
         <ButtonElement
-          isSbmtBtnActiv={true}
+          isSbmtBtnActiv={isSbmtBtnActiv}
           name="signup"
           btnText="Зарегистрироваться"
+          errorMessage="Такой пользователь уже есть!"
+          isError={isSbmtBtnActiv}
         />
         <h3
           className="register__hint">

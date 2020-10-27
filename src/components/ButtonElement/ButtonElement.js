@@ -7,10 +7,12 @@ function ButtonElement({
   isSbmtBtnActiv,
   btnName,
   btnText,
+  errorMessage,
+  isError,
 }) {
   return (
     <>
-      <span className="popup__btn-error">Такой пользователь уже есть!</span>
+      <span className={`${isError ? 'popup__btn-error' : ''}`}>{errorMessage}</span>
       <button
         disabled={isSbmtBtnActiv ? false : true}
         type="submit"
