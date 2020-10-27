@@ -28,7 +28,8 @@ function InputElement({
       <input
         type={type}
         name={name}
-        value={value}
+        // value={value}
+        defaultValue={value}
         onChange={handleChangeInput}
         placeholder={placeholder}
         id={idInput}

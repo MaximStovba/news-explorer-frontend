@@ -18,6 +18,16 @@ import './App.css';
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
   const [isPopupMenuOpen, setIsPopupMenuOpen] = React.useState(false);
+  // Validation Email
+  const [isEmailValid, setIsEmailValid] = React.useState(false);
+  const [emailValidationMessage, setEmailValidationMessage] = React.useState('Введите данные');
+  // Validation Password
+  const [isPasswordValid, setIsPasswordValid] = React.useState(false);
+  const [passwordValidationMessage, setPasswordValidationMessage] = React.useState('Введите данные');
+
+  // SubmitButton
+  const [isSbmtBtnActiv, setIsSbmtBtnActiv] = React.useState(false);
+  // History
   const history = useHistory();
 
   // сообзение об открытии мини-попапа
@@ -30,6 +40,11 @@ import './App.css';
   function handleLogInClick() {
     // открываем попап
     setIsLoginPopupOpen(true);
+    // скрываем ошибки валидации при открытии
+    setIsEmailValid(true);
+    setIsPasswordValid(true);
+    // делаем кнопку сабмита неактивной при открытии
+    setIsSbmtBtnActiv(false);
     // переадресовываем
     history.push('/sign-in');
   }
@@ -75,6 +90,52 @@ import './App.css';
     setIsPopupMenuOpen(false);
     setIsMiniOpen(false);
   }
+
+  // -------- валидация полей ввода ----------
+  // -------- форма аутентификации -----------
+
+  // состояние кнопки сабмита
+  React.useEffect(() => {
+    if (isEmailValid === true && isPasswordValid === true) {
+      setIsSbmtBtnActiv(true);
+    } else {
+      setIsSbmtBtnActiv(false);
+    }
+    // делаем кнопку сабмита при открытии неактивной
+    if (isEmailValid === true &&
+      (emailValidationMessage === 'Введите данные' ||
+      passwordValidationMessage === 'Введите данные')) {
+      setIsSbmtBtnActiv(false);
+    }
+  }, [
+    isEmailValid,
+    isPasswordValid,
+    emailValidationMessage,
+    passwordValidationMessage]);
+
+  // Обработчик изменения инпута "email"
+  function handleChangeEmailLogin(e) {
+    if (e.target.validity.valid) {
+      setIsEmailValid(true);
+      setEmailValidationMessage('0');
+    } else {
+      setIsEmailValid(false);
+      setEmailValidationMessage(e.target.validationMessage);
+    }
+  }
+  // Обработчик изменения инпута "password"
+  function handleChangePasswordLogin(e) {
+    if (e.target.validity.valid) {
+      setIsPasswordValid(true);
+      setPasswordValidationMessage('0');
+    } else {
+      setIsPasswordValid(false);
+      setPasswordValidationMessage(e.target.validationMessage);
+    }
+  }
+
+  // -------- форма аутентификации ----------
+
 
   return (
     <div className="app">
@@ -127,6 +188,14 @@ import './App.css';
         onClose={closeAllPopups}
         handleSignUpLinkClick={handleSignUpLinkClick}
         authorizationUser={authorizationUser}
+        // валидация
+        handleChangeEmailLogin={handleChangeEmailLogin}
+        handleChangePasswordLogin={handleChangePasswordLogin}
+        isEmailValid={isEmailValid}
+        isPasswordValid={isPasswordValid}
+        emailValidationMessage={emailValidationMessage}
+        passwordValidationMessage={passwordValidationMessage}
+        isSbmtBtnActiv={isSbmtBtnActiv}
       />
     </Route>
     <Route path="/sign-up">

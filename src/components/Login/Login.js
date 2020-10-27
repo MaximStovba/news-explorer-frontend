@@ -12,7 +12,14 @@ function Login({
   onClose,
   handleSignUpLinkClick,
   authorizationUser,
-  //onLogin,
+  //валидация
+  handleChangeEmailLogin,
+  handleChangePasswordLogin,
+  isEmailValid,
+  isPasswordValid,
+  emailValidationMessage,
+  passwordValidationMessage,
+  isSbmtBtnActiv,
 }) {
 
   // стейт переменные
@@ -33,6 +40,17 @@ function Login({
     e.target.reset();
   }
 
+  // обработчик изменения поля email
+  function handleChangeEmail(e) {
+    setEmail(e.target.value);
+    handleChangeEmailLogin(e);
+  }
+  // обработчик изменения поля password
+  function handleChangePassword(e) {
+    setPassword(e.target.value);
+    handleChangePasswordLogin(e);
+  }
+
   return (
     <PopupWithForm
       name="login"
@@ -47,14 +65,14 @@ function Login({
           type="email"
           name="email"
           value={email}
-          handleChangeInput={e => setEmail(e.target.value)}
+          handleChangeInput={handleChangeEmail}
           placeholder="Введите почту"
           minLength="2"
           maxLength="30"
           // <span> //
           idSpan="email-input-error"
-          isInputValid={false}
-          validationMessage="Ошибка валидации!"
+          isInputValid={isEmailValid}
+          validationMessage={emailValidationMessage}
         />
         <InputElement
           // <h3> //
@@ -64,17 +82,17 @@ function Login({
           type="password"
           name="password"
           value={password}
-          handleChangeInput={e => setPassword(e.target.value)}
+          handleChangeInput={handleChangePassword}
           placeholder="Введите пароль"
           minLength="8"
           maxLength="24"
           // <span> //
           idSpan="password-input-error"
-          isInputValid={false}
-          validationMessage="Ошибка валидации!"
+          isInputValid={isPasswordValid}
+          validationMessage={passwordValidationMessage}
         />
         <ButtonElement
-          isSbmtBtnActiv={true}
+          isSbmtBtnActiv={isSbmtBtnActiv}
           name="signin"
           btnText="Войти"
         />
