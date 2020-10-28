@@ -106,7 +106,7 @@ import './App.css';
 
   // управление состоянием кнопки сабмита
   React.useEffect(() => {
-  if (isLoginPopupOpen) {
+  if (isLoginPopupOpen || isMiniOpen) {
     // попап аутентификации
     if (isEmailValid === true && isPasswordValid === true) {
       setIsSbmtBtnActiv(true);
@@ -139,6 +139,7 @@ import './App.css';
   }
   }, [
     isLoginPopupOpen,
+    isMiniOpen,
     isRegisterPopupOpen,
     isEmailValid,
     isPasswordValid,

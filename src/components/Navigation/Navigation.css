@@ -103,6 +103,10 @@
   opacity: 0.7;
   transition: opacity 1s ease;
 }
+.navigation__btn:focus {
+  /* кнопка в фокусе */
+  outline: none;
+}
 
 .navigation__btn_style_white {
   color: #FFFFFF;
@@ -150,6 +154,10 @@
 
 .navigation__mini-btn {
   display: none;
+}
+.navigation__mini-btn:focus {
+  /* кнопка в фокусе */
+  outline: none;
 }
 
 /* ------- vertical mini -------- */

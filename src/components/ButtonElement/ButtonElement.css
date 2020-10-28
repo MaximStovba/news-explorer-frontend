@@ -16,8 +16,18 @@
 }
 
 .popup__btn:hover {
+  /* кнопка при наведении */
   background: #347EFF;
   cursor: pointer;
+}
+.popup__btn:focus {
+  /* кнопка в фокусе */
+  outline: none;
+  background: #2A65CC;
+}
+.popup__btn:active {
+  /* кнопка при нажатии */
+  background: #2A65CC;
 }
 
 .popup__btn_disabled {

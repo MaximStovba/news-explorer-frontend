@@ -23,7 +23,7 @@ function NewsCardList({ loggedIn, isMain }) {
         <NewsCard loggedIn={loggedIn} isLiked={false} isMain={isMain} />
       </div>
       <button
-          type="submit"
+          type="button"
           className={
          `news-cardlist__btn
           news-cardlist__btn_status_${loggedIn ? 'login' : 'logout'}

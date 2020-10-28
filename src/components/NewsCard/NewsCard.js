@@ -38,6 +38,7 @@ function NewsCard({ loggedIn, isLiked, isMain }) {
     setHintStyle('visible');
     if (loggedIn) {setTrashStyle(trash_enbl)}
     if (!isLiked) { setLikeStyle(like_hover) }
+    if (isLiked && !loggedIn) { setLikeStyle(like_hover) }
   }
 
   // обрабатываем событие снятия курсора мыши
@@ -45,6 +46,7 @@ function NewsCard({ loggedIn, isLiked, isMain }) {
     setHintStyle('hidden');
     if (loggedIn) {setTrashStyle(trash_dsbl)}
     if (!isLiked) {setLikeStyle(like_normal)}
+    if (isLiked && !loggedIn) { setLikeStyle(like_normal) }
   }
 
   // выбор надписи подсказки для кнопки лайка

@@ -97,10 +97,18 @@
 }
 
 .search-form__btn:hover {
-  /* кнопка при наведении мыши плавно становиться немного прозрачной */
-  opacity: 0.7;
-  transition: opacity 1s ease;
+  /* кнопка при наведении */
+  background: #347EFF;
   cursor: pointer;
+}
+.search-form__btn:focus {
+  /* кнопка в фокусе */
+  outline: none;
+  background: #2A65CC;
+}
+.search-form__btn:active {
+  /* кнопка при нажатии */
+  background: #2A65CC;
 }
 
 @media all and (max-width : 800px) { /* 768 */

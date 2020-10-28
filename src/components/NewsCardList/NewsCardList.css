@@ -96,6 +96,10 @@
   transition: opacity 1s ease;
   cursor: pointer;
 }
+.news-cardlist__btn:focus {
+  /* кнопка в фокусе */
+  outline: none;
+}
 
 .news-cardlist__btn_hidden {
   display: none;

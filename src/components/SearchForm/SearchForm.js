@@ -5,7 +5,7 @@ import './SearchForm.css';
 
 function SearchForm() {
   return (
-    <form name="search" method="POST" action="#" className="search-form" noValidate>
+    <form name="search" method="POST" action="/" className="search-form" noValidate>
       <h1 className="search-form__title">Что творится в мире?</h1>
       <p className="search-form__text">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.</p>
       <input type="text"
@@ -17,7 +17,7 @@ function SearchForm() {
         required
       />
       <button
-          type="submit"
+          type="button"
           className="search-form__btn">
           Искать
       </button>
