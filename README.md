@@ -1,3 +1,6 @@
+# News-Explorer-Frontend
+Фронтэнд проекта News Explorer, включающий авторизацию и регистрацию пользователей, операции со статьями и пользователями.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
