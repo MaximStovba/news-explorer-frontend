@@ -183,6 +183,11 @@
   background-position: center;
 }
 
+.card__btn:focus {
+  /* кнопка в фокусе */
+  outline: none;
+}
+
 @media all and (max-width : 1000px) { /* 768 */
   .card {
     /* grid-template-columns: 136px 40px 48px; /* sum=224 */

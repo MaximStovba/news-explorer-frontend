@@ -67,6 +67,7 @@ function NewsCard({ loggedIn, isLiked, isMain }) {
       <p className="card__keyword">Природа</p>
       <p className="card__hint" style={ style }>{`${loggedIn ? likeMessage() : 'Войдите, чтобы сохранять статьи'}`}</p>
       <button
+        type="button"
         className="card__btn"
         style={{ backgroundImage: `url(${ loggedIn && !isMain ? trashStyle : likeStyle })` }}
         onMouseEnter={ handleMouseEnter }
