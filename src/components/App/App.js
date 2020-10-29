@@ -100,6 +100,13 @@ import './App.css';
     setIsMiniOpen(false);
   }
 
+  // обработчик клика по оверлей модального окна
+  function handleOverlayClick(e) {
+    if (e.target.classList.contains('popup')) {
+      closeAllPopups();
+    }
+  }
+
   // -------- валидация полей ввода -----------------
   // ----------------------------------------------------
   // -------- форма аутентификации / регистрации -----------
@@ -233,6 +240,7 @@ import './App.css';
         onClose={closeAllPopups}
         handleSignUpLinkClick={handleSignUpLinkClick}
         authorizationUser={authorizationUser}
+        handleOverlayClick={handleOverlayClick}
         // валидация
         handleChangeEmailLogin={handleChangeEmail}
         handleChangePasswordLogin={handleChangePassword}
@@ -250,6 +258,7 @@ import './App.css';
         onClose={closeAllPopups}
         handleSignInLinkClick={handleSignInLinkClick}
         handleInfoLinkClick={handleInfoLinkClick}
+        handleOverlayClick={handleOverlayClick}
         // валидация
         handleChangeEmailRegister={handleChangeEmail}
         handleChangePasswordRegister={handleChangePassword}
@@ -268,6 +277,7 @@ import './App.css';
         isOpen={isInfoTooltipPopupOpen}
         isMiniOpen={isMiniOpen}
         onClose={closeAllPopups}
+        handleOverlayClick={handleOverlayClick}
       />
     </Route>
     </div>

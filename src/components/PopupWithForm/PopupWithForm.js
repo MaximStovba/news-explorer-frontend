@@ -11,9 +11,10 @@ function PopupWithForm({
   onClose,
   onSubmit,
   isMiniOpen,
+  handleOverlayClick,
   }) {
   return (
-    <section className={`popup ${isMiniOpen ? 'popup-mini' : ''} popup_type_${name} ${isOpen || isMiniOpen ? 'popup_opened' : ''}`}>
+    <section className={`popup ${isMiniOpen ? 'popup-mini' : ''} popup_type_${name} ${isOpen || isMiniOpen ? 'popup_opened' : ''}`} onClick={handleOverlayClick}>
       <form
         name={name}
         method="POST"

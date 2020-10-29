@@ -12,6 +12,7 @@ function Register({
   onClose,
   handleSignInLinkClick,
   handleInfoLinkClick,
+  handleOverlayClick,
   //валидация
   handleChangeEmailRegister,
   handleChangePasswordRegister,
@@ -135,6 +136,7 @@ function Register({
       isMiniOpen={isMiniOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      handleOverlayClick={handleOverlayClick}
       />
   );
 }

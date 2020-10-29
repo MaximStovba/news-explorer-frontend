@@ -12,6 +12,7 @@ function Login({
   onClose,
   handleSignUpLinkClick,
   authorizationUser,
+  handleOverlayClick,
   //валидация
   handleChangeEmailLogin,
   handleChangePasswordLogin,
@@ -108,6 +109,7 @@ function Login({
       isMiniOpen={isMiniOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      handleOverlayClick={handleOverlayClick}
       />
   );
 }
