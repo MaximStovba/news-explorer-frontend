@@ -4,7 +4,13 @@ import React from 'react';
 import './InfoTooltip.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
-function InfoTooltip({isOpen, isMiniOpen, onClose, handleOverlayClick}) {
+function InfoTooltip({
+  isOpen,
+  isMiniOpen,
+  onClose,
+  handleOverlayClick,
+  // handleKeyPress,
+}) {
   return (
     <PopupWithForm
       name="info"
@@ -18,6 +24,7 @@ function InfoTooltip({isOpen, isMiniOpen, onClose, handleOverlayClick}) {
       isMiniOpen={isMiniOpen}
       onClose={onClose}
       handleOverlayClick={handleOverlayClick}
+      // handleKeyPress={handleKeyPress}
     />
   );
 }

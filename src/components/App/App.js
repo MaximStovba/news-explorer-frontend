@@ -98,11 +98,21 @@ import './App.css';
     setIsInfoTooltipPopupOpen(false);
     setIsPopupMenuOpen(false);
     setIsMiniOpen(false);
+    // переадресовываем
+    history.push('/');
   }
 
   // обработчик клика по оверлей модального окна
   function handleOverlayClick(e) {
     if (e.target.classList.contains('popup')) {
+      closeAllPopups();
+    }
+  }
+
+  // обработчик нажатия клавиши
+  function handleKeyDown(e) {
+    if (e.keyCode === 27) {
+      // console.log(e.keyCode);
       closeAllPopups();
     }
   }
@@ -190,7 +200,7 @@ import './App.css';
 
 
   return (
-    <div className="app">
+    <div className="app" onKeyDown={handleKeyDown}>
     <Switch>
       {
       loggedIn
@@ -241,6 +251,7 @@ import './App.css';
         handleSignUpLinkClick={handleSignUpLinkClick}
         authorizationUser={authorizationUser}
         handleOverlayClick={handleOverlayClick}
+        // handleKeyPress={handleKeyPress}
         // валидация
         handleChangeEmailLogin={handleChangeEmail}
         handleChangePasswordLogin={handleChangePassword}
@@ -259,6 +270,7 @@ import './App.css';
         handleSignInLinkClick={handleSignInLinkClick}
         handleInfoLinkClick={handleInfoLinkClick}
         handleOverlayClick={handleOverlayClick}
+        // handleKeyPress={handleKeyPress}
         // валидация
         handleChangeEmailRegister={handleChangeEmail}
         handleChangePasswordRegister={handleChangePassword}
@@ -278,6 +290,7 @@ import './App.css';
         isMiniOpen={isMiniOpen}
         onClose={closeAllPopups}
         handleOverlayClick={handleOverlayClick}
+        // handleKeyPress={handleKeyPress}
       />
     </Route>
     </div>

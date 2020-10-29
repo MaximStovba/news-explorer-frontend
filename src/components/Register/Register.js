@@ -13,6 +13,7 @@ function Register({
   handleSignInLinkClick,
   handleInfoLinkClick,
   handleOverlayClick,
+  // handleKeyPress,
   //валидация
   handleChangeEmailRegister,
   handleChangePasswordRegister,
@@ -137,6 +138,7 @@ function Register({
       onClose={onClose}
       onSubmit={handleSubmit}
       handleOverlayClick={handleOverlayClick}
+      // handleKeyPress={handleKeyPress}
       />
   );
 }

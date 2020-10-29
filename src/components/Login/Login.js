@@ -13,6 +13,7 @@ function Login({
   handleSignUpLinkClick,
   authorizationUser,
   handleOverlayClick,
+  // handleKeyPress,
   //валидация
   handleChangeEmailLogin,
   handleChangePasswordLogin,
@@ -110,6 +111,7 @@ function Login({
       onClose={onClose}
       onSubmit={handleSubmit}
       handleOverlayClick={handleOverlayClick}
+      // handleKeyPress={handleKeyPress}
       />
   );
 }
