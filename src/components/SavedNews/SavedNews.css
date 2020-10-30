@@ -1,0 +1,31 @@
+.saved-news {
+  /* фон */
+  background: #F5F6F7;
+  /* сетка */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows:
+    80px
+    repeat(3, min-content);
+  grid-template-areas:
+    "header"
+    "news-header"
+    "news-list"
+    "footer";
+}
+
+@media all and (max-width : 800px) { /* 768 */
+  .saved-news {
+    grid-template-rows:
+      66px
+      repeat(3, min-content);
+  }
+}
+
+@media all and (max-width : 600px) { /* 320 */
+  .saved-news {
+    grid-template-rows:
+      56px
+      repeat(3, min-content);
+  }
+}

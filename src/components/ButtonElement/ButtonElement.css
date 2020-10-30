@@ -1,0 +1,50 @@
+.popup__btn {
+  margin: 8px 36px 16px 36px;
+  padding: 0;
+  border-width: 0;
+  background: #2F71E5;
+  border-radius: 100px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #FFFFFF;
+  text-align: center;
+  height: 64px;
+  pointer-events: initial;
+}
+
+.popup__btn:hover {
+  /* кнопка при наведении */
+  background: #347EFF;
+  cursor: pointer;
+}
+.popup__btn:focus {
+  /* кнопка в фокусе */
+  outline: none;
+  background: #2A65CC;
+}
+.popup__btn:active {
+  /* кнопка при нажатии */
+  background: #2A65CC;
+}
+
+.popup__btn_disabled {
+  background: #E6E8EB;
+  color: #B6BCBF;
+  cursor: default;
+  pointer-events: none;
+}
+
+.popup__btn-error {
+  margin: 1px 36px 0px 36px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: #FF0000;
+  text-align: center;
+}

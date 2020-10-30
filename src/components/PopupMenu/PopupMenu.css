@@ -1,0 +1,34 @@
+.popup-menu {
+  display: none;
+}
+
+@media all and (max-width : 800px) { /* 768 */
+  .popup-menu {
+    display: none;
+  }
+}
+
+@media all and (max-width : 600px) { /* 320 */
+  .popup-menu {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .popup__container_formtype_menu {
+    background: black;
+    min-width: 320px;
+    width: 100%;
+    border-radius: 0 0 16px 16px;
+    /* сетка */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows:
+      56px
+      min-content;
+      grid-template-areas:
+        "header"
+        "nav-vertical";
+    /* выравниваем содаржимое сетки main по центру */
+    justify-items: center;
+  }
+}

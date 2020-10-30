@@ -1,0 +1,298 @@
+.navigation {
+  margin: 0;
+  /* расположение в сетке header */
+  grid-column: 3/4;
+  grid-row: 1;
+  /* выравнивание по вертикале */
+  align-items: center;
+  /* выравнивание сетки navigation */
+  justify-content: end;
+}
+
+.navigation_status_signin {
+  /* сетка navigation */
+  display: grid;
+  grid-template-columns: repeat(3, min-content);
+  grid-template-rows: 1fr;
+  grid-template-areas:
+  "navigation__link_type_main navigation__link_type_article navigation__btn";
+}
+
+.navigation_status_signout {
+  /* сетка navigation */
+  display: grid;
+  grid-template-columns: repeat(2, min-content);
+  grid-template-rows: 1fr;
+  grid-template-areas:
+  "navigation__link_type_main navigation__btn";
+}
+
+.navigation__link {
+  margin: 0;
+  /* стилизация ссылки */
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  /* --> style_white/black */
+  text-decoration: none;
+}
+
+.navigation__link:hover {
+  /* ссылка при наведении мыши плавно становиться немного прозрачной */
+  opacity: 0.7;
+  transition: opacity 1s ease;
+}
+
+.navigation__link_style_white {
+  color: #FFFFFF;
+  border-bottom: white;
+}
+
+.navigation__link_style_black {
+  color: #1A1B22;
+  border-bottom: #1A1B22;
+}
+
+.navigation__link_status_active {
+  line-height: 77px;
+  /* --> style_white/black */
+  border-bottom: 3px solid;
+}
+
+.navigation__link_type_main {
+  /* расположение в сетке navigation */
+  grid-area: navigation__link_type_main;
+  margin-right: 34px;
+}
+
+.navigation__link_type_article {
+  /* расположение в сетке navigation */
+  grid-area: navigation__link_type_article;
+  margin-right: 32px;
+}
+
+.navigation__link_hidden {
+  display: none;
+}
+
+.navigation__btn {
+  /* расположение в сетке navigation */
+  grid-area: navigation__btn;
+  /* стилизация кнопки */
+  padding: 0 12px 0 12px;
+  width: auto;
+  height: 48px;
+  background-color: transparent;
+  border: 1px solid;
+  box-sizing: border-box;
+  border-radius: 100px;
+  /* надпись кнопки */
+  text-align: center;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.navigation__btn:hover {
+  /* кнопка при наведении мыши плавно становиться немного прозрачной */
+  opacity: 0.7;
+  transition: opacity 1s ease;
+}
+.navigation__btn:focus {
+  /* кнопка в фокусе */
+  outline: none;
+}
+
+.navigation__btn_style_white {
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+}
+
+.navigation__btn_style_black {
+  color: #1A1B22;
+  border-color: #1A1B22;
+}
+
+.navigation__btn_logout {
+  position: relative;
+  text-align: left;
+  padding-right: 38px;
+}
+
+.navigation__btn_logout:after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-image: url(../../images/logout_black.svg);
+  background-position: center;
+  right: 12px;
+  top: calc((48px - 24px) / 2);
+}
+
+.navigation__btn_logout_main {
+  position: relative;
+  text-align: left;
+  padding-right: 38px;
+}
+
+.navigation__btn_logout_main:after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-image: url(../../images/logout_white.svg);
+  background-position: center;
+  right: 12px;
+  top: calc((48px - 24px) / 2);
+}
+
+.navigation__mini-btn {
+  display: none;
+}
+.navigation__mini-btn:focus {
+  /* кнопка в фокусе */
+  outline: none;
+}
+
+/* ------- vertical mini -------- */
+
+.nav-vertical {
+  /* ширина */
+  /* сетка nav-vertical */
+  display: grid;
+  grid-template-columns: 16px 1fr 16px;
+  grid-template-rows: repeat(3, min-content);
+  grid-template-areas:
+    ". main-vert ."
+    ". article-vert ."
+    ". btn-vert .";
+}
+
+.nav-vertical__link {
+  margin: 0;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 56px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.nav-vertical__link_type_main {
+  grid-area: main-vert;
+}
+
+.nav-vertical__link_type_article {
+  grid-area: article-vert;
+}
+
+.nav-vertical__btn {
+  margin: 22px 0 24px;
+  padding: 0;
+  min-width: 288px;
+  height: 56px;
+  grid-area: btn-vert;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+
+  border: 1px solid #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 100px;
+
+  background-color: transparent;
+  color: #FFFFFF;
+}
+
+/* ------- vertical mini -------- */
+
+
+@media all and (max-width : 800px) { /* 768 */
+  .navigation__link {
+    font-size: 16px;
+  }
+  .navigation__link_status_active {
+    line-height: 63px;
+  }
+  .navigation__link_type_main {
+    margin-right: 16px;
+  }
+  .navigation__link_type_article {
+    margin-right: 16px;
+  }
+  .navigation__btn {
+    height: 40px;
+    font-size: 16px;
+  }
+  .navigation__btn_logout:after {
+    top: calc((40px - 24px) / 2);
+  }
+  .navigation__btn_logout_main:after {
+    top: calc((40px - 24px) / 2);
+  }
+}
+
+@media all and (max-width : 600px) { /* 320 */
+  .navigation_status_signin {
+    grid-template-areas:
+    ". . navigation__mini-btn";
+  }
+  .navigation_status_signout {
+    grid-template-areas:
+    ". navigation__mini-btn";
+  }
+  .navigation_vertical {
+    /* расположение в popup__mini */
+    grid-area: nav-vertical;
+  }
+  .navigation__link_type_main {
+    display: none;
+  }
+  .navigation__link_type_article {
+    display: none;
+  }
+  .navigation__btn {
+    display: none;
+  }
+  .navigation__mini-btn {
+    grid-area: navigation__mini-btn;
+    display: block;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    border-width: 0;
+    background-color: transparent;
+    background-position: center;
+  }
+  .navigation__mini-btn_hidden {
+    display: none;
+  }
+  .navigation__mini-btn_type_open-white {
+    background-image: url(../../images/icon_menu_open_white.svg);
+  }
+  .navigation__mini-btn_type_open-black {
+    background-image: url(../../images/icon_menu_open_black.svg);
+  }
+  .navigation__mini-btn_type_close-white {
+    background-image: url(../../images/icon_menu_close_white.svg);
+  }
+  .navigation__mini-btn:hover {
+    opacity: 0.7;
+    transition: opacity 1s ease;
+    cursor: pointer;
+  }
+  .navigation__mini-btn:focus {
+    outline: none;
+  }
+}

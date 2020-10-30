@@ -1,0 +1,25 @@
+.app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  /* Основной код для desctop */
+  font-family: 'Inter', 'Roboto', 'Roboto Slab', 'Source Sans Pro', 'Arial', sans-serif;
+  max-width: 1440px;
+  min-width: 320px;
+  margin: auto;
+/*
+  padding-top: 45px;
+  min-width: 300px;
+*/
+}
+
+/*
+@media all and (max-width : 340px) {
+  .app {
+    padding-top: 28px;
+  }
+}
+*/

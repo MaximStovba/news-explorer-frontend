@@ -1,0 +1,46 @@
+.not-found {
+  margin: 0;
+	min-height: 374px;
+  background: #F5F6F7;
+  /* сетка preloader */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 96px repeat(2, min-content);
+  grid-template-areas:
+  "not-found__img"
+  "not-found__title"
+  "not-found__text";
+  /* расположение */
+  justify-content: center;
+  align-content: center;
+}
+
+.not-found__img {
+  margin: 0 auto;
+  grid-area: not-found__img;
+}
+
+.not-found__title {
+  margin: 24px 0 0;
+  grid-area: not-found__title;
+  font-family: Roboto Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 30px;
+  text-align: center;
+  color: #1A1B22;
+}
+
+.not-found__text {
+  margin: 16px 0 0;
+  grid-area: not-found__text;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: #B6BCBF;
+  max-width: 288px;
+}
