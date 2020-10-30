@@ -8,6 +8,7 @@ import Register from '../Register/Register';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'; // импортируем HOC
 import './App.css';
 
   function App() {
@@ -202,34 +203,15 @@ import './App.css';
   return (
     <div className="app" onKeyDown={handleKeyDown}>
     <Switch>
-      {
-      loggedIn
-      ?
-      <>
-        <Route path="/saved-news">
-          <SavedNews
-            isOpen={isPopupMenuOpen}
-            onClose={closeAllPopups}
-            loggedIn={loggedIn}
-            isMiniOpen={isMiniOpen}
-            handleLogInClick={handleLogInClick}
-            handleMiniClick={handleMiniClick}
-            handleMenuOpenClick={handleMenuOpenClick}
-          />
-        </Route>
-        <Route exact path="/">
-          <Main
-            loggedIn={loggedIn}
-            handleLogInClick={handleLogInClick}
-            handleMenuOpenClick={handleMenuOpenClick}
-            isOpen={isPopupMenuOpen}
-            isMiniOpen={isMiniOpen}
-            onClose={closeAllPopups}
-            handleMiniClick={handleMiniClick}
-          />
-        </Route>
-      </>
-      :
+      <ProtectedRoute path="/saved-news" loggedIn={loggedIn} component={SavedNews}
+        isOpen={isPopupMenuOpen}
+        onClose={closeAllPopups}
+        isMiniOpen={isMiniOpen}
+        handleLogInClick={handleLogInClick}
+        handleMiniClick={handleMiniClick}
+        handleMenuOpenClick={handleMenuOpenClick}
+        setIsMiniOpen={setIsMiniOpen}
+      />
       <Route path="/">
         <Main
           loggedIn={loggedIn}
@@ -241,7 +223,6 @@ import './App.css';
           handleMiniClick={handleMiniClick}
         />
       </Route>
-      }
     </Switch>
     <Route path="/sign-in">
       <Login
