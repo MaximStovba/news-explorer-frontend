@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
+import validator from 'validator';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 
@@ -263,7 +264,7 @@ import './App.css';
 
   // Обработчик изменения инпута "email"
   function handleChangeEmail(e) {
-    if (e.target.validity.valid) {
+    if (e.target.validity.valid && validator.isEmail(e.target.value)) {
       setIsEmailValid(true);
       setEmailValidationMessage('0');
     } else {
