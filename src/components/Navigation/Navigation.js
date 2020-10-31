@@ -7,6 +7,7 @@ const userName = "Максим";
 
 function Navigation({
   loggedIn,
+  onSignOut,
   isMain,
   handleLogInClick,
   isOpen,
@@ -22,6 +23,7 @@ function Navigation({
   }
   function logOut() {
     // завершение сессии
+    onSignOut();
   }
   return (
     <nav className={`navigation ${isVertical ? 'navigation_vertical' : ''} navigation_status_${loggedIn ? 'signin' : 'signout'}`}>

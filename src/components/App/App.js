@@ -9,6 +9,7 @@ import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'; // импортируем HOC
+import * as auth from '../../utils/MainApi'; // импортируем api
 import './App.css';
 
   function App() {
@@ -33,6 +34,100 @@ import './App.css';
   const [isSbmtBtnActiv, setIsSbmtBtnActiv] = React.useState(false);
   // History
   const history = useHistory();
+  // Loader
+  // const [loaded, setLoaded] = React.useState(true);
+  // UserData
+  // const [userData, setUserData] = React.useState('');
+
+  // ------- авторизация и регистрация ----------- //
+  // Описаны обработчики: onRegister, onLogin и onSignOut.
+  // Эти обработчики переданы в соответствующие компоненты: Register.js, Login.js, Header.js.
+
+  // const history = useHistory();
+  // const [loggedIn, setLoggedIn] = React.useState(false);
+
+  React.useEffect(() => {
+    tokenCheck();
+  }, [loggedIn]);
+
+  // если у пользователя есть токен в localStorage,
+  // функция проверит валидность токена
+  function tokenCheck() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // проверим токен
+      auth.getContent(token)
+        .then((data) => {
+          if (data) {
+          // записываем данные пользователя
+          // setUserData(data.data);
+          // авторизуем пользователя
+          setLoggedIn(true);
+          // убираем индикатор загрузки
+          // setLoaded(false);
+          // переадресовываем пользователя на "главную"
+          // history.push('/');
+          }
+        })
+        // если токен не найден
+        .catch(err => console.log(err));
+    } else {
+      // убираем индикатор загрузки
+      // setLoaded(false);
+    }
+  }
+
+  // onRegister
+  function onRegister({email, password, name}) {
+    return auth.register(email, password, name)
+    .then((res) => {
+      // console.log(res);
+      if (res.status !== 400) {
+        // разрешаем открытие попапа "результат регистрации"
+        handleInfoLinkClick();
+        return true;
+      } else {
+        throw new Error('Не корректно заполнено одно из полей!');
+      }
+    })
+    .then((res) => {
+      if (res) {
+        history.push('/sign-in');
+      }
+    })
+    .catch(err => console.log(err));
+  }
+
+  // onLogin
+  function onLogin({email, password}) {
+    auth.authorize(email, password)
+    .then((res) => {
+      if(res && res.token) {
+        // логгинимся
+        setLoggedIn(true);
+        return true;
+      } else {
+        if (res.status === 400) {throw new Error('Не передано одно из полей!');}
+        if (res.status === 401) {throw new Error('Пользователь с email не найден!');}
+      }
+    })
+    .then(() => {
+      // переадресовываем пользователя на "главную"
+      history.push('/');
+    })
+    // если пользователь не найден
+    .catch(err => console.log(err));
+  }
+
+  // onSignOut
+  function onSignOut() {
+    localStorage.removeItem('token');
+    history.push('/');
+  }
+
+  // ------- авторизация и регистрация ----------- //
+
+
 
   // сообщение об открытии мини-попапа
   function handleMiniClick() {
@@ -85,11 +180,11 @@ import './App.css';
   }
 
   // авторизация
-  function authorizationUser() {
-    setLoggedIn(true);
+  //function authorizationUser() {
+  //  setLoggedIn(true);
     // переадресовываем
-    history.push('/saved-news');
-  }
+    // history.push('/saved-news');
+  // }
 
   // обработчик закрытия всех попапов
   function closeAllPopups() {
@@ -197,13 +292,14 @@ import './App.css';
     }
   }
   // -------- форма аутентификации / регистрации ----------
-  // ----------------------------------------
+  // ------------------------------------------------
 
 
   return (
     <div className="app" onKeyDown={handleKeyDown}>
     <Switch>
       <ProtectedRoute path="/saved-news" loggedIn={loggedIn} component={SavedNews}
+        onSignOut={onSignOut}
         isOpen={isPopupMenuOpen}
         onClose={closeAllPopups}
         isMiniOpen={isMiniOpen}
@@ -215,6 +311,7 @@ import './App.css';
       <Route path="/">
         <Main
           loggedIn={loggedIn}
+          onSignOut={onSignOut}
           handleLogInClick={handleLogInClick}
           handleMenuOpenClick={handleMenuOpenClick}
           isOpen={isPopupMenuOpen}
@@ -226,11 +323,12 @@ import './App.css';
     </Switch>
     <Route path="/sign-in">
       <Login
+        onLogin={onLogin}
         isOpen={isLoginPopupOpen}
         isMiniOpen={isMiniOpen}
         onClose={closeAllPopups}
         handleSignUpLinkClick={handleSignUpLinkClick}
-        authorizationUser={authorizationUser}
+        // authorizationUser={authorizationUser}
         handleOverlayClick={handleOverlayClick}
         // handleKeyPress={handleKeyPress}
         // валидация
@@ -245,11 +343,12 @@ import './App.css';
     </Route>
     <Route path="/sign-up">
       <Register
+        onRegister={onRegister}
         isOpen={isRegisterPopupOpen}
         isMiniOpen={isMiniOpen}
         onClose={closeAllPopups}
         handleSignInLinkClick={handleSignInLinkClick}
-        handleInfoLinkClick={handleInfoLinkClick}
+        // handleInfoLinkClick={handleInfoLinkClick}
         handleOverlayClick={handleOverlayClick}
         // handleKeyPress={handleKeyPress}
         // валидация

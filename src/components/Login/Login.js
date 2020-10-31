@@ -7,14 +7,15 @@ import InputElement from '../InputElement/InputElement';
 import ButtonElement from '../ButtonElement/ButtonElement';
 
 function Login({
+  onLogin,
   isOpen,
   isMiniOpen,
   onClose,
   handleSignUpLinkClick,
-  authorizationUser,
+  // authorizationUser,
   handleOverlayClick,
   // handleKeyPress,
-  //валидация
+  // валидация
   handleChangeEmailLogin,
   handleChangePasswordLogin,
   isEmailValid,
@@ -33,11 +34,9 @@ function Login({
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
     // сохраняем значения полей
-    // onLogin({email, password});
-    console.log(email);
-    console.log(password);
+    onLogin({email, password});
     // авторизуем
-    authorizationUser();
+    // authorizationUser();
     // сбрасываем все поля формы
     e.target.reset();
   }

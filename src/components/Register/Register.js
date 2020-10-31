@@ -7,14 +7,15 @@ import InputElement from '../InputElement/InputElement';
 import ButtonElement from '../ButtonElement/ButtonElement';
 
 function Register({
+  onRegister,
   isOpen,
   isMiniOpen,
   onClose,
   handleSignInLinkClick,
-  handleInfoLinkClick,
+  // handleInfoLinkClick,
   handleOverlayClick,
   // handleKeyPress,
-  //валидация
+  // валидация
   handleChangeEmailRegister,
   handleChangePasswordRegister,
   handleChangeNameRegister,
@@ -37,12 +38,9 @@ function Register({
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
     // сохраняем значения полей
-    // onLogin({email, password});
-    console.log(email);
-    console.log(password);
-    console.log(name);
+    onRegister({email, password, name});
     // открываем попап информации
-    handleInfoLinkClick();
+    // handleInfoLinkClick();
     // сбрасываем все поля формы
     e.target.reset();
   }
@@ -138,7 +136,6 @@ function Register({
       onClose={onClose}
       onSubmit={handleSubmit}
       handleOverlayClick={handleOverlayClick}
-      // handleKeyPress={handleKeyPress}
       />
   );
 }

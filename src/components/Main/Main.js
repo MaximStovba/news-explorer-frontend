@@ -14,6 +14,7 @@ import './Main.css';
 
 function Main({
   loggedIn,
+  onSignOut,
   handleLogInClick,
   handleMenuOpenClick,
   isOpen,
@@ -26,6 +27,7 @@ function Main({
     <div className="main">
       <Header
         loggedIn={loggedIn}
+        onSignOut={onSignOut}
         isMain={isMain}
         isMiniOpen={isMiniOpen}
         handleLogInClick={handleLogInClick}

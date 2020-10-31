@@ -6,6 +6,7 @@ import Navigation from '../Navigation/Navigation';
 
 function Header({
   loggedIn,
+  onSignOut,
   isMain,
   handleLogInClick,
   handleMiniClick,
@@ -20,6 +21,7 @@ function Header({
         <a href="/" className={`header__logo header__logo_style_${isMain || isOpen  ? 'white' : 'black'}`}>NewsExplorer</a>
         <Navigation
           loggedIn={loggedIn}
+          onSignOut={onSignOut}
           isMain={isMain}
           handleLogInClick={handleLogInClick}
           handleMiniClick={handleMiniClick}

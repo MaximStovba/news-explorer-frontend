@@ -12,6 +12,7 @@ function SavedNews({
   isOpen,
   onClose,
   loggedIn,
+  onSignOut,
   isMiniOpen,
   handleLogInClick,
   handleMiniClick,
@@ -23,6 +24,7 @@ function SavedNews({
       <Header
         isOpen={isOpen}
         loggedIn={loggedIn}
+        onSignOut={onSignOut}
         isMiniOpen={isMiniOpen}
         handleLogInClick={handleLogInClick}
         handleMiniClick={handleMiniClick}
@@ -33,6 +35,7 @@ function SavedNews({
       <Footer />
       <PopupMenu
         loggedIn={loggedIn}
+        onSignOut={onSignOut}
         isMain={isMain}
         isOpen={isOpen}
         onClose={onClose}
