@@ -33,6 +33,9 @@ import './App.css';
 
   // SubmitButton
   const [isSbmtBtnActiv, setIsSbmtBtnActiv] = React.useState(false);
+  const [sbmtBtnErrMessage, setSbmtBtnErrMessage] = React.useState('Сообщение об ошибке');
+  const [showSbmtError, setShowSbmtError] = React.useState(false);
+
   // History
   const history = useHistory();
   // Loader
@@ -117,7 +120,11 @@ import './App.css';
       history.push('/');
     })
     // если пользователь не найден
-    .catch(err => console.log(err));
+    .catch((err) => {
+      setSbmtBtnErrMessage(err.message);
+      setShowSbmtError(true);
+      // console.log(err.message);
+    });
   }
 
   // onSignOut
@@ -264,9 +271,10 @@ import './App.css';
 
   // Обработчик изменения инпута "email"
   function handleChangeEmail(e) {
+    setShowSbmtError(false);
     if (e.target.validity.valid && validator.isEmail(e.target.value)) {
       setIsEmailValid(true);
-      setEmailValidationMessage('0');
+      setEmailValidationMessage('|');
     } else {
       setIsEmailValid(false);
       setEmailValidationMessage(e.target.validationMessage);
@@ -274,9 +282,10 @@ import './App.css';
   }
   // Обработчик изменения инпута "password"
   function handleChangePassword(e) {
+    setShowSbmtError(false);
     if (e.target.validity.valid) {
       setIsPasswordValid(true);
-      setPasswordValidationMessage('0');
+      setPasswordValidationMessage('|');
     } else {
       setIsPasswordValid(false);
       setPasswordValidationMessage(e.target.validationMessage);
@@ -284,9 +293,10 @@ import './App.css';
   }
     // Обработчик изменения инпута "name"
   function handleChangeName(e) {
+    setShowSbmtError(false);
     if (e.target.validity.valid) {
       setIsNameValid(true);
-      setNameValidationMessage('0');
+      setNameValidationMessage('|');
     } else {
       setIsNameValid(false);
       setNameValidationMessage(e.target.validationMessage);
@@ -340,6 +350,8 @@ import './App.css';
         emailValidationMessage={emailValidationMessage}
         passwordValidationMessage={passwordValidationMessage}
         isSbmtBtnActiv={isSbmtBtnActiv}
+        sbmtBtnErrMessage={sbmtBtnErrMessage}
+        showSbmtError={showSbmtError}
       />
     </Route>
     <Route path="/sign-up">

@@ -8,11 +8,11 @@ function ButtonElement({
   btnName,
   btnText,
   errorMessage,
-  isError,
+  showSbmtError,
 }) {
   return (
     <>
-      <span className={`${isError ? 'popup__btn-error' : ''}`}>{errorMessage}</span>
+      <span className={`popup__btn-error ${showSbmtError ? '' : 'popup__btn-error_hidden'}`}>{errorMessage}</span>
       <button
         disabled={isSbmtBtnActiv ? false : true}
         type="submit"

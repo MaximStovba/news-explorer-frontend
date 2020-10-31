@@ -23,6 +23,8 @@ function Login({
   emailValidationMessage,
   passwordValidationMessage,
   isSbmtBtnActiv,
+  sbmtBtnErrMessage,
+  showSbmtError,
 }) {
 
   // стейт переменные
@@ -96,8 +98,8 @@ function Login({
           isSbmtBtnActiv={isSbmtBtnActiv}
           name="signin"
           btnText="Войти"
-          errorMessage="Такой пользователь уже есть!"
-          isError={isSbmtBtnActiv}
+          errorMessage={sbmtBtnErrMessage}
+          showSbmtError={showSbmtError}
         />
         <h3
           className="login__hint">

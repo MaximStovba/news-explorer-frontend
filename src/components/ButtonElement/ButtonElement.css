@@ -47,4 +47,9 @@
   text-align: center;
   color: #FF0000;
   text-align: center;
+  visibility: visible;
+}
+
+.popup__btn-error_hidden {
+  visibility: hidden;
 }
