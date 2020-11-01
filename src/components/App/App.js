@@ -11,6 +11,8 @@ import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'; // импортируем HOC
 import * as auth from '../../utils/MainApi'; // импортируем api
+// импортируем объект контекста
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './App.css';
 
   function App() {
@@ -38,10 +40,12 @@ import './App.css';
 
   // History
   const history = useHistory();
+
   // Loader
   // const [loaded, setLoaded] = React.useState(true);
+
   // UserData
-  // const [userData, setUserData] = React.useState('');
+  const [currentUser, setCurrentUser] = React.useState({});
 
   // ------- авторизация и регистрация ----------- //
   // Описаны обработчики: onRegister, onLogin и onSignOut.
@@ -52,10 +56,11 @@ import './App.css';
 
   React.useEffect(() => {
     tokenCheck();
-  }, [loggedIn]);
+  }, []); // loggedIn
 
   // если у пользователя есть токен в localStorage,
-  // функция проверит валидность токена
+  // функция проверит валидность токена и
+  // вернет данные пользователя
   function tokenCheck() {
     const token = localStorage.getItem('token');
     if (token) {
@@ -64,7 +69,8 @@ import './App.css';
         .then((data) => {
           if (data) {
           // записываем данные пользователя
-          // setUserData(data.data);
+          setCurrentUser(data.data);
+          // console.log(data.data);
           // авторизуем пользователя
           setLoggedIn(true);
           // убираем индикатор загрузки
@@ -188,13 +194,6 @@ import './App.css';
     history.push('/success');
   }
 
-  // авторизация
-  //function authorizationUser() {
-  //  setLoggedIn(true);
-    // переадресовываем
-    // history.push('/saved-news');
-  // }
-
   // обработчик закрытия всех попапов
   function closeAllPopups() {
     // закрываем попап
@@ -308,89 +307,91 @@ import './App.css';
 
 
   return (
-    <div className="app" onKeyDown={handleKeyDown}>
-    <Switch>
-      <Route path="/saved-news">
-        <ProtectedRoute path="/saved-news" component={SavedNews}
-          loggedIn={true}
-          onSignOut={onSignOut}
-          isOpen={isPopupMenuOpen}
-          onClose={closeAllPopups}
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="app" onKeyDown={handleKeyDown}>
+      <Switch>
+        <Route path="/saved-news">
+          <ProtectedRoute path="/saved-news" component={SavedNews}
+            loggedIn={true}
+            onSignOut={onSignOut}
+            isOpen={isPopupMenuOpen}
+            onClose={closeAllPopups}
+            isMiniOpen={isMiniOpen}
+            handleLogInClick={handleLogInClick}
+            handleMiniClick={handleMiniClick}
+            handleMenuOpenClick={handleMenuOpenClick}
+            setIsMiniOpen={setIsMiniOpen}
+          />
+        </Route>
+        <Route path="/">
+          <Main
+            loggedIn={loggedIn}
+            onSignOut={onSignOut}
+            handleLogInClick={handleLogInClick}
+            handleMenuOpenClick={handleMenuOpenClick}
+            isOpen={isPopupMenuOpen}
+            isMiniOpen={isMiniOpen}
+            onClose={closeAllPopups}
+            handleMiniClick={handleMiniClick}
+          />
+        </Route>
+      </Switch>
+      <Route path="/sign-in">
+        <Login
+          onLogin={onLogin}
+          isOpen={isLoginPopupOpen}
           isMiniOpen={isMiniOpen}
-          handleLogInClick={handleLogInClick}
-          handleMiniClick={handleMiniClick}
-          handleMenuOpenClick={handleMenuOpenClick}
-          setIsMiniOpen={setIsMiniOpen}
+          onClose={closeAllPopups}
+          handleSignUpLinkClick={handleSignUpLinkClick}
+          // authorizationUser={authorizationUser}
+          handleOverlayClick={handleOverlayClick}
+          // handleKeyPress={handleKeyPress}
+          // валидация
+          handleChangeEmailLogin={handleChangeEmail}
+          handleChangePasswordLogin={handleChangePassword}
+          isEmailValid={isEmailValid}
+          isPasswordValid={isPasswordValid}
+          emailValidationMessage={emailValidationMessage}
+          passwordValidationMessage={passwordValidationMessage}
+          isSbmtBtnActiv={isSbmtBtnActiv}
+          sbmtBtnErrMessage={sbmtBtnErrMessage}
+          showSbmtError={showSbmtError}
         />
       </Route>
-      <Route path="/">
-        <Main
-          loggedIn={loggedIn}
-          onSignOut={onSignOut}
-          handleLogInClick={handleLogInClick}
-          handleMenuOpenClick={handleMenuOpenClick}
-          isOpen={isPopupMenuOpen}
+      <Route path="/sign-up">
+        <Register
+          onRegister={onRegister}
+          isOpen={isRegisterPopupOpen}
           isMiniOpen={isMiniOpen}
           onClose={closeAllPopups}
-          handleMiniClick={handleMiniClick}
+          handleSignInLinkClick={handleSignInLinkClick}
+          // handleInfoLinkClick={handleInfoLinkClick}
+          handleOverlayClick={handleOverlayClick}
+          // handleKeyPress={handleKeyPress}
+          // валидация
+          handleChangeEmailRegister={handleChangeEmail}
+          handleChangePasswordRegister={handleChangePassword}
+          handleChangeNameRegister={handleChangeName}
+          isEmailValid={isEmailValid}
+          isPasswordValid={isPasswordValid}
+          isNameValid={isNameValid}
+          emailValidationMessage={emailValidationMessage}
+          passwordValidationMessage={passwordValidationMessage}
+          nameValidationMessage={nameValidationMessage}
+          isSbmtBtnActiv={isSbmtBtnActiv}
         />
       </Route>
-    </Switch>
-    <Route path="/sign-in">
-      <Login
-        onLogin={onLogin}
-        isOpen={isLoginPopupOpen}
-        isMiniOpen={isMiniOpen}
-        onClose={closeAllPopups}
-        handleSignUpLinkClick={handleSignUpLinkClick}
-        // authorizationUser={authorizationUser}
-        handleOverlayClick={handleOverlayClick}
-        // handleKeyPress={handleKeyPress}
-        // валидация
-        handleChangeEmailLogin={handleChangeEmail}
-        handleChangePasswordLogin={handleChangePassword}
-        isEmailValid={isEmailValid}
-        isPasswordValid={isPasswordValid}
-        emailValidationMessage={emailValidationMessage}
-        passwordValidationMessage={passwordValidationMessage}
-        isSbmtBtnActiv={isSbmtBtnActiv}
-        sbmtBtnErrMessage={sbmtBtnErrMessage}
-        showSbmtError={showSbmtError}
-      />
-    </Route>
-    <Route path="/sign-up">
-      <Register
-        onRegister={onRegister}
-        isOpen={isRegisterPopupOpen}
-        isMiniOpen={isMiniOpen}
-        onClose={closeAllPopups}
-        handleSignInLinkClick={handleSignInLinkClick}
-        // handleInfoLinkClick={handleInfoLinkClick}
-        handleOverlayClick={handleOverlayClick}
-        // handleKeyPress={handleKeyPress}
-        // валидация
-        handleChangeEmailRegister={handleChangeEmail}
-        handleChangePasswordRegister={handleChangePassword}
-        handleChangeNameRegister={handleChangeName}
-        isEmailValid={isEmailValid}
-        isPasswordValid={isPasswordValid}
-        isNameValid={isNameValid}
-        emailValidationMessage={emailValidationMessage}
-        passwordValidationMessage={passwordValidationMessage}
-        nameValidationMessage={nameValidationMessage}
-        isSbmtBtnActiv={isSbmtBtnActiv}
-      />
-    </Route>
-    <Route path="/success">
-      <InfoTooltip
-        isOpen={isInfoTooltipPopupOpen}
-        isMiniOpen={isMiniOpen}
-        onClose={closeAllPopups}
-        handleOverlayClick={handleOverlayClick}
-        // handleKeyPress={handleKeyPress}
-      />
-    </Route>
-    </div>
+      <Route path="/success">
+        <InfoTooltip
+          isOpen={isInfoTooltipPopupOpen}
+          isMiniOpen={isMiniOpen}
+          onClose={closeAllPopups}
+          handleOverlayClick={handleOverlayClick}
+          // handleKeyPress={handleKeyPress}
+        />
+      </Route>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

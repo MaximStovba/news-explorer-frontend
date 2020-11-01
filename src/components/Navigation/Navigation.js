@@ -1,9 +1,9 @@
 // Navigation.js
 
 import React from 'react';
+// импортируем объект контекста
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Navigation.css';
-
-const userName = "Максим";
 
 function Navigation({
   loggedIn,
@@ -17,6 +17,11 @@ function Navigation({
   handleMenuOpenClick,
   handleMiniClick,
 }) {
+
+  // Подписываемся на контекст CurrentUserContext
+  const currentUser = React.useContext(CurrentUserContext);
+  const userName = currentUser.name;
+
   function onClickMini() {
     handleLogInClick();
     handleMiniClick();

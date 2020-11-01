@@ -4,7 +4,7 @@ import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import './NewsCardList.css';
 
-function NewsCardList({ loggedIn, isMain }) {
+function NewsCardList({ loggedIn, isMain, handleLogInClick }) {
   return (
     <form
       name="cardlist"
@@ -18,9 +18,9 @@ function NewsCardList({ loggedIn, isMain }) {
        `}>Результаты поиска
       </h2>
       <div className={`news-cardlist__container news-cardlist__container_status_${loggedIn ? 'login' : 'logout'}`}>
-        <NewsCard loggedIn={loggedIn} isLiked={false} isMain={isMain} />
-        <NewsCard loggedIn={loggedIn} isLiked={true} isMain={isMain} />
-        <NewsCard loggedIn={loggedIn} isLiked={false} isMain={isMain} />
+        <NewsCard loggedIn={loggedIn} isLiked={false} isMain={isMain} handleLogInClick={handleLogInClick} />
+        <NewsCard loggedIn={loggedIn} isLiked={true} isMain={isMain} handleLogInClick={handleLogInClick} />
+        <NewsCard loggedIn={loggedIn} isLiked={false} isMain={isMain} handleLogInClick={handleLogInClick} />
       </div>
       <button
           type="button"

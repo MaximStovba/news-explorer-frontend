@@ -10,7 +10,7 @@ import trash_enbl from '../../images/btn_trash_enbl.svg';
 import trash_dsbl from '../../images/btn_trash_dsbl.svg';
 
 
-function NewsCard({ loggedIn, isLiked, isMain }) {
+function NewsCard({ loggedIn, isLiked, isMain, handleLogInClick }) {
   // переменная состояния (всплывающая подсказка)
   const [hintStyle, setHintStyle] = React.useState('');
   // задаем переменную стиля для всплывающей подсказки
@@ -71,7 +71,8 @@ function NewsCard({ loggedIn, isLiked, isMain }) {
         className="card__btn"
         style={{ backgroundImage: `url(${ loggedIn && !isMain ? trashStyle : likeStyle })` }}
         onMouseEnter={ handleMouseEnter }
-        onMouseLeave={ handleMouseLeave }>
+        onMouseLeave={ handleMouseLeave }
+        onClick={handleLogInClick}>
       </button>
     </div>
   );

@@ -22,6 +22,7 @@ function Main({
   onClose,
   handleMiniClick,
 }) {
+
   const isMain = true;
   return (
     <div className="main">
@@ -37,7 +38,7 @@ function Main({
       <SearchForm />
       <Preloader />
       <NotFound />
-      <NewsCardList loggedIn={loggedIn} isMain={isMain} />
+      <NewsCardList loggedIn={loggedIn} isMain={isMain} handleLogInClick={handleLogInClick} />
       <About />
       <Footer />
       <PopupMenu
