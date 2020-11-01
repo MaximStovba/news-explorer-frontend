@@ -130,6 +130,7 @@ import './App.css';
   // onSignOut
   function onSignOut() {
     localStorage.removeItem('token');
+    setLoggedIn(false);
     history.push('/');
   }
 
@@ -309,16 +310,19 @@ import './App.css';
   return (
     <div className="app" onKeyDown={handleKeyDown}>
     <Switch>
-      <ProtectedRoute path="/saved-news" loggedIn={loggedIn} component={SavedNews}
-        onSignOut={onSignOut}
-        isOpen={isPopupMenuOpen}
-        onClose={closeAllPopups}
-        isMiniOpen={isMiniOpen}
-        handleLogInClick={handleLogInClick}
-        handleMiniClick={handleMiniClick}
-        handleMenuOpenClick={handleMenuOpenClick}
-        setIsMiniOpen={setIsMiniOpen}
-      />
+      <Route path="/saved-news">
+        <ProtectedRoute path="/saved-news" component={SavedNews}
+          loggedIn={true}
+          onSignOut={onSignOut}
+          isOpen={isPopupMenuOpen}
+          onClose={closeAllPopups}
+          isMiniOpen={isMiniOpen}
+          handleLogInClick={handleLogInClick}
+          handleMiniClick={handleMiniClick}
+          handleMenuOpenClick={handleMenuOpenClick}
+          setIsMiniOpen={setIsMiniOpen}
+        />
+      </Route>
       <Route path="/">
         <Main
           loggedIn={loggedIn}

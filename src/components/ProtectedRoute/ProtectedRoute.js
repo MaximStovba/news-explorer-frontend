@@ -7,7 +7,7 @@ import { Route, Redirect } from "react-router-dom";
 // он также может взять неограниченное число пропсов и передать их новому компоненту
 const ProtectedRoute = ({ component: Component, ...props }) => {
 
-  // открываем модальное окно авторизации
+// открываем модальное окно авторизации
   React.useEffect(() => {
     if (!props.loggedIn) {
       props.setIsMiniOpen(true);
