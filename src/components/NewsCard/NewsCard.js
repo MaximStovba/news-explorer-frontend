@@ -57,6 +57,13 @@ function NewsCard({ loggedIn, isLiked, isMain, handleLogInClick }) {
     return 'Убрать из сохранённых'
   }
 
+  // обрабатываем нажатие кнопки лайка
+  function onBtnClick() {
+    if (!loggedIn) {
+      handleLogInClick();
+    }
+  }
+
   return (
     <div className="card">
       <img className="card__image" src={img} alt="img" />
@@ -72,7 +79,7 @@ function NewsCard({ loggedIn, isLiked, isMain, handleLogInClick }) {
         style={{ backgroundImage: `url(${ loggedIn && !isMain ? trashStyle : likeStyle })` }}
         onMouseEnter={ handleMouseEnter }
         onMouseLeave={ handleMouseLeave }
-        onClick={handleLogInClick}>
+        onClick={onBtnClick}>
       </button>
     </div>
   );

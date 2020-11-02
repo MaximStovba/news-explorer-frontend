@@ -21,6 +21,7 @@ function Main({
   isMiniOpen,
   onClose,
   handleMiniClick,
+  handleSearchBtnClick,
 }) {
 
   const isMain = true;
@@ -35,7 +36,7 @@ function Main({
         handleMiniClick={handleMiniClick}
         handleMenuOpenClick={handleMenuOpenClick}
       />
-      <SearchForm />
+      <SearchForm handleSearchBtnClick={handleSearchBtnClick} />
       <Preloader />
       <NotFound />
       <NewsCardList loggedIn={loggedIn} isMain={isMain} handleLogInClick={handleLogInClick} />
