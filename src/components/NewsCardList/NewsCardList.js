@@ -4,7 +4,10 @@ import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import './NewsCardList.css';
 
-function NewsCardList({ loggedIn, isMain, handleLogInClick }) {
+function NewsCardList({ loggedIn, isMain, handleLogInClick, cards, question }) {
+
+  const isLiked = false;
+
   return (
     <form
       name="cardlist"
@@ -18,9 +21,15 @@ function NewsCardList({ loggedIn, isMain, handleLogInClick }) {
        `}>Результаты поиска
       </h2>
       <div className={`news-cardlist__container news-cardlist__container_status_${loggedIn ? 'login' : 'logout'}`}>
-        <NewsCard loggedIn={loggedIn} isLiked={false} isMain={isMain} handleLogInClick={handleLogInClick} />
-        <NewsCard loggedIn={loggedIn} isLiked={true} isMain={isMain} handleLogInClick={handleLogInClick} />
-        <NewsCard loggedIn={loggedIn} isLiked={false} isMain={isMain} handleLogInClick={handleLogInClick} />
+        {
+          cards.map(item => <NewsCard key={Math.random().toString(36).substr(2, 9)}
+            card={item}
+            loggedIn={loggedIn}
+            isLiked={isLiked}
+            isMain={isMain}
+            handleLogInClick={handleLogInClick}
+            question={question} />)
+        }
       </div>
       <button
           type="button"

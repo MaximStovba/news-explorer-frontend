@@ -25,6 +25,8 @@ function Main({
   isSearch,
   loaded,
   isNotFound,
+  cards,
+  question,
 }) {
 
   const isMain = true;
@@ -40,7 +42,9 @@ function Main({
         handleMiniClick={handleMiniClick}
         handleMenuOpenClick={handleMenuOpenClick}
       />
-      <SearchForm handleSearchBtnClick={handleSearchBtnClick} />
+      <SearchForm
+        handleSearchBtnClick={handleSearchBtnClick}
+      />
       {
         loaded
         ? <Preloader />
@@ -53,7 +57,7 @@ function Main({
       }
       {
         isSearch && !loaded && !isNotFound
-        ? <NewsCardList loggedIn={loggedIn} isMain={isMain} handleLogInClick={handleLogInClick} />
+        ? <NewsCardList loggedIn={loggedIn} isMain={isMain} handleLogInClick={handleLogInClick} cards={cards} question={question} />
         : ''
       }
       <About />

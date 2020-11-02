@@ -52,6 +52,10 @@ import './App.css';
   // UserData
   const [currentUser, setCurrentUser] = React.useState({});
 
+  // Cards
+  const [cards, setCards] = React.useState([]);
+  const [question, setQuestion] = React.useState('');
+
   // ------- авторизация и регистрация ----------- //
   // Описаны обработчики: onRegister, onLogin и onSignOut.
   // Эти обработчики переданы в соответствующие компоненты: Register.js, Login.js, Header.js.
@@ -238,7 +242,11 @@ import './App.css';
 
       newsApi.getInitialCards(q, from, to)
         .then((data) => {
-          if (data) { console.log(data.articles.length) }
+          if (data) {
+            setCards(data.articles);
+            setQuestion(q);
+            console.log(data.articles.length);
+          }
           // если статьи не найдены - выводим сообщение
           if (data.articles.length === 0) { setIsNotFound(true) }
           else { setIsNotFound(false) }
@@ -368,6 +376,8 @@ import './App.css';
             isSearch={isSearch}
             loaded={loaded}
             isNotFound={isNotFound}
+            cards={cards}
+            question={question}
           />
         </Route>
       </Switch>
