@@ -39,11 +39,15 @@ import './App.css';
   const [sbmtBtnErrMessage, setSbmtBtnErrMessage] = React.useState('Сообщение об ошибке');
   const [showSbmtError, setShowSbmtError] = React.useState(false);
 
+  // Search
+  const [isSearch, setIsSearch] = React.useState(false);
+  const [isNotFound, setIsNotFound] = React.useState(false);
+
   // History
   const history = useHistory();
 
   // Loader
-  // const [loaded, setLoaded] = React.useState(true);
+  const [loaded, setLoaded] = React.useState(false);
 
   // UserData
   const [currentUser, setCurrentUser] = React.useState({});
@@ -227,12 +231,25 @@ import './App.css';
     const from = '2020-11-01';
     const to = '2020-11-01';
 
-    newsApi.getInitialCards(q, from, to)
-      .then((data) => {
-        if (data) { console.log(data) }
-      })
-      // если новости не найдены
-      .catch(err => console.log(err));
+    if (q !== '') {
+      setIsSearch(true);
+      // включаем "лоадер"
+      setLoaded(true);
+
+      newsApi.getInitialCards(q, from, to)
+        .then((data) => {
+          if (data) { console.log(data.articles.length) }
+          // если статьи не найдены - выводим сообщение
+          if (data.articles.length === 0) { setIsNotFound(true) }
+          else { setIsNotFound(false) }
+        })
+        // если новости не найдены
+        .catch(err => console.log(err))
+        .finally(() => {
+          // скрываем "лоадер"
+          setLoaded(false);
+        });
+    }
   }
 
   // -------- валидация полей ввода -----------------
@@ -348,6 +365,9 @@ import './App.css';
             onClose={closeAllPopups}
             handleMiniClick={handleMiniClick}
             handleSearchBtnClick={handleSearchBtnClick}
+            isSearch={isSearch}
+            loaded={loaded}
+            isNotFound={isNotFound}
           />
         </Route>
       </Switch>

@@ -22,9 +22,13 @@ function Main({
   onClose,
   handleMiniClick,
   handleSearchBtnClick,
+  isSearch,
+  loaded,
+  isNotFound,
 }) {
 
   const isMain = true;
+  // const isSearch = false;
   return (
     <div className="main">
       <Header
@@ -37,9 +41,21 @@ function Main({
         handleMenuOpenClick={handleMenuOpenClick}
       />
       <SearchForm handleSearchBtnClick={handleSearchBtnClick} />
-      <Preloader />
-      <NotFound />
-      <NewsCardList loggedIn={loggedIn} isMain={isMain} handleLogInClick={handleLogInClick} />
+      {
+        loaded
+        ? <Preloader />
+        : ''
+      }
+      {
+        isNotFound
+        ? <NotFound />
+        : ''
+      }
+      {
+        isSearch && !loaded && !isNotFound
+        ? <NewsCardList loggedIn={loggedIn} isMain={isMain} handleLogInClick={handleLogInClick} />
+        : ''
+      }
       <About />
       <Footer />
       <PopupMenu

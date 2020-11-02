@@ -27,7 +27,7 @@ function SearchForm({handleSearchBtnClick}) {
         placeholder="Введите тему новости"
         className="search-form__input"
         minLength="2"
-        maxLength="30"
+        maxLength="20"
         required
       />
       <button
