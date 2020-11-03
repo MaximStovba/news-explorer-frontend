@@ -67,6 +67,7 @@ import './App.css';
   React.useEffect(() => {
   // если у пользователя есть токен в localStorage,
   // функция проверит валидность токена
+  // обновит данные пользователя
   function tokenCheck() {
     if (localStorage.getItem('token')) {
       // авторизуем пользователя
@@ -118,7 +119,7 @@ import './App.css';
     .then((token) => {
       auth.getContent(token)
         .then((data) => {
-          if (data) {
+          if (data) { // записываем данные пользователя в localStorage
             localStorage.setItem('user', JSON.stringify(data.data));
             setCurrentUser(data.data);
           }
@@ -352,6 +353,8 @@ import './App.css';
             handleMiniClick={handleMiniClick}
             handleMenuOpenClick={handleMenuOpenClick}
             setIsMiniOpen={setIsMiniOpen}
+            cards={cards}
+            question={question}
           />
         </Route>
         <Route path="/">

@@ -17,6 +17,8 @@ function SavedNews({
   handleLogInClick,
   handleMiniClick,
   handleMenuOpenClick,
+  cards,
+  question,
 }) {
   const isMain = false;
   return (
@@ -31,7 +33,11 @@ function SavedNews({
         handleMenuOpenClick={handleMenuOpenClick}
       />
 
-      <NewsCardList loggedIn={loggedIn} />
+      <NewsCardList
+        loggedIn={loggedIn}
+        cards={cards}
+        question={question}
+      />
       <Footer />
       <PopupMenu
         loggedIn={loggedIn}

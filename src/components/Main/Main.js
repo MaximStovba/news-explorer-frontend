@@ -57,7 +57,13 @@ function Main({
       }
       {
         isSearch && !loaded && !isNotFound
-        ? <NewsCardList loggedIn={loggedIn} isMain={isMain} handleLogInClick={handleLogInClick} cards={cards} question={question} />
+        ? <NewsCardList
+            loggedIn={loggedIn}
+            isMain={isMain}
+            handleLogInClick={handleLogInClick}
+            cards={cards}
+            question={question}
+          />
         : ''
       }
       <About />
