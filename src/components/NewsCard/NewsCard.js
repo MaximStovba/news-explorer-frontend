@@ -63,6 +63,12 @@ function NewsCard({ loggedIn, isLiked, isMain, handleLogInClick, card, question 
     if (!loggedIn) {
       handleLogInClick();
     }
+    if (loggedIn && isLiked) {
+      console.log('удалить');
+    }
+    if (loggedIn && !isLiked) {
+      console.log('сохранить');
+    }
   }
 
   // делаем первый символ строки заглавный
