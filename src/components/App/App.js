@@ -63,36 +63,21 @@ import './App.css';
   // const history = useHistory();
   // const [loggedIn, setLoggedIn] = React.useState(false);
 
-  React.useEffect(() => {
-    tokenCheck();
-  }, []); // loggedIn
 
+  React.useEffect(() => {
   // если у пользователя есть токен в localStorage,
-  // функция проверит валидность токена и
-  // вернет данные пользователя
+  // функция проверит валидность токена
   function tokenCheck() {
-    if (auth.token) { // проверим токен
-      auth.getContent()
-        .then((data) => {
-          if (data) {
-          // записываем данные пользователя
-          setCurrentUser(data.data);
-          // console.log(data.data);
-          // авторизуем пользователя
-          setLoggedIn(true);
-          // убираем индикатор загрузки
-          // setLoaded(false);
-          // переадресовываем пользователя на "главную"
-          // history.push('/');
-          }
-        })
-        // если токен не найден
-        .catch(err => console.log(err));
-    } else {
-      // убираем индикатор загрузки
-      // setLoaded(false);
+    if (localStorage.getItem('token')) {
+      // авторизуем пользователя
+      setLoggedIn(true);
+      // CurrentUser
+      setCurrentUser(JSON.parse(localStorage.getItem('user')));
     }
   }
+  tokenCheck();
+  }, []);
+
 
   // onRegister
   function onRegister({email, password, name}) {
@@ -122,27 +107,36 @@ import './App.css';
       if(res && res.token) {
         // логгинимся
         setLoggedIn(true);
-        return true;
+        // переадресовываем пользователя на "главную"
+        history.push('/');
+        return res.token;
       } else {
-        if (res.status === 400) {throw new Error('Не передано одно из полей!');}
+        if (res.status === 400) {throw new Error('Не передано одно из полей !');}
         if (res.status === 401) {throw new Error('Пользователь с email не найден!');}
       }
     })
-    .then(() => {
-      // переадресовываем пользователя на "главную"
-      history.push('/');
+    .then((token) => {
+      auth.getContent(token)
+        .then((data) => {
+          if (data) {
+            localStorage.setItem('user', JSON.stringify(data.data));
+            setCurrentUser(data.data);
+          }
+        })
+        // если токен не найден
+        .catch(err => console.log(err));
     })
     // если пользователь не найден
     .catch((err) => {
       setSbmtBtnErrMessage(err.message);
       setShowSbmtError(true);
-      // console.log(err.message);
     });
   }
 
   // onSignOut
   function onSignOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setLoggedIn(false);
     history.push('/');
   }

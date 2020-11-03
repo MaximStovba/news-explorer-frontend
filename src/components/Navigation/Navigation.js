@@ -20,7 +20,6 @@ function Navigation({
 
   // Подписываемся на контекст CurrentUserContext
   const currentUser = React.useContext(CurrentUserContext);
-  const userName = currentUser.name;
 
   function onClickMini() {
     handleLogInClick();
@@ -55,7 +54,7 @@ function Navigation({
               navigation__btn_style_${!isMain ? 'black' : 'white'}
               ${loggedIn ? 'navigation__btn_logout' : ''}
               ${loggedIn && isMain ? 'navigation__btn_logout_main' : ''}`
-            }>{`${loggedIn ? userName : 'Авторизоваться'}`}
+            }>{`${loggedIn ? currentUser.name : 'Авторизоваться'}`}
           </button>
           </>
         :
@@ -66,7 +65,7 @@ function Navigation({
             navigation__btn_style_${!isMain ? 'black' : 'white'}
             ${loggedIn ? 'navigation__btn_logout' : ''}
             ${loggedIn && isMain ? 'navigation__btn_logout_main' : ''}`
-          }>{`${loggedIn ? userName : 'Авторизоваться'}`}
+          }>{`${loggedIn ? currentUser.name : 'Авторизоваться'}`}
         </button>
       }
 
@@ -76,7 +75,7 @@ function Navigation({
         <nav className="nav-vertical">
           <a href="/" className="nav-vertical__link nav-vertical__link_type_main">Главная</a>
           <a href="/saved-news" className="nav-vertical__link nav-vertical__link_type_article">Сохранённые&nbsp;статьи</a>
-          <button onClick={logOut} className="nav-vertical__btn" type="button">{userName}</button>
+          <button onClick={logOut} className="nav-vertical__btn" type="button">{currentUser.name}</button>
         </nav>
         : ""
       }

@@ -67,7 +67,7 @@ export const authorize = (email, password) => {
 
 // Параметры запроса для проверки валидности токена
 // и получения данных пользователя
-export const getContent = () => {
+export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
