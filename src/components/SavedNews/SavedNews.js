@@ -19,6 +19,7 @@ function SavedNews({
   handleMenuOpenClick,
   cards,
   question,
+  numSavedArticles,
 }) {
   const isMain = false;
   return (
@@ -32,12 +33,18 @@ function SavedNews({
         handleMiniClick={handleMiniClick}
         handleMenuOpenClick={handleMenuOpenClick}
       />
-
-      <NewsCardList
-        loggedIn={loggedIn}
-        cards={cards}
-        question={question}
+      <SavedNewsHeader
+        numSavedArticles={numSavedArticles}
       />
+      {
+        numSavedArticles === 0
+        ? ''
+        : <NewsCardList
+            loggedIn={loggedIn}
+            cards={cards}
+            question={question}
+          />
+      }
       <Footer />
       <PopupMenu
         loggedIn={loggedIn}
@@ -48,7 +55,6 @@ function SavedNews({
         handleLogInClick={handleLogInClick}
         handleMiniClick={handleMiniClick}
       />
-      <SavedNewsHeader />
     </div>
   );
 }

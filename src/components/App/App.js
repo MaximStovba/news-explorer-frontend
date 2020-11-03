@@ -53,21 +53,20 @@ import './App.css';
   const [currentUser, setCurrentUser] = React.useState({});
 
   // Cards
-  const [cards, setCards] = React.useState([]);
+  const [cards, setCards] = React.useState([]); // загруженые по поисковому запросу карточки
   const [question, setQuestion] = React.useState('');
+  const [savedCards, setSavedCards] = React.useState([]); // сохраненные карточки
+  const [numSavedCards, setNumSavedCards] = React.useState(0);
 
   // ------- авторизация и регистрация ----------- //
   // Описаны обработчики: onRegister, onLogin и onSignOut.
   // Эти обработчики переданы в соответствующие компоненты: Register.js, Login.js, Header.js.
 
-  // const history = useHistory();
-  // const [loggedIn, setLoggedIn] = React.useState(false);
-
 
   React.useEffect(() => {
   // если у пользователя есть токен в localStorage,
   // функция проверит валидность токена
-  // обновит данные пользователя
+  // и обновит данные пользователя
   function tokenCheck() {
     if (localStorage.getItem('token')) {
       // авторизуем пользователя
@@ -143,7 +142,35 @@ import './App.css';
   }
 
   // ------- авторизация и регистрация ----------- //
+  // ------- загрузка / сохранение / удаление статей ------- //
 
+  // возвращает все сохранённые пользователем статьи
+  // GET /articles
+  React.useEffect(() => {
+    auth.getSavedCards()
+      .then((allCards) => {
+        // устанавливаем количество сохраненных статей
+        setNumSavedCards(allCards.data.length);
+        // устанавливаем сохраненные карточки
+        console.log(allCards.data);
+        setSavedCards(allCards.data);
+      })
+      .catch((err) => {
+        console.log('Ошибка. Запрос не выполнен: ', err);
+      });
+  }, []);
+
+
+  // сохраняет статью с переданными в теле
+  // keyword, title, text, date, source, link и image
+  // POST /articles
+
+
+  // удаляет сохранённую статью  по _id
+  // DELETE /articles/:articleId
+
+
+  // ------- загрузка / сохранение / удаление статей ------- //
 
 
   // сообщение об открытии мини-попапа
@@ -353,8 +380,9 @@ import './App.css';
             handleMiniClick={handleMiniClick}
             handleMenuOpenClick={handleMenuOpenClick}
             setIsMiniOpen={setIsMiniOpen}
-            cards={cards}
+            cards={savedCards}
             question={question}
+            numSavedArticles={numSavedCards}
           />
         </Route>
         <Route path="/">
