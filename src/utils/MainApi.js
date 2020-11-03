@@ -2,8 +2,9 @@
 
 // signup — регистрация пользователя
 
-// export const BASE_URL = 'https://www.api.news.students.nomoreparties.xyz';
+//export const BASE_URL = 'https://www.api.news.students.nomoreparties.xyz';
 export const BASE_URL = 'http://localhost:3001';
+export const token = localStorage.getItem('token');
 
 export const register = (email, password, name) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -66,7 +67,7 @@ export const authorize = (email, password) => {
 
 // Параметры запроса для проверки валидности токена
 // и получения данных пользователя
-export const getContent = (token) => {
+export const getContent = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
@@ -82,4 +83,67 @@ export const getContent = (token) => {
     return data;
   })
   .catch((err) => console.log(err));
+};
+
+// возвращает все сохранённые пользователем статьи
+// GET /articles
+export const getSavedCards = () => {
+  return fetch(`${BASE_URL}/articles`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  })
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Что-то пошло не так: ${res.status}`);
+  });
+};
+
+// сохраняет статью с переданными в теле
+// keyword, title, text, date, source, link и image
+// POST /articles
+export const postNewCard = (keyword, articleData) => {
+  return fetch(`${BASE_URL}/articles`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      keyword: keyword,
+      title: articleData.title,
+      text: articleData.description,
+      date: articleData.publishedAt,
+      source: articleData.source.name,
+      link: articleData.url,
+      image: articleData.urlToImage,
+    })
+  })
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Что-то пошло не так: ${res.status}`);
+  });
+};
+
+// удаляет сохранённую статью  по _id
+// DELETE /articles/:articleId
+export const deleteMyCard = (articleId) => {
+  return fetch(`${BASE_URL}/articles/${articleId}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Что-то пошло не так: ${res.status}`);
+  });
 };

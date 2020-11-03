@@ -71,10 +71,8 @@ import './App.css';
   // функция проверит валидность токена и
   // вернет данные пользователя
   function tokenCheck() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      // проверим токен
-      auth.getContent(token)
+    if (auth.token) { // проверим токен
+      auth.getContent()
         .then((data) => {
           if (data) {
           // записываем данные пользователя
