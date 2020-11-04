@@ -22,6 +22,7 @@ function Main({
   onClose,
   handleMiniClick,
   handleSearchBtnClick,
+  handleSaveCardBtnClick,
   isSearch,
   loaded,
   isNotFound,
@@ -61,6 +62,7 @@ function Main({
             loggedIn={loggedIn}
             isMain={isMain}
             handleLogInClick={handleLogInClick}
+            handleSaveCardBtnClick={handleSaveCardBtnClick}
             cards={cards}
             question={question}
           />

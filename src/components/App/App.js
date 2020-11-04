@@ -164,7 +164,15 @@ import './App.css';
   // сохраняет статью с переданными в теле
   // keyword, title, text, date, source, link и image
   // POST /articles
-
+  function handleSaveCardBtnClick(card, question) {
+    auth.postNewCard(question, card)
+      .then((savedCard) => {
+        console.log(savedCard);
+      })
+      .catch((err) => {
+        console.log('Ошибка. Запрос не выполнен: ', err);
+      });
+  }
 
   // удаляет сохранённую статью  по _id
   // DELETE /articles/:articleId
@@ -279,6 +287,7 @@ import './App.css';
         });
     }
   }
+
 
   // -------- валидация полей ввода -----------------
   // ----------------------------------------------------
@@ -396,6 +405,7 @@ import './App.css';
             onClose={closeAllPopups}
             handleMiniClick={handleMiniClick}
             handleSearchBtnClick={handleSearchBtnClick}
+            handleSaveCardBtnClick={handleSaveCardBtnClick}
             isSearch={isSearch}
             loaded={loaded}
             isNotFound={isNotFound}

@@ -11,7 +11,15 @@ import trash_enbl from '../../images/btn_trash_enbl.svg';
 import trash_dsbl from '../../images/btn_trash_dsbl.svg';
 
 
-function NewsCard({ loggedIn, isLiked, isMain, handleLogInClick, card, question }) {
+function NewsCard({
+  loggedIn,
+  isLiked,
+  isMain,
+  handleLogInClick,
+  handleSaveCardBtnClick,
+  card,
+  question,
+}) {
   // переменная состояния (всплывающая подсказка)
   const [hintStyle, setHintStyle] = React.useState('');
   // задаем переменную стиля для всплывающей подсказки
@@ -63,11 +71,12 @@ function NewsCard({ loggedIn, isLiked, isMain, handleLogInClick, card, question 
     if (!loggedIn) {
       handleLogInClick();
     }
-    if (loggedIn && isLiked) {
-      console.log('удалить');
+    if (loggedIn && !isLiked && isMain) {
+      handleSaveCardBtnClick(card, question);
     }
-    if (loggedIn && !isLiked) {
-      console.log('сохранить');
+    if (loggedIn && !isMain) {
+      //handleSaveCardBtnClick(card, question);
+      console.log('trashStyle');
     }
   }
 
@@ -100,12 +109,12 @@ function NewsCard({ loggedIn, isLiked, isMain, handleLogInClick, card, question 
 
   return (
     <div className="card">
-      <img className="card__image" src={card.urlToImage} alt="img" />
-      <p className="card__date">{formatDate(card.publishedAt)}</p>
+      <img className="card__image" src={`${isMain ? card.urlToImage : card.image}`} alt="img" />
+      <p className="card__date">{`${isMain ? formatDate(card.publishedAt) : formatDate(card.date)}`}</p>
       <h2 className="card__title card__title_overflow">{card.title}</h2>
-      <p className="card__text card__text_overflow">{card.description}</p>
-      <p className="card__source">{card.source.name}</p>
-      <p className="card__keyword">{ucFirst(question)}</p>
+      <p className="card__text card__text_overflow">{`${isMain ? card.description : card.text}`}</p>
+      <p className="card__source">{`${isMain ? card.source.name : card.source}`}</p>
+      <p className="card__keyword">{`${isMain ? ucFirst(question) : ucFirst(card.keyword)}`}</p>
       <p className="card__hint" style={ style }>{`${loggedIn ? likeMessage() : 'Войдите, чтобы сохранять статьи'}`}</p>
       <button
         type="button"

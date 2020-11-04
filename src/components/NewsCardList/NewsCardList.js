@@ -4,7 +4,14 @@ import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import './NewsCardList.css';
 
-function NewsCardList({ loggedIn, isMain, handleLogInClick, cards, question }) {
+function NewsCardList({
+  loggedIn,
+  isMain,
+  handleLogInClick,
+  handleSaveCardBtnClick,
+  cards,
+  question
+}) {
 
   const isLiked = false; // убрать
   // счетчик
@@ -51,6 +58,7 @@ function NewsCardList({ loggedIn, isMain, handleLogInClick, cards, question }) {
             isLiked={isLiked}
             isMain={isMain}
             handleLogInClick={handleLogInClick}
+            handleSaveCardBtnClick={handleSaveCardBtnClick}
             question={question} />)
         }
       </div>
