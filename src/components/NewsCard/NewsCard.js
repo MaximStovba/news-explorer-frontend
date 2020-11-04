@@ -17,6 +17,7 @@ function NewsCard({
   isMain,
   handleLogInClick,
   handleSaveCardBtnClick,
+  handleDeleteCardBtnClick,
   card,
   question,
 }) {
@@ -75,8 +76,7 @@ function NewsCard({
       handleSaveCardBtnClick(card, question);
     }
     if (loggedIn && !isMain) {
-      //handleSaveCardBtnClick(card, question);
-      console.log('trashStyle');
+      handleDeleteCardBtnClick(card._id);
     }
   }
 

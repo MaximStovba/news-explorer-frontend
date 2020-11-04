@@ -9,6 +9,7 @@ function NewsCardList({
   isMain,
   handleLogInClick,
   handleSaveCardBtnClick,
+  handleDeleteCardBtnClick,
   cards,
   question
 }) {
@@ -59,6 +60,7 @@ function NewsCardList({
             isMain={isMain}
             handleLogInClick={handleLogInClick}
             handleSaveCardBtnClick={handleSaveCardBtnClick}
+            handleDeleteCardBtnClick={handleDeleteCardBtnClick}
             question={question} />)
         }
       </div>

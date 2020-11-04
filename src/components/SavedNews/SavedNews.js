@@ -20,6 +20,7 @@ function SavedNews({
   cards,
   question,
   numSavedArticles,
+  handleDeleteCardBtnClick,
 }) {
   const isMain = false;
   return (
@@ -43,6 +44,7 @@ function SavedNews({
             loggedIn={loggedIn}
             cards={cards}
             question={question}
+            handleDeleteCardBtnClick={handleDeleteCardBtnClick}
           />
       }
       <Footer />

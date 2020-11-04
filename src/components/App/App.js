@@ -176,7 +176,19 @@ import './App.css';
 
   // удаляет сохранённую статью  по _id
   // DELETE /articles/:articleId
-
+  function handleDeleteCardBtnClick(cardId) {
+    auth.deleteMyCard(cardId)
+      .then((delCard) => {
+        // Cоздаем копию массива, исключив из него удалённую карточку
+        const newCards = savedCards.filter((c) => c._id !== cardId);
+        console.log(delCard);
+        // Обновляем стейт
+        setSavedCards(newCards);
+      })
+      .catch((err) => {
+        console.log('Ошибка. Запрос не выполнен: ', err);
+      });
+  }
 
   // ------- загрузка / сохранение / удаление статей ------- //
 
@@ -392,6 +404,7 @@ import './App.css';
             cards={savedCards}
             question={question}
             numSavedArticles={numSavedCards}
+            handleDeleteCardBtnClick={handleDeleteCardBtnClick}
           />
         </Route>
         <Route path="/">
