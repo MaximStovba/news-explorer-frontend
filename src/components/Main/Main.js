@@ -28,6 +28,7 @@ function Main({
   isNotFound,
   cards,
   question,
+  savedCards,
 }) {
 
   const isMain = true;
@@ -65,6 +66,7 @@ function Main({
             handleSaveCardBtnClick={handleSaveCardBtnClick}
             cards={cards}
             question={question}
+            savedCards={savedCards}
           />
         : ''
       }

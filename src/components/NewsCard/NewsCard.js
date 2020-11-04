@@ -13,14 +13,26 @@ import trash_dsbl from '../../images/btn_trash_dsbl.svg';
 
 function NewsCard({
   loggedIn,
-  isLiked,
   isMain,
   handleLogInClick,
   handleSaveCardBtnClick,
   handleDeleteCardBtnClick,
   card,
   question,
+  savedCards,
 }) {
+
+  // определяем сохранялась ли карточка ранее
+  function isSavedNews() {
+    if (isMain) {
+      const isLike = savedCards.some(item => item.link === card.url);
+      return isLike;
+    } else {
+      return true;
+    }
+  }
+
+  const isLiked = isSavedNews();
   // переменная состояния (всплывающая подсказка)
   const [hintStyle, setHintStyle] = React.useState('');
   // задаем переменную стиля для всплывающей подсказки
@@ -74,6 +86,9 @@ function NewsCard({
     }
     if (loggedIn && !isLiked && isMain) {
       handleSaveCardBtnClick(card, question);
+    }
+    if (loggedIn && isLiked && isMain) {
+      console.log('Привет!');
     }
     if (loggedIn && !isMain) {
       handleDeleteCardBtnClick(card._id);

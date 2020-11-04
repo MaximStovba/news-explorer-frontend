@@ -152,7 +152,7 @@ import './App.css';
         // устанавливаем количество сохраненных статей
         setNumSavedCards(allCards.data.length);
         // устанавливаем сохраненные карточки
-        console.log(allCards.data);
+        // console.log(allCards.data);
         setSavedCards(allCards.data);
       })
       .catch((err) => {
@@ -423,6 +423,7 @@ import './App.css';
             loaded={loaded}
             isNotFound={isNotFound}
             cards={cards}
+            savedCards={savedCards}
             question={question}
           />
         </Route>

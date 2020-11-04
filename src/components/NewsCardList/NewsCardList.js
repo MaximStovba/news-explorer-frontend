@@ -11,10 +11,10 @@ function NewsCardList({
   handleSaveCardBtnClick,
   handleDeleteCardBtnClick,
   cards,
-  question
+  question,
+  savedCards,
 }) {
 
-  const isLiked = false; // убрать
   // счетчик
   const [increment, setIncrement] = React.useState(3);
   // показ кнопки
@@ -55,8 +55,8 @@ function NewsCardList({
         {
           cardsToShow.map(item => <NewsCard key={Math.random().toString(36).substr(2, 9)}
             card={item}
+            savedCards={savedCards}
             loggedIn={loggedIn}
-            isLiked={isLiked}
             isMain={isMain}
             handleLogInClick={handleLogInClick}
             handleSaveCardBtnClick={handleSaveCardBtnClick}
