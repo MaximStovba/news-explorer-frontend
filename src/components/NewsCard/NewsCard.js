@@ -17,6 +17,7 @@ function NewsCard({
   handleLogInClick,
   handleSaveCardBtnClick,
   handleDeleteCardBtnClick,
+  handleSearchEndDeleteCardBtnClick,
   card,
   question,
   savedCards,
@@ -94,15 +95,15 @@ function NewsCard({
       handleLogInClick();
     }
     if (loggedIn && !isLiked && isMain) {
-      handleSaveCardBtnClick(card, question);
+      handleSaveCardBtnClick(card, question); // сохраняем статью
       toggleLike();
     }
     if (loggedIn && isLiked && isMain) {
+      handleSearchEndDeleteCardBtnClick(card.url); // ищем и удаляем статью из сохраненных
       toggleLike();
-      console.log('Привет!'); // написать !!! ---------------------
     }
     if (loggedIn && !isMain) {
-      handleDeleteCardBtnClick(card._id);
+      handleDeleteCardBtnClick(card._id); // удаляем статью
     }
   }
 

@@ -190,6 +190,11 @@ import './App.css';
       });
   }
 
+  // находим и удаляем ранее сохраненную статью
+  // function handleSearchEndDeleteCardBtnClick(cardUrl) {
+  //  console.log(cardUrl);
+  // }
+
   // ------- загрузка / сохранение / удаление статей ------- //
 
 
@@ -419,6 +424,7 @@ import './App.css';
             handleMiniClick={handleMiniClick}
             handleSearchBtnClick={handleSearchBtnClick}
             handleSaveCardBtnClick={handleSaveCardBtnClick}
+            handleSearchEndDeleteCard={handleDeleteCardBtnClick}
             isSearch={isSearch}
             loaded={loaded}
             isNotFound={isNotFound}

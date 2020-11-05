@@ -10,6 +10,7 @@ function NewsCardList({
   handleLogInClick,
   handleSaveCardBtnClick,
   handleDeleteCardBtnClick,
+  handleSearchEndDeleteCard,
   cards,
   question,
   savedCards,
@@ -46,6 +47,16 @@ function NewsCardList({
     setIncrement(increment + 3);
   }
 
+  // находим и удаляем ранее сохраненную статью
+  function handleSearchEndDeleteCardBtnClick(cardUrl) {
+    // ищем нужную карточку
+    const myCard = savedCards.filter(function (card) {
+      return card.link === cardUrl;
+    });
+    // удаляем карточку
+    handleSearchEndDeleteCard(myCard[0]._id);
+  }
+
   return (
     <form
       name="cardlist"
@@ -68,6 +79,7 @@ function NewsCardList({
             handleLogInClick={handleLogInClick}
             handleSaveCardBtnClick={handleSaveCardBtnClick}
             handleDeleteCardBtnClick={handleDeleteCardBtnClick}
+            handleSearchEndDeleteCardBtnClick={handleSearchEndDeleteCardBtnClick}
             question={question}
             />)
         }
