@@ -36,6 +36,7 @@ function SavedNews({
       />
       <SavedNewsHeader
         numSavedArticles={numSavedArticles}
+        cards={cards}
       />
       {
         numSavedArticles === 0
