@@ -22,17 +22,26 @@ function NewsCard({
   savedCards,
 }) {
 
-  // определяем сохранялась ли карточка ранее
-  function isSavedNews() {
-    if (isMain) {
-      const isLike = savedCards.some(item => item.link === card.url);
-      return isLike;
-    } else {
-      return true;
+  // сохранение карточки
+  const [isLiked, setIsLiked] = React.useState(false);
+
+  React.useEffect(() => {
+    // определяем сохранялась ли карточка ранее
+    function isSavedCard() {
+      if (isMain) {
+        setIsLiked(savedCards.some(item => item.link === card.url));
+      } else {
+        setIsLiked(true);
+      }
     }
+    isSavedCard();
+  }, [isMain, savedCards, card.url]);
+
+  // тогглим лайк
+  function toggleLike() {
+    setIsLiked(!isLiked);
   }
 
-  const isLiked = isSavedNews();
   // переменная состояния (всплывающая подсказка)
   const [hintStyle, setHintStyle] = React.useState('');
   // задаем переменную стиля для всплывающей подсказки
@@ -86,9 +95,11 @@ function NewsCard({
     }
     if (loggedIn && !isLiked && isMain) {
       handleSaveCardBtnClick(card, question);
+      toggleLike();
     }
     if (loggedIn && isLiked && isMain) {
-      console.log('Привет!');
+      toggleLike();
+      console.log('Привет!'); // написать !!! ---------------------
     }
     if (loggedIn && !isMain) {
       handleDeleteCardBtnClick(card._id);

@@ -22,16 +22,23 @@ function NewsCardList({
   // массив карт для показа
   const [cardsToShow, setCardsToShow] = React.useState([]);
 
+
   React.useEffect(() => {
-    if (increment >= cards.length) {
-      setIsBtnVisible(false); // скрываем кнопку
-    }
-    if (cards.length > 3) {
-      setCardsToShow(cards.slice(0, increment));
+    if (isMain) {
+      if (increment >= cards.length) {
+        setIsBtnVisible(false); // скрываем кнопку
+      }
+      if (cards.length > 3) {
+        setCardsToShow(cards.slice(0, increment));
+      } else {
+        setCardsToShow(cards.slice(0));
+      }
     } else {
-      setCardsToShow(cards.slice(0));
+      setIsBtnVisible(false); // скрываем кнопку
+      setCardsToShow(cards.slice(0)); // показываем все статьи
     }
-  }, [increment, cards]);
+
+  }, [isMain, increment, cards]);
 
   // обработчик нажатия кнопки "показать еще"
   function handleBtnShowMoreClick() {
@@ -61,7 +68,8 @@ function NewsCardList({
             handleLogInClick={handleLogInClick}
             handleSaveCardBtnClick={handleSaveCardBtnClick}
             handleDeleteCardBtnClick={handleDeleteCardBtnClick}
-            question={question} />)
+            question={question}
+            />)
         }
       </div>
       <button
