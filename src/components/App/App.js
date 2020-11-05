@@ -148,17 +148,20 @@ import './App.css';
   // GET /articles
   React.useEffect(() => {
     auth.getSavedCards()
-      .then((allCards) => {
+      .then((allMyCards) => {
         // устанавливаем количество сохраненных статей
-        setNumSavedCards(allCards.data.length);
+        setNumSavedCards(allMyCards.data.length);
         // устанавливаем сохраненные карточки
-        // console.log(allCards.data);
-        setSavedCards(allCards.data);
+        setSavedCards(allMyCards.data);
       })
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен: ', err);
       });
   }, []);
+
+  // создать массив из ключевых слов
+  // далее создать массив с уникальными значениями и количеством их повторений
+  // выбрать первые два ключевых слова и определить количество оставшихся
 
 
   // сохраняет статью с переданными в теле
@@ -167,7 +170,7 @@ import './App.css';
   function handleSaveCardBtnClick(card, question) {
     auth.postNewCard(question, card)
       .then((savedCard) => {
-        console.log(savedCard);
+        console.log(`Карточка "${savedCard.data._id}" сохранена!`);
       })
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен: ', err);
@@ -181,9 +184,11 @@ import './App.css';
       .then((delCard) => {
         // Cоздаем копию массива, исключив из него удалённую карточку
         const newCards = savedCards.filter((c) => c._id !== cardId);
-        console.log(delCard);
-        // Обновляем стейт
+        console.log(`Карточка c id "${delCard.data._id}" успешно удалена!`);
+        // Обновляем стейт сохраненных карточек
         setSavedCards(newCards);
+        // Обновляем количество сохраненных статей
+        setNumSavedCards(numSavedCards - 1);
       })
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен: ', err);
