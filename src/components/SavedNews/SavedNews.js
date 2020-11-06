@@ -38,16 +38,14 @@ function SavedNews({
         numSavedArticles={numSavedArticles}
         cards={cards}
       />
-      {
-        numSavedArticles === 0
-        ? ''
-        : <NewsCardList
-            loggedIn={loggedIn}
-            cards={cards}
-            question={question}
-            handleDeleteCardBtnClick={handleDeleteCardBtnClick}
-          />
-      }
+
+      <NewsCardList
+        loggedIn={loggedIn}
+        cards={cards}
+        question={question}
+        handleDeleteCardBtnClick={handleDeleteCardBtnClick}
+      />
+
       <Footer />
       <PopupMenu
         loggedIn={loggedIn}

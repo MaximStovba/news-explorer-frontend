@@ -143,6 +143,7 @@ import './App.css';
 
   // ------- авторизация и регистрация ----------- //
   // ------- загрузка / сохранение / удаление статей ------- //
+  const [updateSavedCards, setUpdateSavedCards] = React.useState(Math.random().toString(36).substr(2, 9));
 
   // возвращает все сохранённые пользователем статьи
   // GET /articles
@@ -157,9 +158,9 @@ import './App.css';
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен: ', err);
       });
-  }, []);
+  }, [updateSavedCards]);
 
-  
+
   // сохраняет статью с переданными в теле
   // keyword, title, text, date, source, link и image
   // POST /articles
@@ -167,6 +168,7 @@ import './App.css';
     auth.postNewCard(question, card)
       .then((savedCard) => {
         console.log(`Карточка "${savedCard.data._id}" сохранена!`);
+        setUpdateSavedCards(Math.random().toString(36).substr(2, 9));
       })
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен: ', err);
@@ -178,13 +180,8 @@ import './App.css';
   function handleDeleteCardBtnClick(cardId) {
     auth.deleteMyCard(cardId)
       .then((delCard) => {
-        // Cоздаем копию массива, исключив из него удалённую карточку
-        const newCards = savedCards.filter((c) => c._id !== cardId);
         console.log(`Карточка c id "${delCard.data._id}" успешно удалена!`);
-        // Обновляем стейт сохраненных карточек
-        setSavedCards(newCards);
-        // Обновляем количество сохраненных статей
-        setNumSavedCards(numSavedCards - 1);
+        setUpdateSavedCards(Math.random().toString(36).substr(2, 9));
       })
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен: ', err);
@@ -420,13 +417,14 @@ import './App.css';
             handleMiniClick={handleMiniClick}
             handleSearchBtnClick={handleSearchBtnClick}
             handleSaveCardBtnClick={handleSaveCardBtnClick}
-            handleSearchEndDeleteCard={handleDeleteCardBtnClick}
+            handleDeleteCardBtnClick={handleDeleteCardBtnClick}
             isSearch={isSearch}
             loaded={loaded}
             isNotFound={isNotFound}
             cards={cards}
             savedCards={savedCards}
             question={question}
+            // updateSavedCards={updateSavedCards}
           />
         </Route>
       </Switch>

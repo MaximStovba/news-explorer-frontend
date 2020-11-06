@@ -47,11 +47,11 @@ function SavedNewsHeader({ numSavedArticles, cards }) {
   // установка ключевых слов
   React.useEffect(() => {
     function setKeyWords() {
-      if (numOtherKeyWord >= -1 && numOtherKeyWord < 1) {
+      if (numOtherKeyWord >= -1 && numOtherKeyWord < 0) {
         // возвращаем 1 слово
         setFirstKeyWord(sortAllKeyWords[0][0]);
       }
-      if (numOtherKeyWord >= 1) {
+      if (numOtherKeyWord >= 0) {
         // возвращаем 2 слова
         setFirstKeyWord(sortAllKeyWords[0][0]);
         setSecondKeyWord(sortAllKeyWords[1][0]);
@@ -96,7 +96,7 @@ function SavedNewsHeader({ numSavedArticles, cards }) {
         }
         {
           numAllKeyWord === 1 && numSavedArticles > 0
-          ? <p className="saved-news-header__keyword">По ключевым словам:
+          ? <p className="saved-news-header__keyword">По ключевому слову:
             <span className="saved-news-header__span-accent">{` ${utils.ucFirst(firstKeyWord)}`}</span>
             </p>
           : ''

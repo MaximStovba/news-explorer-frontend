@@ -23,7 +23,7 @@ function Main({
   handleMiniClick,
   handleSearchBtnClick,
   handleSaveCardBtnClick,
-  handleSearchEndDeleteCard,
+  handleDeleteCardBtnClick,
   isSearch,
   loaded,
   isNotFound,
@@ -33,7 +33,7 @@ function Main({
 }) {
 
   const isMain = true;
-  // const isSearch = false;
+
   return (
     <div className="main">
       <Header
@@ -65,7 +65,7 @@ function Main({
             isMain={isMain}
             handleLogInClick={handleLogInClick}
             handleSaveCardBtnClick={handleSaveCardBtnClick}
-            handleSearchEndDeleteCard={handleSearchEndDeleteCard}
+            handleDeleteCardBtnClick={handleDeleteCardBtnClick}
             cards={cards}
             question={question}
             savedCards={savedCards}

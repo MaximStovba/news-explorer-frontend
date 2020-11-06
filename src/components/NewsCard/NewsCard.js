@@ -3,7 +3,6 @@
 import React from 'react';
 import * as utils from '../../utils/MyUtils';
 import './NewsCard.css';
-// import img from '../../images/card_image.png';
 import like_marked from '../../images/btn_like_marked.svg';
 import like_normal from '../../images/btn_like_normal.svg';
 import like_hover from '../../images/btn_like_hover.svg';
@@ -17,7 +16,6 @@ function NewsCard({
   handleLogInClick,
   handleSaveCardBtnClick,
   handleDeleteCardBtnClick,
-  handleSearchEndDeleteCardBtnClick,
   card,
   question,
   savedCards,
@@ -25,23 +23,6 @@ function NewsCard({
 
   // сохранение карточки
   const [isLiked, setIsLiked] = React.useState(false);
-
-  React.useEffect(() => {
-    // определяем сохранялась ли карточка ранее
-    function isSavedCard() {
-      if (isMain) {
-        setIsLiked(savedCards.some(item => item.link === card.url));
-      } else {
-        setIsLiked(true);
-      }
-    }
-    isSavedCard();
-  }, [isMain, savedCards, card.url]);
-
-  // тогглим лайк
-  function toggleLike() {
-    setIsLiked(!isLiked);
-  }
 
   // переменная состояния (всплывающая подсказка)
   const [hintStyle, setHintStyle] = React.useState('');
@@ -51,6 +32,16 @@ function NewsCard({
   const [likeStyle, setLikeStyle] = React.useState('');
   // переменная состояния (декор кнопки треша)
   const [trashStyle, setTrashStyle] = React.useState('');
+
+  React.useEffect(() => {
+    function isSavedCard() {
+      setIsLiked(savedCards.some(item => item.link === card.url));
+    }
+    if (isMain) {
+      // проверяем сохранялась ли карточка ранее
+      isSavedCard();
+    }
+  }, [isMain, savedCards, card.url]);
 
   // проставляем на карточках статус выбрана / не выбрана
   React.useEffect(() => {
@@ -64,6 +55,11 @@ function NewsCard({
     }
     decorateCardBtn();
   }, [isLiked, loggedIn]);
+
+  // тогглим лайк
+  function toggleLike() {
+    setIsLiked(!isLiked);
+  }
 
   // обрабатываем событие наведения курсора мыши
   function handleMouseEnter() {
@@ -98,8 +94,12 @@ function NewsCard({
       handleSaveCardBtnClick(card, question); // сохраняем статью
       toggleLike();
     }
-    if (loggedIn && isLiked && isMain) {
-      handleSearchEndDeleteCardBtnClick(card.url); // ищем и удаляем статью из сохраненных
+    if (loggedIn && isLiked && isMain) { // ищем и удаляем статью из сохраненных
+      // ищем нужную карточку
+      const myCard = savedCards.filter(function (item) {
+        return item.link === card.url;
+      });
+      handleDeleteCardBtnClick(myCard[0]._id); // удаляем статью
       toggleLike();
     }
     if (loggedIn && !isMain) {
