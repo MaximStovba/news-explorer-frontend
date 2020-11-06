@@ -11,9 +11,10 @@ function SavedNewsHeader({ numSavedArticles, cards }) {
 
   // Подписываемся на контекст CurrentUserContext
   const currentUser = React.useContext(CurrentUserContext);
+  const [sortAllKeyWords, setSortAllKeyWords] = React.useState([]);
   const [firstKeyWord, setFirstKeyWord] = React.useState('');
   const [secondKeyWord, setSecondKeyWord] = React.useState('');
-  const [numOtherKeyWord, setNumOtherKeyWord] = React.useState('');
+  const [numOtherKeyWord, setNumOtherKeyWord] = React.useState(0);
 
   // анализ ключевых слов
   React.useEffect(() => {
@@ -33,17 +34,42 @@ function SavedNewsHeader({ numSavedArticles, cards }) {
       const sortKeyWords = myKeyWords.sort(function(a, b) {
         return b[1] - a[1];
       });
-      // возвращаем слова / статистику
-      setFirstKeyWord(sortKeyWords[0][0]);
-      setSecondKeyWord(sortKeyWords[1][0]);
+
+      setSortAllKeyWords(sortKeyWords);
       setNumOtherKeyWord(sortKeyWords.length - 2);
     }
     if (cards.length > 0) {
       analyticsKeyWord();
     }
+
   }, [numSavedArticles, cards]);
 
+  // установка ключевых слов
+  React.useEffect(() => {
+    function setKeyWords() {
+      if (numOtherKeyWord >= -1 && numOtherKeyWord < 1) {
+        // возвращаем 1 слово
+        setFirstKeyWord(sortAllKeyWords[0][0]);
+      }
+      if (numOtherKeyWord >= 1) {
+        // возвращаем 2 слова
+        setFirstKeyWord(sortAllKeyWords[0][0]);
+        setSecondKeyWord(sortAllKeyWords[1][0]);
+      }
+    }
+    if (sortAllKeyWords.length > 0) {
+      setKeyWords();
+      console.log(numOtherKeyWord);
+    }
+
+  }, [numOtherKeyWord, sortAllKeyWords]);
+
+
+  const numAllKeyWord = numOtherKeyWord + 2;
+
   const wordSaveAeticles = utils.sklonenie(numSavedArticles, ['сохранённая статья', 'сохранённые статьи', 'сохранённых статей']);
+  const endNumOtherKeyWords = utils.sklonenie(numOtherKeyWord, ['-у', '-м', '-и']);
+  const wordAnother = utils.sklonenie(numOtherKeyWord, ['другому', 'другим', 'другим']);
 
 
   return (
@@ -52,14 +78,34 @@ function SavedNewsHeader({ numSavedArticles, cards }) {
         <h2 className="saved-news-header__title">Сохранённые статьи</h2>
         <p className="saved-news-header__statistics">{ currentUser.name }, у вас {`${numSavedArticles === 0 ? 'нет' : numSavedArticles} ${wordSaveAeticles}`}</p>
         {
-          numSavedArticles === 0
-          ? ''
-          : <p className="saved-news-header__keyword">По ключевым словам:
+          numAllKeyWord >= 3 && numSavedArticles > 0
+          ? <p className="saved-news-header__keyword">По ключевым словам:
             <span className="saved-news-header__span-accent">{` ${utils.ucFirst(firstKeyWord)},`}</span>
             <span className="saved-news-header__span-accent">{` ${utils.ucFirst(secondKeyWord)} `}</span>
             и
-            <span className="saved-news-header__span-accent">{` ${numOtherKeyWord}-м другим`}</span>
+            <span className="saved-news-header__span-accent">{` ${numOtherKeyWord}${endNumOtherKeyWords} ${wordAnother}`}</span>
             </p>
+          : ''
+        }
+        {
+          numAllKeyWord === 2 && numSavedArticles > 0
+          ? <p className="saved-news-header__keyword">По ключевым словам:
+            <span className="saved-news-header__span-accent">{` ${utils.ucFirst(firstKeyWord)},`}</span>
+            <span className="saved-news-header__span-accent">{` ${utils.ucFirst(secondKeyWord)} `}</span>
+            </p>
+          : ''
+        }
+        {
+          numAllKeyWord === 1 && numSavedArticles > 0
+          ? <p className="saved-news-header__keyword">По ключевым словам:
+            <span className="saved-news-header__span-accent">{` ${utils.ucFirst(firstKeyWord)}`}</span>
+            </p>
+          : ''
+        }
+        {
+          numSavedArticles === 0
+          ? <p className="saved-news-header__keyword"></p>
+          : ''
         }
       </div>
     </header>
