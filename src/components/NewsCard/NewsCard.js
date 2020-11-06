@@ -1,8 +1,8 @@
 // NewsCard.js
 
 import React from 'react';
+import * as utils from '../../utils/MyUtils';
 import './NewsCard.css';
-import dateFormat from 'dateformat';
 // import img from '../../images/card_image.png';
 import like_marked from '../../images/btn_like_marked.svg';
 import like_normal from '../../images/btn_like_normal.svg';
@@ -107,41 +107,14 @@ function NewsCard({
     }
   }
 
-  // делаем первый символ строки заглавный
-  function ucFirst(str) {
-    if (!str) return str;
-
-    return str[0].toUpperCase() + str.slice(1);
-  }
-
-  // форматируем дату
-  function formatDate(date) {
-    dateFormat.masks.hammerTime = 'd mmmm, yyyy';
-    dateFormat.i18n = {
-      dayNames: [
-        'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
-        'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
-      ],
-      monthNames: [
-          'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-          'января', 'февраля', 'марта', 'апреля', 'майя', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
-      ],
-      timeNames: [
-        'a', 'p', 'am', 'pm', 'A', 'P', 'AM', 'PM'
-      ]
-    };
-
-    return dateFormat(date, "hammerTime");
-  }
-
   return (
     <div className="card">
       <img className="card__image" src={`${isMain ? card.urlToImage : card.image}`} alt="img" />
-      <p className="card__date">{`${isMain ? formatDate(card.publishedAt) : formatDate(card.date)}`}</p>
+      <p className="card__date">{`${isMain ? utils.formatDate(card.publishedAt) : utils.formatDate(card.date)}`}</p>
       <h2 className="card__title card__title_overflow">{card.title}</h2>
       <p className="card__text card__text_overflow">{`${isMain ? card.description : card.text}`}</p>
       <p className="card__source">{`${isMain ? card.source.name : card.source}`}</p>
-      <p className="card__keyword">{`${isMain ? ucFirst(question) : ucFirst(card.keyword)}`}</p>
+      <p className="card__keyword">{`${isMain ? utils.ucFirst(question) : utils.ucFirst(card.keyword)}`}</p>
       <p className="card__hint" style={ style }>{`${loggedIn ? likeMessage() : 'Войдите, чтобы сохранять статьи'}`}</p>
       <button
         type="button"
