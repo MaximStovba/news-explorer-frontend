@@ -59,7 +59,6 @@ function SavedNewsHeader({ numSavedArticles, cards }) {
     }
     if (sortAllKeyWords.length > 0) {
       setKeyWords();
-      console.log(numOtherKeyWord);
     }
 
   }, [numOtherKeyWord, sortAllKeyWords]);
