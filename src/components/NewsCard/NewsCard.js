@@ -86,7 +86,9 @@ function NewsCard({
   }
 
   // обрабатываем нажатие кнопки лайка
-  function onBtnClick() {
+  function onBtnClick(e) {
+    e.preventDefault();
+    
     if (!loggedIn) {
       handleLogInClick();
     }
@@ -108,8 +110,8 @@ function NewsCard({
   }
 
   return (
-    <div className="card">
-      <img className="card__image" src={`${isMain ? card.urlToImage : card.image}`} alt="img" />
+    <a className="card" href={`${isMain ? card.url : card.link}`} rel="noopener noreferrer" target="_blank">
+      <img className="card__image" src={`${isMain ? card.urlToImage : card.image}`} alt={card.title} />
       <p className="card__date">{`${isMain ? utils.formatDate(card.publishedAt) : utils.formatDate(card.date)}`}</p>
       <h2 className="card__title card__title_overflow">{card.title}</h2>
       <p className="card__text card__text_overflow">{`${isMain ? card.description : card.text}`}</p>
@@ -124,7 +126,7 @@ function NewsCard({
         onMouseLeave={ handleMouseLeave }
         onClick={onBtnClick}>
       </button>
-    </div>
+    </a>
   );
 }
 
