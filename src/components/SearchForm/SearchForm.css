@@ -77,6 +77,17 @@
   color: #B6BCBF;
 }
 
+.search-form__input_err {}
+.search-form__input_err:focus {
+  outline: none;
+}
+.search-form__input_err::-moz-placeholder {
+  color: red;
+}
+.search-form__input_err::-webkit-input-placeholder {
+  color: red;
+}
+
 .search-form__btn {
   z-index: 1;
   padding: 0;

@@ -7,13 +7,19 @@ function SearchForm({handleSearchBtnClick}) {
 
   // стейт переменная
   const [question, setQuestion] = React.useState('');
+  const [placeholder, setPlaceholder] = React.useState('Введите тему новости');
 
   // обработчик сабмита формы
   function sbmtSearchBtn(e) {
     // запрещаем браузеру переходить по адресу формы
     e.preventDefault();
-    // обработчик кнопки сабмита
-    handleSearchBtnClick(question);
+    if (question === '') {
+      // Если в поле не введён текст, выводится ошибка «Нужно ввести ключевое слово».
+      setPlaceholder('Нужно ввести ключевое слово');
+    } else {
+      // обработчик кнопки сабмита
+      handleSearchBtnClick(question);
+    }
   }
 
   return (
@@ -24,8 +30,8 @@ function SearchForm({handleSearchBtnClick}) {
         name="text"
         defaultValue={question}
         onChange={ e => setQuestion(e.target.value) }
-        placeholder="Введите тему новости"
-        className="search-form__input"
+        placeholder={placeholder}
+        className={`search-form__input ${question === '' && placeholder !== 'Введите тему новости' ? 'search-form__input_err' : ''}`}
         minLength="2"
         maxLength="20"
         required
