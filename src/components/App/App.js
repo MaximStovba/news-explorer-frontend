@@ -12,6 +12,7 @@ import SavedNews from '../SavedNews/SavedNews';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'; // импортируем HOC
 import * as auth from '../../utils/MainApi'; // импортируем api
 import * as newsApi from '../../utils/NewsApi'; // импортируем api
+import * as utils from '../../utils/MyUtils'; // импортируем utils
 // импортируем объект контекста
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './App.css';
@@ -270,8 +271,9 @@ import './App.css';
 
   // обработчик нажатия кнопки поиска статей
   function handleSearchBtnClick(q) {
-    const from = '2020-11-01';
-    const to = '2020-11-01';
+
+    const from = utils.sevenDaysAgoDate();
+    const to = utils.currentDate();
 
     if (q !== '') {
       setIsSearch(true);

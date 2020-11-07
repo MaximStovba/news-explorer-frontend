@@ -34,4 +34,19 @@ export function formatDate(date) {
   return dateFormat(date, "hammerTime");
 }
 
+// получение текущей даты в формате 2020-11-01
+export function currentDate() {
+  let time = new Date();
+  dateFormat.masks.hammerTime = 'yyyy-mm-dd';
+
+  return dateFormat(time, "hammerTime");
+}
+
+// получение текущей даты в формате 2020-11-01
+export function sevenDaysAgoDate() {
+  let time = Date.now() - 7 * 24 * 3600 * 1000;
+  dateFormat.masks.hammerTime = 'yyyy-mm-dd';
+
+  return dateFormat(time, "hammerTime");
+}
 

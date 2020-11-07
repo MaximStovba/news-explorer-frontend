@@ -2,7 +2,7 @@
 
 export const BASE_URL = 'https://nomoreparties.co/news/v2/top-headlines?';
 export const API_KEY = 'ac262763b55b48bca9f3ff767b60c2be';
-export const P_SIZE = 10;
+export const P_SIZE = 100;
 
 // метод загрузки карточек с сервера
 // q — то, что ввёл пользователь в поиск;
