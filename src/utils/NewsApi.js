@@ -12,7 +12,7 @@ export const P_SIZE = 10;
 // pageSize — максимально допустимый массив. Выберите 100 статей
 
 export const getInitialCards = ( q, from, to ) => {
-  return fetch(`${BASE_URL}q=${q}&apiKey=${API_KEY}&from=${from}&to=${to}&pageSize=${P_SIZE}`, {
+  return fetch(`${BASE_URL}country=ru&q=${q}&apiKey=${API_KEY}&from=${from}&to=${to}&pageSize=${P_SIZE}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
