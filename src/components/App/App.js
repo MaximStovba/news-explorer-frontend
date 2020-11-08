@@ -108,6 +108,8 @@ import './App.css';
       if(res && res.token) {
         // логгинимся
         setLoggedIn(true);
+        //
+        isSavedNews(res.token);
         // переадресовываем пользователя на "главную"
         history.push('/');
         return res.token;
@@ -138,18 +140,34 @@ import './App.css';
   function onSignOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('articles');
+    localStorage.removeItem('keyword');
     setLoggedIn(false);
     history.push('/');
   }
-
   // ------- авторизация и регистрация ----------- //
+
   // ------- загрузка / сохранение / удаление статей ------- //
-  const [updateSavedCards, setUpdateSavedCards] = React.useState(Math.random().toString(36).substr(2, 9));
+  // отправляем запрос на получение сохранённых пользователем статей
+  // из SavedNews
+  const isSavedNews = React.useCallback((token) => {
+    getAllSavedCards(token);
+  }, []);
+
+  const [updateSavedCards, setUpdateSavedCards] = React.useState(0);
+
+  // отправляем запрос на получение сохранённых пользователем статей
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (loggedIn && updateSavedCards !== 0) {
+      getAllSavedCards(token);
+    }
+  }, [loggedIn, updateSavedCards]);
 
   // возвращает все сохранённые пользователем статьи
   // GET /articles
-  React.useEffect(() => {
-    auth.getSavedCards()
+  function getAllSavedCards(token) {
+    auth.getSavedCards(token)
       .then((allMyCards) => {
         // устанавливаем количество сохраненных статей
         setNumSavedCards(allMyCards.data.length);
@@ -159,16 +177,17 @@ import './App.css';
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен: ', err);
       });
-  }, [updateSavedCards]);
-
+  }
 
   // сохраняет статью с переданными в теле
   // keyword, title, text, date, source, link и image
   // POST /articles
   function handleSaveCardBtnClick(card, question) {
-    auth.postNewCard(question, card)
+    const token = localStorage.getItem('token');
+    auth.postNewCard(question, card, token)
       .then((savedCard) => {
         console.log(`Карточка "${savedCard.data._id}" сохранена!`);
+        // обновляем стейт сохраненых карточек
         setUpdateSavedCards(Math.random().toString(36).substr(2, 9));
       })
       .catch((err) => {
@@ -179,9 +198,11 @@ import './App.css';
   // удаляет сохранённую статью  по _id
   // DELETE /articles/:articleId
   function handleDeleteCardBtnClick(cardId) {
-    auth.deleteMyCard(cardId)
+    const token = localStorage.getItem('token');
+    auth.deleteMyCard(cardId, token)
       .then((delCard) => {
-        console.log(`Карточка c id "${delCard.data._id}" успешно удалена!`);
+        console.log(`Карточка "${delCard.data._id}" успешно удалена!`);
+        // обновляем стейт сохраненых карточек
         setUpdateSavedCards(Math.random().toString(36).substr(2, 9));
       })
       .catch((err) => {
@@ -269,6 +290,21 @@ import './App.css';
     }
   }
 
+  React.useEffect(() => {
+    // если данные о ранее найденых статьях есть в localStorage,
+    // функция обновит стейт переменную с карточками
+    function loadFoundCards() {
+      if (localStorage.getItem('articles') && localStorage.getItem('keyword')) { // если карточки сохранены
+        // показываем блок с карточками
+        setIsSearch(true);
+        // записываем данные в стейт для отображения
+        setCards(JSON.parse(localStorage.getItem('articles')));
+        setQuestion(JSON.parse(localStorage.getItem('keyword')));
+      }
+    }
+    loadFoundCards();
+    }, [loggedIn]);
+
   // обработчик нажатия кнопки поиска статей
   function handleSearchBtnClick(q) {
 
@@ -276,6 +312,7 @@ import './App.css';
     const to = utils.currentDate();
 
     if (q !== '') {
+      // показываем блок с карточками
       setIsSearch(true);
       // включаем "лоадер"
       setLoaded(true);
@@ -283,9 +320,16 @@ import './App.css';
       newsApi.getInitialCards(q, from, to)
         .then((data) => {
           if (data) {
+            // данные передаются в стейт-переменную
             setCards(data.articles);
             setQuestion(q);
-            console.log(data.articles.length);
+            // данные обновляются в локальном хранилище
+            if (localStorage.getItem('articles') && localStorage.getItem('keyword')) {
+              localStorage.removeItem('articles'); // удаляем старые
+              localStorage.removeItem('keyword'); // удаляем старые
+            }
+            localStorage.setItem('articles', JSON.stringify(data.articles)); // сохраняем новые
+            localStorage.setItem('keyword', JSON.stringify(q)); // сохраняем новые
           }
           // если статьи не найдены - выводим сообщение
           if (data.articles.length === 0) { setIsNotFound(true) }
@@ -405,6 +449,7 @@ import './App.css';
             question={question}
             numSavedArticles={numSavedCards}
             handleDeleteCardBtnClick={handleDeleteCardBtnClick}
+            isSavedNews={isSavedNews}
           />
         </Route>
         <Route path="/">
@@ -426,7 +471,6 @@ import './App.css';
             cards={cards}
             savedCards={savedCards}
             question={question}
-            // updateSavedCards={updateSavedCards}
           />
         </Route>
       </Switch>

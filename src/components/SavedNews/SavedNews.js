@@ -21,8 +21,18 @@ function SavedNews({
   question,
   numSavedArticles,
   handleDeleteCardBtnClick,
+  isSavedNews,
 }) {
+
   const isMain = false;
+
+  // отправляем запрос на получение сохранённых пользователем статей
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    isSavedNews(token);
+  }, [isSavedNews]);
+
+
   return (
     <div className="saved-news">
       <Header

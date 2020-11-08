@@ -87,12 +87,13 @@ export const getContent = (token) => {
 
 // возвращает все сохранённые пользователем статьи
 // GET /articles
-export const getSavedCards = () => {
+export const getSavedCards = (token) => {
   return fetch(`${BASE_URL}/articles`, {
     method: 'GET',
     headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
     }
   })
   .then((res) => {
@@ -106,7 +107,7 @@ export const getSavedCards = () => {
 // сохраняет статью с переданными в теле
 // keyword, title, text, date, source, link и image
 // POST /articles
-export const postNewCard = (keyword, articleData) => {
+export const postNewCard = (keyword, articleData, token) => {
   return fetch(`${BASE_URL}/articles`, {
     method: 'POST',
     headers: {
@@ -133,7 +134,7 @@ export const postNewCard = (keyword, articleData) => {
 
 // удаляет сохранённую статью  по _id
 // DELETE /articles/:articleId
-export const deleteMyCard = (articleId) => {
+export const deleteMyCard = (articleId, token) => {
   return fetch(`${BASE_URL}/articles/${articleId}`, {
     method: 'DELETE',
     headers: {

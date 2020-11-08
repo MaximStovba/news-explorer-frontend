@@ -22,7 +22,6 @@ function NewsCardList({
   // массив карт для показа
   const [cardsToShow, setCardsToShow] = React.useState([]);
 
-
   React.useEffect(() => {
     if (isMain) {
       if (increment >= cards.length) {

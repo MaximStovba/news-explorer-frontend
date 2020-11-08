@@ -37,8 +37,6 @@ function Login({
     e.preventDefault();
     // сохраняем значения полей
     onLogin({email, password});
-    // авторизуем
-    // authorizationUser();
     // сбрасываем все поля формы
     e.target.reset();
   }
