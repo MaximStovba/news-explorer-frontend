@@ -43,6 +43,7 @@ import './App.css';
   // Search
   const [isSearch, setIsSearch] = React.useState(false);
   const [isNotFound, setIsNotFound] = React.useState(false);
+  const [notFoundErrMessage, setNotFoundErrMessage] = React.useState('К сожалению по вашему запросу ничего не найдено.');
 
   // History
   const history = useHistory();
@@ -153,6 +154,13 @@ import './App.css';
   const isSavedNews = React.useCallback((token) => {
     getAllSavedCards(token);
   }, []);
+  // отправляем запрос на получение сохранённых пользователем статей
+  // из Main
+  const isSavedNewsFromMain = React.useCallback((token) => {
+    if (loggedIn) {
+      getAllSavedCards(token);
+    }
+  }, [loggedIn]);
 
   const [updateSavedCards, setUpdateSavedCards] = React.useState(0);
 
@@ -307,15 +315,17 @@ import './App.css';
 
   // обработчик нажатия кнопки поиска статей
   function handleSearchBtnClick(q) {
-
+    // задаем параметры даты для поискового запроса
     const from = utils.sevenDaysAgoDate();
     const to = utils.currentDate();
-
+    // если поле не заполнено
     if (q !== '') {
       // показываем блок с карточками
       setIsSearch(true);
       // включаем "лоадер"
       setLoaded(true);
+      // строка ошибки поиска по умолчанию
+      setNotFoundErrMessage('К сожалению по вашему запросу ничего не найдено.');
 
       newsApi.getInitialCards(q, from, to)
         .then((data) => {
@@ -335,8 +345,15 @@ import './App.css';
           if (data.articles.length === 0) { setIsNotFound(true) }
           else { setIsNotFound(false) }
         })
-        // если новости не найдены
-        .catch(err => console.log(err))
+        // Если в процессе получения данных происходит ошибка,
+        // в окне результатов выводится надпись «Во время запроса произошла ошибка.
+        // Возможно, проблема с соединением или сервер недоступен.
+        // Подождите немного и попробуйте ещё раз».
+        .catch((err) => {
+          console.log(err);
+          setIsNotFound(true);
+          setNotFoundErrMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+        })
         .finally(() => {
           // скрываем "лоадер"
           setLoaded(false);
@@ -468,10 +485,11 @@ import './App.css';
             isSearch={isSearch}
             loaded={loaded}
             isNotFound={isNotFound}
+            notFoundErrMessage={notFoundErrMessage}
             cards={cards}
             savedCards={savedCards}
             question={question}
-            isSavedNews={isSavedNews}
+            isSavedNewsFromMain={isSavedNewsFromMain}
           />
         </Route>
       </Switch>

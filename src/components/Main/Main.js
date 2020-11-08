@@ -27,10 +27,11 @@ function Main({
   isSearch,
   loaded,
   isNotFound,
+  notFoundErrMessage,
   cards,
   question,
   savedCards,
-  isSavedNews,
+  isSavedNewsFromMain,
 }) {
 
   const isMain = true;
@@ -38,8 +39,8 @@ function Main({
   // отправляем запрос на получение сохранённых пользователем статей
   React.useEffect(() => {
     const token = localStorage.getItem('token');
-    isSavedNews(token);
-  }, [isSavedNews]);
+    isSavedNewsFromMain(token);
+  }, [isSavedNewsFromMain]);
 
   return (
     <div className="main">
@@ -62,7 +63,7 @@ function Main({
       }
       {
         isNotFound
-        ? <NotFound />
+        ? <NotFound notFoundErrMessage={notFoundErrMessage} />
         : ''
       }
       {
