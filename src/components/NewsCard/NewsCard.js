@@ -88,13 +88,23 @@ function NewsCard({
   // обрабатываем нажатие кнопки лайка
   function onBtnClick(e) {
     e.preventDefault();
-    
+
     if (!loggedIn) {
       handleLogInClick();
     }
     if (loggedIn && !isLiked && isMain) {
-      handleSaveCardBtnClick(card, question); // сохраняем статью
-      toggleLike();
+      // если в карточке корректный url изображения
+      // сохраняем карточку
+      if (utils.urlValidator(card.urlToImage)) {
+        handleSaveCardBtnClick(card, question); // сохраняем статью
+        toggleLike();
+      } else {
+        card.urlToImage = 'http:'+card.urlToImage;
+        // если нет - исправляеи url
+        console.log(`url изображения исправлен: ${card.urlToImage}`);
+        handleSaveCardBtnClick(card, question); // сохраняем статью
+        toggleLike();
+      }
     }
     if (loggedIn && isLiked && isMain) { // ищем и удаляем статью из сохраненных
       // ищем нужную карточку

@@ -50,3 +50,10 @@ export function sevenDaysAgoDate() {
   return dateFormat(time, "hammerTime");
 }
 
+// проверяем корректность полученного url изображения
+export function urlValidator(url) {
+  const regex = /^(https?:\/\/)([\da-z.-]{1,})(\.)([a-z]{2,6})(\/?)([\da-z-.\W]*)/; // шаблон для поиска url
+  const str = url;
+
+return regex.test(str); // true
+}

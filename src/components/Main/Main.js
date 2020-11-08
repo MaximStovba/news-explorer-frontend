@@ -30,9 +30,16 @@ function Main({
   cards,
   question,
   savedCards,
+  isSavedNews,
 }) {
 
   const isMain = true;
+
+  // отправляем запрос на получение сохранённых пользователем статей
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    isSavedNews(token);
+  }, [isSavedNews]);
 
   return (
     <div className="main">

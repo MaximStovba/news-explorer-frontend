@@ -471,6 +471,7 @@ import './App.css';
             cards={cards}
             savedCards={savedCards}
             question={question}
+            isSavedNews={isSavedNews}
           />
         </Route>
       </Switch>
