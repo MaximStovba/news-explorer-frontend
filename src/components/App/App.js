@@ -112,8 +112,9 @@ import './App.css';
         setLoggedIn(true);
         //
         isSavedNews(res.token);
-        // переадресовываем пользователя на "главную"
-        history.push('/');
+        // закрываем popup и переадресовываем пользователя на "главную"
+        closeAllPopups();
+        // history.push('/');
         return res.token;
       } else {
         if (res.status === 400) {throw new Error('Не передано одно из полей!');}

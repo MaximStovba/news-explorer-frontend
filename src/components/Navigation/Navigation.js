@@ -22,8 +22,8 @@ function Navigation({
   const currentUser = React.useContext(CurrentUserContext);
 
   function onClickMini() {
-    handleLogInClick();
     handleMiniClick();
+    handleLogInClick();
   }
   function logOut() {
     // завершение сессии
@@ -84,7 +84,6 @@ function Navigation({
         ?
         <nav className="nav-vertical">
           <a href="/" className="nav-vertical__link nav-vertical__link_type_main">Главная</a>
-          <a href="/" className="nav-vertical__link nav-vertical__link_type_article">Сохранённые&nbsp;статьи</a>
           <button onClick={onClickMini} className="nav-vertical__btn" type="button">Авторизоваться</button>
         </nav>
         : ""

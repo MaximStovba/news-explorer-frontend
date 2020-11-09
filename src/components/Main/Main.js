@@ -84,13 +84,13 @@ function Main({
       <Footer />
       <PopupMenu
         loggedIn={loggedIn}
+        onSignOut={onSignOut}
         isMain={isMain}
         isOpen={isOpen}
         onClose={onClose}
         handleLogInClick={handleLogInClick}
         handleMiniClick={handleMiniClick}
       />
-      {/**/}
     </div>
   );
 }
