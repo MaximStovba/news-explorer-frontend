@@ -15,22 +15,20 @@ export const register = (email, password, name) => {
     },
     body: JSON.stringify({ password, email, name})
   })
-  .then((response) => {
+  .then((res) => {
     try {
-      if (response.status === 200) {
-        return response.json();
+      if (res.status === 200) {
+        return res.json();
       } else {
-        return response;
+        return res;
       }
     } catch(e) {
       return (e)
     }
   })
-  .then((res) => {
-    // console.log(res);
-    return res;
-  })
-  .catch((err) => console.log(err));
+  .catch((err) => {
+    console.log(err)
+  });
 };
 
 // signin — авторизация пользователя
@@ -43,12 +41,12 @@ export const authorize = (email, password) => {
     },
     body: JSON.stringify({email, password})
   })
-  .then((response) => {
+  .then((res) => {
     try {
-      if (response.status === 200) {
-        return response.json();
+      if (res.status === 200) {
+        return res.json();
       } else {
-        return response;
+        return res;
       }
     } catch(e) {
       return (e)

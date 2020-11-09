@@ -9,7 +9,7 @@ function InfoTooltip({
   isMiniOpen,
   onClose,
   handleOverlayClick,
-  // handleKeyPress,
+  handleLogInClick,
 }) {
   return (
     <PopupWithForm
@@ -17,14 +17,13 @@ function InfoTooltip({
       title="Пользователь успешно зарегистрирован!"
       children={
       <>
-        <h3 className="info-tooltip" onClick={onClose}>Войти</h3>
+        <h3 className="info-tooltip" onClick={handleLogInClick}>Войти</h3>
       </>
       }
       isOpen={isOpen}
       isMiniOpen={isMiniOpen}
       onClose={onClose}
       handleOverlayClick={handleOverlayClick}
-      // handleKeyPress={handleKeyPress}
     />
   );
 }

@@ -85,21 +85,22 @@ import './App.css';
   function onRegister({email, password, name}) {
     return auth.register(email, password, name)
     .then((res) => {
-      // console.log(res);
-      if (res.status !== 400) {
-        // разрешаем открытие попапа "результат регистрации"
-        handleInfoLinkClick();
-        return true;
-      } else {
+      if (res.status === 200) {
+        // разрешаем открытие попапа "успешная регистрация"
+        setIsInfoTooltipPopupOpen(true);
+        // переадресовываем
+        history.push('/success');
+      } else if (res.status === 400) {
         throw new Error('Не корректно заполнено одно из полей!');
+      } else {
+        throw new Error('Ошибка соединения! Неполадки на сервере либо отсутствует доступ в интернет');
       }
     })
-    .then((res) => {
-      if (res) {
-        history.push('/sign-in');
-      }
-    })
-    .catch(err => console.log(err));
+    // если ошибка регистрации
+    .catch((err) => {
+      setSbmtBtnErrMessage(err.message);
+      setShowSbmtError(true);
+    });
   }
 
   // onLogin
@@ -115,7 +116,7 @@ import './App.css';
         history.push('/');
         return res.token;
       } else {
-        if (res.status === 400) {throw new Error('Не передано одно из полей !');}
+        if (res.status === 400) {throw new Error('Не передано одно из полей!');}
         if (res.status === 401) {throw new Error('Пользователь с email не найден!');}
       }
     })
@@ -265,11 +266,11 @@ import './App.css';
   }
 
   // обработчик открытия попапа "информации об успешной регистрации"
-  function handleInfoLinkClick() {
-    setIsInfoTooltipPopupOpen(true);
+  //function handleInfoLinkClick() {
+  //  setIsInfoTooltipPopupOpen(true);
     // переадресовываем
-    history.push('/success');
-  }
+  //  history.push('/success');
+  //}
 
   // обработчик закрытия всех попапов
   function closeAllPopups() {
@@ -536,6 +537,8 @@ import './App.css';
           passwordValidationMessage={passwordValidationMessage}
           nameValidationMessage={nameValidationMessage}
           isSbmtBtnActiv={isSbmtBtnActiv}
+          sbmtBtnErrMessage={sbmtBtnErrMessage}
+          showSbmtError={showSbmtError}
         />
       </Route>
       <Route path="/success">
@@ -544,7 +547,7 @@ import './App.css';
           isMiniOpen={isMiniOpen}
           onClose={closeAllPopups}
           handleOverlayClick={handleOverlayClick}
-          // handleKeyPress={handleKeyPress}
+          handleLogInClick={handleLogInClick}
         />
       </Route>
       </div>

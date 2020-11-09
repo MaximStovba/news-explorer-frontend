@@ -94,7 +94,7 @@ function Login({
         />
         <ButtonElement
           isSbmtBtnActiv={isSbmtBtnActiv}
-          name="signin"
+          btnName="signin"
           btnText="Войти"
           errorMessage={sbmtBtnErrMessage}
           showSbmtError={showSbmtError}

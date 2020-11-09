@@ -26,6 +26,8 @@ function Register({
   passwordValidationMessage,
   nameValidationMessage,
   isSbmtBtnActiv,
+  sbmtBtnErrMessage,
+  showSbmtError,
 }) {
 
   // стейт переменные
@@ -120,10 +122,10 @@ function Register({
         />
         <ButtonElement
           isSbmtBtnActiv={isSbmtBtnActiv}
-          name="signup"
+          btnName="signup"
           btnText="Зарегистрироваться"
-          errorMessage="Такой пользователь уже есть!"
-          isError={isSbmtBtnActiv}
+          errorMessage={sbmtBtnErrMessage}
+          showSbmtError={showSbmtError}
         />
         <h3
           className="register__hint">
