@@ -2,8 +2,8 @@
 
 // signup — регистрация пользователя
 
-//export const BASE_URL = 'https://www.api.news.students.nomoreparties.xyz';
-export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'http://api.newsex.students.nomoreparties.co';
+//export const BASE_URL = 'http://localhost:3001';
 export const token = localStorage.getItem('token');
 
 export const register = (email, password, name) => {

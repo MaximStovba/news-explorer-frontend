@@ -85,7 +85,7 @@ import './App.css';
   function onRegister({email, password, name}) {
     return auth.register(email, password, name)
     .then((res) => {
-      if (res.status === 200) {
+      if (res.status !== 400) {
         // разрешаем открытие попапа "успешная регистрация"
         setIsInfoTooltipPopupOpen(true);
         // переадресовываем
