@@ -91,11 +91,11 @@ import './App.css';
         // переадресовываем
         history.push('/success');
       }
-      // else if (res.status === 400) {
-      // throw new Error('Не корректно заполнено одно из полей!');
-      // } else {
-      // throw new Error('Ошибка соединения! Неполадки на сервере либо отсутствует доступ в интернет');
-      // }
+      else if (res.statusCode === 400) {
+        throw new Error('Не корректно заполнено одно из полей!');
+      } else {
+        throw new Error('Ошибка соединения! Неполадки на сервере либо отсутствует доступ в интернет');
+      }
     })
     // если ошибка регистрации
     .catch((err) => {
@@ -118,10 +118,10 @@ import './App.css';
         // history.push('/');
         return res.token;
       }
-      // else {
-        // if (res.status === 400) {throw new Error('Не передано одно из полей!');}
-        // if (res.status === 401) {throw new Error('Пользователь с email не найден!');}
-      // }
+      else {
+        if (res.statusCode === 400) {throw new Error('Не передано одно из полей!');}
+        if (res.statusCode === 401) {throw new Error('Пользователь с email не найден!');}
+      }
     })
     .then((token) => {
       auth.getContent(token)

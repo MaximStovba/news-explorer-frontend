@@ -20,9 +20,7 @@ export const register = (email, password, name) => {
       if (res.status === 200) {
         return res.json();
       } else {
-        if (res.status === 400) {throw new Error('Не корректно заполнено одно из полей!');}
-        if (res.status === 500) {throw new Error('Ошибка соединения! Неполадки на сервере либо отсутствует доступ в интернет!');}
-        return false;
+        return res;
       }
     } catch(e) {
       return (e)
@@ -48,9 +46,9 @@ export const authorize = (email, password) => {
       if (res.status === 200) {
         return res.json();
       } else {
-        if (res.status === 400) {throw new Error('Не передано одно из полей!');}
-        if (res.status === 401) {throw new Error('Пользователь с email не найден!');}
-        return false;
+        //if (res.status === 400) {throw new Error('Не передано одно из полей!');}
+        //if (res.status === 401) {throw new Error('Пользователь с email не найден!');}
+        return res;
       }
     } catch(e) {
       return (e)
