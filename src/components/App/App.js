@@ -150,11 +150,13 @@ import './App.css';
   // ------- авторизация и регистрация ----------- //
 
   // ------- загрузка / сохранение / удаление статей ------- //
+
   // отправляем запрос на получение сохранённых пользователем статей
   // из SavedNews
   const isSavedNews = React.useCallback((token) => {
     getAllSavedCards(token);
   }, []);
+
   // отправляем запрос на получение сохранённых пользователем статей
   // из Main
   const isSavedNewsFromMain = React.useCallback((token) => {
@@ -326,7 +328,7 @@ import './App.css';
       // включаем "лоадер"
       setLoaded(true);
       // строка ошибки поиска по умолчанию
-      setNotFoundErrMessage('К сожалению по вашему запросу ничего не найдено.');
+      setNotFoundErrMessage('К сожалению, по вашему запросу ничего не найдено.');
 
       newsApi.getInitialCards(q, from, to)
         .then((data) => {
@@ -454,7 +456,7 @@ import './App.css';
       <Switch>
         <Route path="/saved-news">
           <ProtectedRoute path="/saved-news" component={SavedNews}
-            loggedIn={true}
+            loggedIn={loggedIn}
             onSignOut={onSignOut}
             isOpen={isPopupMenuOpen}
             onClose={closeAllPopups}

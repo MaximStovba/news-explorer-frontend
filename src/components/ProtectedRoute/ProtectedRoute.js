@@ -7,17 +7,27 @@ import { Route, Redirect } from "react-router-dom";
 // он также может взять неограниченное число пропсов и передать их новому компоненту
 const ProtectedRoute = ({ component: Component, ...props }) => {
 
-// открываем модальное окно авторизации
+  function tokenCheck() {
+    if (localStorage.getItem('token')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // открываем модальное окно авторизации
   React.useEffect(() => {
-    if (!props.loggedIn) {
+    if (!tokenCheck()) {
       props.setIsMiniOpen(true);
     }
   });
 
+  console.log(props.loggedIn);
+
   return (
     <Route>
       {
-        () => props.loggedIn ? <Component {...props} /> : <Redirect to="/sign-in" />
+        () => tokenCheck() ? <Component {...props} /> : <Redirect to="/sign-in" />
       }
     </Route>
 )}

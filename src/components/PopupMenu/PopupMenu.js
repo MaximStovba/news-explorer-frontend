@@ -11,6 +11,7 @@ function PopupMenu({
   isOpen,
   onClose,
   loggedIn,
+  onSignOut,
   isMain,
   handleLogInClick,
   handleMenuOpenClick,
@@ -37,6 +38,7 @@ function PopupMenu({
 
         <Navigation
           loggedIn={loggedIn}
+          onSignOut={onSignOut}
           isMain={isMain}
           handleLogInClick={handleLogInClick}
           handleMiniClick={handleMiniClick}
