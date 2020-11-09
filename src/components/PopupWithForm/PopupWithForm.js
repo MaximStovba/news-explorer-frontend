@@ -12,13 +12,11 @@ function PopupWithForm({
   onSubmit,
   isMiniOpen,
   handleOverlayClick,
-  // handleKeyPress,
   }) {
   return (
     <section
       className={`popup ${isMiniOpen ? 'popup-mini' : ''} popup_type_${name} ${isOpen || isMiniOpen ? 'popup_opened' : ''}`}
       onClick={handleOverlayClick}
-      // onKeyDown={handleKeyPress}
       >
       <form
         name={name}

@@ -12,9 +12,7 @@ function Register({
   isMiniOpen,
   onClose,
   handleSignInLinkClick,
-  // handleInfoLinkClick,
   handleOverlayClick,
-  // handleKeyPress,
   // валидация
   handleChangeEmailRegister,
   handleChangePasswordRegister,
@@ -41,8 +39,6 @@ function Register({
     e.preventDefault();
     // сохраняем значения полей
     onRegister({email, password, name});
-    // открываем попап информации
-    // handleInfoLinkClick();
     // сбрасываем все поля формы
     e.target.reset();
   }

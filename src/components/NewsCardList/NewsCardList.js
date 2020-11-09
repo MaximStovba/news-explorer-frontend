@@ -13,6 +13,7 @@ function NewsCardList({
   cards,
   question,
   savedCards,
+  handleMiniClick,
 }) {
 
   // счетчик
@@ -65,6 +66,7 @@ function NewsCardList({
             loggedIn={loggedIn}
             isMain={isMain}
             handleLogInClick={handleLogInClick}
+            handleMiniClick={handleMiniClick}
             handleSaveCardBtnClick={handleSaveCardBtnClick}
             handleDeleteCardBtnClick={handleDeleteCardBtnClick}
             question={question}

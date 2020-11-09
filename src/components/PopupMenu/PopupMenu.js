@@ -34,7 +34,6 @@ function PopupMenu({
           onClose={onClose}
           handleMenuOpenClick={handleMenuOpenClick}
           handleMiniClick={handleMiniClick}
-          // onSignOut={onSignOut}
         />
 
         <Navigation

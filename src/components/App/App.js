@@ -268,13 +268,6 @@ import './App.css';
     handleLogInClick();
   }
 
-  // обработчик открытия попапа "информации об успешной регистрации"
-  //function handleInfoLinkClick() {
-  //  setIsInfoTooltipPopupOpen(true);
-    // переадресовываем
-  //  history.push('/success');
-  //}
-
   // обработчик закрытия всех попапов
   function closeAllPopups() {
     // закрываем попап

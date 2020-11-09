@@ -22,8 +22,6 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
     }
   });
 
-  console.log(props.loggedIn);
-
   return (
     <Route>
       {

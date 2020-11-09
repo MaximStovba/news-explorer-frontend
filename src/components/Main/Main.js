@@ -72,6 +72,7 @@ function Main({
             loggedIn={loggedIn}
             isMain={isMain}
             handleLogInClick={handleLogInClick}
+            handleMiniClick={handleMiniClick}
             handleSaveCardBtnClick={handleSaveCardBtnClick}
             handleDeleteCardBtnClick={handleDeleteCardBtnClick}
             cards={cards}

@@ -75,7 +75,7 @@ function Navigation({
         <nav className="nav-vertical">
           <a href="/" className="nav-vertical__link nav-vertical__link_type_main">Главная</a>
           <a href="/saved-news" className="nav-vertical__link nav-vertical__link_type_article">Сохранённые&nbsp;статьи</a>
-          <button onClick={logOut} className="nav-vertical__btn" type="button">{currentUser.name}</button>
+          <button onClick={logOut} className="nav-vertical__btn nav-vertical__btn_logout" type="button">{currentUser.name}</button>
         </nav>
         : ""
       }

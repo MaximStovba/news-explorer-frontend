@@ -19,6 +19,7 @@ function NewsCard({
   card,
   question,
   savedCards,
+  handleMiniClick,
 }) {
 
   // сохранение карточки
@@ -90,6 +91,7 @@ function NewsCard({
     e.preventDefault();
 
     if (!loggedIn) {
+      handleMiniClick();
       handleLogInClick();
     }
     if (loggedIn && !isLiked && isMain) {
