@@ -86,15 +86,17 @@ import './App.css';
     return auth.register(email, password, name)
     .then((res) => {
       if (res) {
-        // разрешаем открытие попапа "успешная регистрация"
-        setIsInfoTooltipPopupOpen(true);
-        // переадресовываем
-        history.push('/success');
+        if (res.status === 400) {
+          throw new Error('Не корректно заполнено одно из полей!');
+        } else {
+          // разрешаем открытие попапа "успешная регистрация"
+          setIsInfoTooltipPopupOpen(true);
+          // переадресовываем
+          history.push('/success');
+        }
       }
-      else if (res.statusCode === 400) {
-        throw new Error('Не корректно заполнено одно из полей!');
-      } else {
-        throw new Error('Ошибка соединения! Неполадки на сервере либо отсутствует доступ в интернет');
+       else {
+        throw new Error('Ошибка соединения! Неполадки на сервере либо отсутствует доступ в интернет!');
       }
     })
     // если ошибка регистрации
@@ -117,10 +119,9 @@ import './App.css';
         closeAllPopups();
         // history.push('/');
         return res.token;
-      }
-      else {
-        if (res.statusCode === 400) {throw new Error('Не передано одно из полей!');}
-        if (res.statusCode === 401) {throw new Error('Пользователь с email не найден!');}
+      } else {
+        if (res.status === 400) {throw new Error('Не передано одно из полей!');}
+        if (res.status === 401) {throw new Error('Пользователь с email не найден!');}
       }
     })
     .then((token) => {
