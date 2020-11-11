@@ -1,12 +1,13 @@
 // Navigation.js
 
 import React from 'react';
+// импортируем объект контекста
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Navigation.css';
-
-const userName = "Максим";
 
 function Navigation({
   loggedIn,
+  onSignOut,
   isMain,
   handleLogInClick,
   isOpen,
@@ -16,12 +17,17 @@ function Navigation({
   handleMenuOpenClick,
   handleMiniClick,
 }) {
+
+  // Подписываемся на контекст CurrentUserContext
+  const currentUser = React.useContext(CurrentUserContext);
+
   function onClickMini() {
-    handleLogInClick();
     handleMiniClick();
+    handleLogInClick();
   }
   function logOut() {
     // завершение сессии
+    onSignOut();
   }
   return (
     <nav className={`navigation ${isVertical ? 'navigation_vertical' : ''} navigation_status_${loggedIn ? 'signin' : 'signout'}`}>
@@ -48,7 +54,7 @@ function Navigation({
               navigation__btn_style_${!isMain ? 'black' : 'white'}
               ${loggedIn ? 'navigation__btn_logout' : ''}
               ${loggedIn && isMain ? 'navigation__btn_logout_main' : ''}`
-            }>{`${loggedIn ? userName : 'Авторизоваться'}`}
+            }>{`${loggedIn ? currentUser.name : 'Авторизоваться'}`}
           </button>
           </>
         :
@@ -59,7 +65,7 @@ function Navigation({
             navigation__btn_style_${!isMain ? 'black' : 'white'}
             ${loggedIn ? 'navigation__btn_logout' : ''}
             ${loggedIn && isMain ? 'navigation__btn_logout_main' : ''}`
-          }>{`${loggedIn ? userName : 'Авторизоваться'}`}
+          }>{`${loggedIn ? currentUser.name : 'Авторизоваться'}`}
         </button>
       }
 
@@ -69,7 +75,7 @@ function Navigation({
         <nav className="nav-vertical">
           <a href="/" className="nav-vertical__link nav-vertical__link_type_main">Главная</a>
           <a href="/saved-news" className="nav-vertical__link nav-vertical__link_type_article">Сохранённые&nbsp;статьи</a>
-          <button onClick={logOut} className="nav-vertical__btn" type="button">{userName}</button>
+          <button onClick={logOut} className="nav-vertical__btn nav-vertical__btn_logout" type="button">{currentUser.name}</button>
         </nav>
         : ""
       }
@@ -78,7 +84,6 @@ function Navigation({
         ?
         <nav className="nav-vertical">
           <a href="/" className="nav-vertical__link nav-vertical__link_type_main">Главная</a>
-          <a href="/" className="nav-vertical__link nav-vertical__link_type_article">Сохранённые&nbsp;статьи</a>
           <button onClick={onClickMini} className="nav-vertical__btn" type="button">Авторизоваться</button>
         </nav>
         : ""

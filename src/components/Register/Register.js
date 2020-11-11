@@ -7,14 +7,13 @@ import InputElement from '../InputElement/InputElement';
 import ButtonElement from '../ButtonElement/ButtonElement';
 
 function Register({
+  onRegister,
   isOpen,
   isMiniOpen,
   onClose,
   handleSignInLinkClick,
-  handleInfoLinkClick,
   handleOverlayClick,
-  // handleKeyPress,
-  //валидация
+  // валидация
   handleChangeEmailRegister,
   handleChangePasswordRegister,
   handleChangeNameRegister,
@@ -25,6 +24,8 @@ function Register({
   passwordValidationMessage,
   nameValidationMessage,
   isSbmtBtnActiv,
+  sbmtBtnErrMessage,
+  showSbmtError,
 }) {
 
   // стейт переменные
@@ -37,12 +38,7 @@ function Register({
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
     // сохраняем значения полей
-    // onLogin({email, password});
-    console.log(email);
-    console.log(password);
-    console.log(name);
-    // открываем попап информации
-    handleInfoLinkClick();
+    onRegister({email, password, name});
     // сбрасываем все поля формы
     e.target.reset();
   }
@@ -122,10 +118,10 @@ function Register({
         />
         <ButtonElement
           isSbmtBtnActiv={isSbmtBtnActiv}
-          name="signup"
+          btnName="signup"
           btnText="Зарегистрироваться"
-          errorMessage="Такой пользователь уже есть!"
-          isError={isSbmtBtnActiv}
+          errorMessage={sbmtBtnErrMessage}
+          showSbmtError={showSbmtError}
         />
         <h3
           className="register__hint">
@@ -138,7 +134,6 @@ function Register({
       onClose={onClose}
       onSubmit={handleSubmit}
       handleOverlayClick={handleOverlayClick}
-      // handleKeyPress={handleKeyPress}
       />
   );
 }

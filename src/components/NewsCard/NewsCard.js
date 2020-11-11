@@ -1,8 +1,8 @@
 // NewsCard.js
 
 import React from 'react';
+import * as utils from '../../utils/MyUtils';
 import './NewsCard.css';
-import img from '../../images/card_image.png';
 import like_marked from '../../images/btn_like_marked.svg';
 import like_normal from '../../images/btn_like_normal.svg';
 import like_hover from '../../images/btn_like_hover.svg';
@@ -10,7 +10,21 @@ import trash_enbl from '../../images/btn_trash_enbl.svg';
 import trash_dsbl from '../../images/btn_trash_dsbl.svg';
 
 
-function NewsCard({ loggedIn, isLiked, isMain }) {
+function NewsCard({
+  loggedIn,
+  isMain,
+  handleLogInClick,
+  handleSaveCardBtnClick,
+  handleDeleteCardBtnClick,
+  card,
+  question,
+  savedCards,
+  handleMiniClick,
+}) {
+
+  // сохранение карточки
+  const [isLiked, setIsLiked] = React.useState(false);
+
   // переменная состояния (всплывающая подсказка)
   const [hintStyle, setHintStyle] = React.useState('');
   // задаем переменную стиля для всплывающей подсказки
@@ -19,6 +33,16 @@ function NewsCard({ loggedIn, isLiked, isMain }) {
   const [likeStyle, setLikeStyle] = React.useState('');
   // переменная состояния (декор кнопки треша)
   const [trashStyle, setTrashStyle] = React.useState('');
+
+  React.useEffect(() => {
+    function isSavedCard() {
+      setIsLiked(savedCards.some(item => item.link === card.url));
+    }
+    if (isMain) {
+      // проверяем сохранялась ли карточка ранее
+      isSavedCard();
+    }
+  }, [isMain, savedCards, card.url]);
 
   // проставляем на карточках статус выбрана / не выбрана
   React.useEffect(() => {
@@ -32,6 +56,11 @@ function NewsCard({ loggedIn, isLiked, isMain }) {
     }
     decorateCardBtn();
   }, [isLiked, loggedIn]);
+
+  // тогглим лайк
+  function toggleLike() {
+    setIsLiked(!isLiked);
+  }
 
   // обрабатываем событие наведения курсора мыши
   function handleMouseEnter() {
@@ -57,23 +86,59 @@ function NewsCard({ loggedIn, isLiked, isMain }) {
     return 'Убрать из сохранённых'
   }
 
+  // обрабатываем нажатие кнопки лайка
+  function onBtnClick(e) {
+    e.preventDefault();
+
+    if (!loggedIn) {
+      handleMiniClick();
+      handleLogInClick();
+    }
+    if (loggedIn && !isLiked && isMain) {
+      // если в карточке корректный url изображения
+      // сохраняем карточку
+      if (utils.urlValidator(card.urlToImage)) {
+        handleSaveCardBtnClick(card, question); // сохраняем статью
+        toggleLike();
+      } else {
+        card.urlToImage = 'http:'+card.urlToImage;
+        // если нет - исправляеи url
+        console.log(`url изображения исправлен: ${card.urlToImage}`);
+        handleSaveCardBtnClick(card, question); // сохраняем статью
+        toggleLike();
+      }
+    }
+    if (loggedIn && isLiked && isMain) { // ищем и удаляем статью из сохраненных
+      // ищем нужную карточку
+      const myCard = savedCards.filter(function (item) {
+        return item.link === card.url;
+      });
+      handleDeleteCardBtnClick(myCard[0]._id); // удаляем статью
+      toggleLike();
+    }
+    if (loggedIn && !isMain) {
+      handleDeleteCardBtnClick(card._id); // удаляем статью
+    }
+  }
+
   return (
-    <div className="card">
-      <img className="card__image" src={img} alt="img" />
-      <p className="card__date">2 августа, 2019</p>
-      <h2 className="card__title card__title_overflow">Лесные огоньки: история одной фотографии</h2>
-      <p className="card__text card__text_overflow">Фотограф отвлеклась от освещения суровой политической реальности Мексики чтобы запечатлеть ускользающую красоту. Чтобы запечатлеть ускользающую красоту.</p>
-      <p className="card__source">Медуза</p>
-      <p className="card__keyword">Природа</p>
+    <a className="card" href={`${isMain ? card.url : card.link}`} rel="noopener noreferrer" target="_blank">
+      <img className="card__image" src={`${isMain ? card.urlToImage : card.image}`} alt={card.title} />
+      <p className="card__date">{`${isMain ? utils.formatDate(card.publishedAt) : utils.formatDate(card.date)}`}</p>
+      <h2 className="card__title card__title_overflow">{card.title}</h2>
+      <p className="card__text card__text_overflow">{`${isMain ? card.description : card.text}`}</p>
+      <p className="card__source">{`${isMain ? card.source.name : card.source}`}</p>
+      <p className="card__keyword">{`${isMain ? utils.ucFirst(question) : utils.ucFirst(card.keyword)}`}</p>
       <p className="card__hint" style={ style }>{`${loggedIn ? likeMessage() : 'Войдите, чтобы сохранять статьи'}`}</p>
       <button
         type="button"
         className="card__btn"
         style={{ backgroundImage: `url(${ loggedIn && !isMain ? trashStyle : likeStyle })` }}
         onMouseEnter={ handleMouseEnter }
-        onMouseLeave={ handleMouseLeave }>
+        onMouseLeave={ handleMouseLeave }
+        onClick={onBtnClick}>
       </button>
-    </div>
+    </a>
   );
 }
 

@@ -7,14 +7,13 @@ import InputElement from '../InputElement/InputElement';
 import ButtonElement from '../ButtonElement/ButtonElement';
 
 function Login({
+  onLogin,
   isOpen,
   isMiniOpen,
   onClose,
   handleSignUpLinkClick,
-  authorizationUser,
   handleOverlayClick,
-  // handleKeyPress,
-  //валидация
+  // валидация
   handleChangeEmailLogin,
   handleChangePasswordLogin,
   isEmailValid,
@@ -22,6 +21,8 @@ function Login({
   emailValidationMessage,
   passwordValidationMessage,
   isSbmtBtnActiv,
+  sbmtBtnErrMessage,
+  showSbmtError,
 }) {
 
   // стейт переменные
@@ -33,11 +34,7 @@ function Login({
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
     // сохраняем значения полей
-    // onLogin({email, password});
-    console.log(email);
-    console.log(password);
-    // авторизуем
-    authorizationUser();
+    onLogin({email, password});
     // сбрасываем все поля формы
     e.target.reset();
   }
@@ -95,10 +92,10 @@ function Login({
         />
         <ButtonElement
           isSbmtBtnActiv={isSbmtBtnActiv}
-          name="signin"
+          btnName="signin"
           btnText="Войти"
-          errorMessage="Такой пользователь уже есть!"
-          isError={isSbmtBtnActiv}
+          errorMessage={sbmtBtnErrMessage}
+          showSbmtError={showSbmtError}
         />
         <h3
           className="login__hint">
@@ -111,7 +108,6 @@ function Login({
       onClose={onClose}
       onSubmit={handleSubmit}
       handleOverlayClick={handleOverlayClick}
-      // handleKeyPress={handleKeyPress}
       />
   );
 }

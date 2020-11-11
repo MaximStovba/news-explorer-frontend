@@ -2,12 +2,19 @@
 
 import React from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
+import validator from 'validator';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'; // импортируем HOC
+import * as auth from '../../utils/MainApi'; // импортируем api
+import * as newsApi from '../../utils/NewsApi'; // импортируем api
+import * as utils from '../../utils/MyUtils'; // импортируем utils
+// импортируем объект контекста
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './App.css';
 
   function App() {
@@ -30,8 +37,196 @@ import './App.css';
 
   // SubmitButton
   const [isSbmtBtnActiv, setIsSbmtBtnActiv] = React.useState(false);
+  const [sbmtBtnErrMessage, setSbmtBtnErrMessage] = React.useState('Сообщение об ошибке');
+  const [showSbmtError, setShowSbmtError] = React.useState(false);
+
+  // Search
+  const [isSearch, setIsSearch] = React.useState(false);
+  const [isNotFound, setIsNotFound] = React.useState(false);
+  const [notFoundErrMessage, setNotFoundErrMessage] = React.useState('К сожалению по вашему запросу ничего не найдено.');
+
   // History
   const history = useHistory();
+
+  // Loader
+  const [loaded, setLoaded] = React.useState(false);
+
+  // UserData
+  const [currentUser, setCurrentUser] = React.useState({});
+
+  // Cards
+  const [cards, setCards] = React.useState([]); // загруженые по поисковому запросу карточки
+  const [question, setQuestion] = React.useState('');
+  const [savedCards, setSavedCards] = React.useState([]); // сохраненные карточки
+  const [numSavedCards, setNumSavedCards] = React.useState(0);
+
+  // ------- авторизация и регистрация ----------- //
+  // Описаны обработчики: onRegister, onLogin и onSignOut.
+  // Эти обработчики переданы в соответствующие компоненты: Register.js, Login.js, Header.js.
+
+
+  React.useEffect(() => {
+  // если у пользователя есть токен в localStorage,
+  // функция проверит валидность токена
+  // и обновит данные пользователя
+  function tokenCheck() {
+    if (localStorage.getItem('token')) {
+      // авторизуем пользователя
+      setLoggedIn(true);
+      // CurrentUser
+      setCurrentUser(JSON.parse(localStorage.getItem('user')));
+    }
+  }
+  tokenCheck();
+  }, []);
+
+
+  // onRegister
+  function onRegister({email, password, name}) {
+    return auth.register(email, password, name)
+    .then((res) => {
+      if (res) {
+        if (res.status === 400) {
+          throw new Error('Не корректно заполнено одно из полей!');
+        } else {
+          // разрешаем открытие попапа "успешная регистрация"
+          setIsInfoTooltipPopupOpen(true);
+          // переадресовываем
+          history.push('/success');
+        }
+      }
+       else {
+        throw new Error('Ошибка соединения! Неполадки на сервере либо отсутствует доступ в интернет!');
+      }
+    })
+    // если ошибка регистрации
+    .catch((err) => {
+      setSbmtBtnErrMessage(err.message);
+      setShowSbmtError(true);
+    });
+  }
+
+  // onLogin
+  function onLogin({email, password}) {
+    auth.authorize(email, password)
+    .then((res) => {
+      if(res && res.token) {
+        // логгинимся
+        setLoggedIn(true);
+        //
+        isSavedNews(res.token);
+        // закрываем popup и переадресовываем пользователя на "главную"
+        closeAllPopups();
+        // history.push('/');
+        return res.token;
+      } else {
+        if (res.status === 400) {throw new Error('Не передано одно из полей!');}
+        if (res.status === 401) {throw new Error('Пользователь с email не найден!');}
+      }
+    })
+    .then((token) => {
+      auth.getContent(token)
+        .then((data) => {
+          if (data) { // записываем данные пользователя в localStorage
+            localStorage.setItem('user', JSON.stringify(data.data));
+            setCurrentUser(data.data);
+          }
+        })
+        // если токен не найден
+        .catch(err => console.log(err));
+    })
+    // если пользователь не найден
+    .catch((err) => {
+      setSbmtBtnErrMessage(err.message);
+      setShowSbmtError(true);
+    });
+  }
+
+  // onSignOut
+  function onSignOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('articles');
+    localStorage.removeItem('keyword');
+    setLoggedIn(false);
+    history.push('/');
+  }
+  // ------- авторизация и регистрация ----------- //
+
+  // ------- загрузка / сохранение / удаление статей ------- //
+
+  // отправляем запрос на получение сохранённых пользователем статей
+  // из SavedNews
+  const isSavedNews = React.useCallback((token) => {
+    getAllSavedCards(token);
+  }, []);
+
+  // отправляем запрос на получение сохранённых пользователем статей
+  // из Main
+  const isSavedNewsFromMain = React.useCallback((token) => {
+    if (loggedIn) {
+      getAllSavedCards(token);
+    }
+  }, [loggedIn]);
+
+  const [updateSavedCards, setUpdateSavedCards] = React.useState(0);
+
+  // отправляем запрос на получение сохранённых пользователем статей
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (loggedIn && updateSavedCards !== 0) {
+      getAllSavedCards(token);
+    }
+  }, [loggedIn, updateSavedCards]);
+
+  // возвращает все сохранённые пользователем статьи
+  // GET /articles
+  function getAllSavedCards(token) {
+    auth.getSavedCards(token)
+      .then((allMyCards) => {
+        // устанавливаем количество сохраненных статей
+        setNumSavedCards(allMyCards.data.length);
+        // устанавливаем сохраненные карточки
+        setSavedCards(allMyCards.data);
+      })
+      .catch((err) => {
+        console.log('Ошибка. Запрос не выполнен: ', err);
+      });
+  }
+
+  // сохраняет статью с переданными в теле
+  // keyword, title, text, date, source, link и image
+  // POST /articles
+  function handleSaveCardBtnClick(card, question) {
+    const token = localStorage.getItem('token');
+    auth.postNewCard(question, card, token)
+      .then((savedCard) => {
+        console.log(`Карточка "${savedCard.data._id}" сохранена!`);
+        // обновляем стейт сохраненых карточек
+        setUpdateSavedCards(Math.random().toString(36).substr(2, 9));
+      })
+      .catch((err) => {
+        console.log('Ошибка. Запрос не выполнен: ', err);
+      });
+  }
+
+  // удаляет сохранённую статью  по _id
+  // DELETE /articles/:articleId
+  function handleDeleteCardBtnClick(cardId) {
+    const token = localStorage.getItem('token');
+    auth.deleteMyCard(cardId, token)
+      .then((delCard) => {
+        console.log(`Карточка "${delCard.data._id}" успешно удалена!`);
+        // обновляем стейт сохраненых карточек
+        setUpdateSavedCards(Math.random().toString(36).substr(2, 9));
+      })
+      .catch((err) => {
+        console.log('Ошибка. Запрос не выполнен: ', err);
+      });
+  }
+
+  // ------- загрузка / сохранение / удаление статей ------- //
+
 
   // сообщение об открытии мини-попапа
   function handleMiniClick() {
@@ -76,20 +271,6 @@ import './App.css';
     handleLogInClick();
   }
 
-  // обработчик открытия попапа "информации об успешной регистрации"
-  function handleInfoLinkClick() {
-    setIsInfoTooltipPopupOpen(true);
-    // переадресовываем
-    history.push('/success');
-  }
-
-  // авторизация
-  function authorizationUser() {
-    setLoggedIn(true);
-    // переадресовываем
-    history.push('/saved-news');
-  }
-
   // обработчик закрытия всех попапов
   function closeAllPopups() {
     // закрываем попап
@@ -116,6 +297,70 @@ import './App.css';
       closeAllPopups();
     }
   }
+
+  React.useEffect(() => {
+    // если данные о ранее найденых статьях есть в localStorage,
+    // функция обновит стейт переменную с карточками
+    function loadFoundCards() {
+      if (localStorage.getItem('articles') && localStorage.getItem('keyword')) { // если карточки сохранены
+        // показываем блок с карточками
+        setIsSearch(true);
+        // записываем данные в стейт для отображения
+        setCards(JSON.parse(localStorage.getItem('articles')));
+        setQuestion(JSON.parse(localStorage.getItem('keyword')));
+      }
+    }
+    loadFoundCards();
+    }, [loggedIn]);
+
+  // обработчик нажатия кнопки поиска статей
+  function handleSearchBtnClick(q) {
+    // задаем параметры даты для поискового запроса
+    const from = utils.sevenDaysAgoDate();
+    const to = utils.currentDate();
+    // если поле не заполнено
+    if (q !== '') {
+      // показываем блок с карточками
+      setIsSearch(true);
+      // включаем "лоадер"
+      setLoaded(true);
+      // строка ошибки поиска по умолчанию
+      setNotFoundErrMessage('К сожалению, по вашему запросу ничего не найдено.');
+
+      newsApi.getInitialCards(q, from, to)
+        .then((data) => {
+          if (data) {
+            // данные передаются в стейт-переменную
+            setCards(data.articles);
+            setQuestion(q);
+            // данные обновляются в локальном хранилище
+            if (localStorage.getItem('articles') && localStorage.getItem('keyword')) {
+              localStorage.removeItem('articles'); // удаляем старые
+              localStorage.removeItem('keyword'); // удаляем старые
+            }
+            localStorage.setItem('articles', JSON.stringify(data.articles)); // сохраняем новые
+            localStorage.setItem('keyword', JSON.stringify(q)); // сохраняем новые
+          }
+          // если статьи не найдены - выводим сообщение
+          if (data.articles.length === 0) { setIsNotFound(true) }
+          else { setIsNotFound(false) }
+        })
+        // Если в процессе получения данных происходит ошибка,
+        // в окне результатов выводится надпись «Во время запроса произошла ошибка.
+        // Возможно, проблема с соединением или сервер недоступен.
+        // Подождите немного и попробуйте ещё раз».
+        .catch((err) => {
+          console.log(err);
+          setIsNotFound(true);
+          setNotFoundErrMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+        })
+        .finally(() => {
+          // скрываем "лоадер"
+          setLoaded(false);
+        });
+    }
+  }
+
 
   // -------- валидация полей ввода -----------------
   // ----------------------------------------------------
@@ -167,9 +412,10 @@ import './App.css';
 
   // Обработчик изменения инпута "email"
   function handleChangeEmail(e) {
-    if (e.target.validity.valid) {
+    setShowSbmtError(false);
+    if (e.target.validity.valid && validator.isEmail(e.target.value)) {
       setIsEmailValid(true);
-      setEmailValidationMessage('0');
+      setEmailValidationMessage('|');
     } else {
       setIsEmailValid(false);
       setEmailValidationMessage(e.target.validationMessage);
@@ -177,9 +423,10 @@ import './App.css';
   }
   // Обработчик изменения инпута "password"
   function handleChangePassword(e) {
+    setShowSbmtError(false);
     if (e.target.validity.valid) {
       setIsPasswordValid(true);
-      setPasswordValidationMessage('0');
+      setPasswordValidationMessage('|');
     } else {
       setIsPasswordValid(false);
       setPasswordValidationMessage(e.target.validationMessage);
@@ -187,113 +434,123 @@ import './App.css';
   }
     // Обработчик изменения инпута "name"
   function handleChangeName(e) {
+    setShowSbmtError(false);
     if (e.target.validity.valid) {
       setIsNameValid(true);
-      setNameValidationMessage('0');
+      setNameValidationMessage('|');
     } else {
       setIsNameValid(false);
       setNameValidationMessage(e.target.validationMessage);
     }
   }
   // -------- форма аутентификации / регистрации ----------
-  // ----------------------------------------
+  // ------------------------------------------------
 
 
   return (
-    <div className="app" onKeyDown={handleKeyDown}>
-    <Switch>
-      {
-      loggedIn
-      ?
-      <>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="app" onKeyDown={handleKeyDown}>
+      <Switch>
         <Route path="/saved-news">
-          <SavedNews
+          <ProtectedRoute path="/saved-news" component={SavedNews}
+            loggedIn={loggedIn}
+            onSignOut={onSignOut}
             isOpen={isPopupMenuOpen}
             onClose={closeAllPopups}
-            loggedIn={loggedIn}
             isMiniOpen={isMiniOpen}
             handleLogInClick={handleLogInClick}
             handleMiniClick={handleMiniClick}
             handleMenuOpenClick={handleMenuOpenClick}
+            setIsMiniOpen={setIsMiniOpen}
+            cards={savedCards}
+            question={question}
+            numSavedArticles={numSavedCards}
+            handleDeleteCardBtnClick={handleDeleteCardBtnClick}
+            isSavedNews={isSavedNews}
           />
         </Route>
-        <Route exact path="/">
+        <Route path="/">
           <Main
             loggedIn={loggedIn}
+            onSignOut={onSignOut}
             handleLogInClick={handleLogInClick}
             handleMenuOpenClick={handleMenuOpenClick}
             isOpen={isPopupMenuOpen}
             isMiniOpen={isMiniOpen}
             onClose={closeAllPopups}
             handleMiniClick={handleMiniClick}
+            handleSearchBtnClick={handleSearchBtnClick}
+            handleSaveCardBtnClick={handleSaveCardBtnClick}
+            handleDeleteCardBtnClick={handleDeleteCardBtnClick}
+            isSearch={isSearch}
+            loaded={loaded}
+            isNotFound={isNotFound}
+            notFoundErrMessage={notFoundErrMessage}
+            cards={cards}
+            savedCards={savedCards}
+            question={question}
+            isSavedNewsFromMain={isSavedNewsFromMain}
           />
         </Route>
-      </>
-      :
-      <Route path="/">
-        <Main
-          loggedIn={loggedIn}
-          handleLogInClick={handleLogInClick}
-          handleMenuOpenClick={handleMenuOpenClick}
-          isOpen={isPopupMenuOpen}
+      </Switch>
+      <Route path="/sign-in">
+        <Login
+          onLogin={onLogin}
+          isOpen={isLoginPopupOpen}
           isMiniOpen={isMiniOpen}
           onClose={closeAllPopups}
-          handleMiniClick={handleMiniClick}
+          handleSignUpLinkClick={handleSignUpLinkClick}
+          // authorizationUser={authorizationUser}
+          handleOverlayClick={handleOverlayClick}
+          // handleKeyPress={handleKeyPress}
+          // валидация
+          handleChangeEmailLogin={handleChangeEmail}
+          handleChangePasswordLogin={handleChangePassword}
+          isEmailValid={isEmailValid}
+          isPasswordValid={isPasswordValid}
+          emailValidationMessage={emailValidationMessage}
+          passwordValidationMessage={passwordValidationMessage}
+          isSbmtBtnActiv={isSbmtBtnActiv}
+          sbmtBtnErrMessage={sbmtBtnErrMessage}
+          showSbmtError={showSbmtError}
         />
       </Route>
-      }
-    </Switch>
-    <Route path="/sign-in">
-      <Login
-        isOpen={isLoginPopupOpen}
-        isMiniOpen={isMiniOpen}
-        onClose={closeAllPopups}
-        handleSignUpLinkClick={handleSignUpLinkClick}
-        authorizationUser={authorizationUser}
-        handleOverlayClick={handleOverlayClick}
-        // handleKeyPress={handleKeyPress}
-        // валидация
-        handleChangeEmailLogin={handleChangeEmail}
-        handleChangePasswordLogin={handleChangePassword}
-        isEmailValid={isEmailValid}
-        isPasswordValid={isPasswordValid}
-        emailValidationMessage={emailValidationMessage}
-        passwordValidationMessage={passwordValidationMessage}
-        isSbmtBtnActiv={isSbmtBtnActiv}
-      />
-    </Route>
-    <Route path="/sign-up">
-      <Register
-        isOpen={isRegisterPopupOpen}
-        isMiniOpen={isMiniOpen}
-        onClose={closeAllPopups}
-        handleSignInLinkClick={handleSignInLinkClick}
-        handleInfoLinkClick={handleInfoLinkClick}
-        handleOverlayClick={handleOverlayClick}
-        // handleKeyPress={handleKeyPress}
-        // валидация
-        handleChangeEmailRegister={handleChangeEmail}
-        handleChangePasswordRegister={handleChangePassword}
-        handleChangeNameRegister={handleChangeName}
-        isEmailValid={isEmailValid}
-        isPasswordValid={isPasswordValid}
-        isNameValid={isNameValid}
-        emailValidationMessage={emailValidationMessage}
-        passwordValidationMessage={passwordValidationMessage}
-        nameValidationMessage={nameValidationMessage}
-        isSbmtBtnActiv={isSbmtBtnActiv}
-      />
-    </Route>
-    <Route path="/success">
-      <InfoTooltip
-        isOpen={isInfoTooltipPopupOpen}
-        isMiniOpen={isMiniOpen}
-        onClose={closeAllPopups}
-        handleOverlayClick={handleOverlayClick}
-        // handleKeyPress={handleKeyPress}
-      />
-    </Route>
-    </div>
+      <Route path="/sign-up">
+        <Register
+          onRegister={onRegister}
+          isOpen={isRegisterPopupOpen}
+          isMiniOpen={isMiniOpen}
+          onClose={closeAllPopups}
+          handleSignInLinkClick={handleSignInLinkClick}
+          // handleInfoLinkClick={handleInfoLinkClick}
+          handleOverlayClick={handleOverlayClick}
+          // handleKeyPress={handleKeyPress}
+          // валидация
+          handleChangeEmailRegister={handleChangeEmail}
+          handleChangePasswordRegister={handleChangePassword}
+          handleChangeNameRegister={handleChangeName}
+          isEmailValid={isEmailValid}
+          isPasswordValid={isPasswordValid}
+          isNameValid={isNameValid}
+          emailValidationMessage={emailValidationMessage}
+          passwordValidationMessage={passwordValidationMessage}
+          nameValidationMessage={nameValidationMessage}
+          isSbmtBtnActiv={isSbmtBtnActiv}
+          sbmtBtnErrMessage={sbmtBtnErrMessage}
+          showSbmtError={showSbmtError}
+        />
+      </Route>
+      <Route path="/success">
+        <InfoTooltip
+          isOpen={isInfoTooltipPopupOpen}
+          isMiniOpen={isMiniOpen}
+          onClose={closeAllPopups}
+          handleOverlayClick={handleOverlayClick}
+          handleLogInClick={handleLogInClick}
+        />
+      </Route>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

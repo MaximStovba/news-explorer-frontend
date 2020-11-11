@@ -1,6 +1,10 @@
 # News-Explorer-Frontend
 Фронтэнд проекта News Explorer, включающий авторизацию и регистрацию пользователей, операции со статьями и пользователями.
 
+Ссылка на опубликованный проект<br />
+Открыть [https://newsex.students.nomoreparties.co/](https://newsex.students.nomoreparties.co/) для просмотра.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

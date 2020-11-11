@@ -22,6 +22,7 @@
   align-content: space-between;
   /* курсор */
   cursor: pointer;
+  text-decoration: none;
 }
 .card__image {
   /* width: 400px; */
@@ -160,7 +161,7 @@
 }
 
 .card__btn {
-  z-index: 1;
+  z-index: 1; /* 1 */
   padding: 0;
   /* расположение в сетке card */
   grid-area: card__btn;

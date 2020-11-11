@@ -14,39 +14,84 @@ import './Main.css';
 
 function Main({
   loggedIn,
+  onSignOut,
   handleLogInClick,
   handleMenuOpenClick,
   isOpen,
   isMiniOpen,
   onClose,
   handleMiniClick,
+  handleSearchBtnClick,
+  handleSaveCardBtnClick,
+  handleDeleteCardBtnClick,
+  isSearch,
+  loaded,
+  isNotFound,
+  notFoundErrMessage,
+  cards,
+  question,
+  savedCards,
+  isSavedNewsFromMain,
 }) {
+
   const isMain = true;
+
+  // отправляем запрос на получение сохранённых пользователем статей
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    isSavedNewsFromMain(token);
+  }, [isSavedNewsFromMain]);
+
   return (
     <div className="main">
       <Header
         loggedIn={loggedIn}
+        onSignOut={onSignOut}
         isMain={isMain}
         isMiniOpen={isMiniOpen}
         handleLogInClick={handleLogInClick}
         handleMiniClick={handleMiniClick}
         handleMenuOpenClick={handleMenuOpenClick}
       />
-      <SearchForm />
-      <Preloader />
-      <NotFound />
-      <NewsCardList loggedIn={loggedIn} isMain={isMain} />
+      <SearchForm
+        handleSearchBtnClick={handleSearchBtnClick}
+      />
+      {
+        loaded
+        ? <Preloader />
+        : ''
+      }
+      {
+        isNotFound
+        ? <NotFound notFoundErrMessage={notFoundErrMessage} />
+        : ''
+      }
+      {
+        isSearch && !loaded && !isNotFound
+        ? <NewsCardList
+            loggedIn={loggedIn}
+            isMain={isMain}
+            handleLogInClick={handleLogInClick}
+            handleMiniClick={handleMiniClick}
+            handleSaveCardBtnClick={handleSaveCardBtnClick}
+            handleDeleteCardBtnClick={handleDeleteCardBtnClick}
+            cards={cards}
+            question={question}
+            savedCards={savedCards}
+          />
+        : ''
+      }
       <About />
       <Footer />
       <PopupMenu
         loggedIn={loggedIn}
+        onSignOut={onSignOut}
         isMain={isMain}
         isOpen={isOpen}
         onClose={onClose}
         handleLogInClick={handleLogInClick}
         handleMiniClick={handleMiniClick}
       />
-      {/**/}
     </div>
   );
 }
