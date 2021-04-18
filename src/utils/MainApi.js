@@ -2,33 +2,32 @@
 
 // signup — регистрация пользователя
 
-export const BASE_URL = 'https://api.newsex.students.nomoreparties.co';
-//export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'http://localhost:3001';
 export const token = localStorage.getItem('token');
 
 export const register = (email, password, name) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ password, email, name})
+    body: JSON.stringify({ password, email, name }),
   })
-  .then((res) => {
-    try {
-      if (res.status === 200) {
-        return res.json();
-      } else {
-        return res;
+    .then((res) => {
+      try {
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          return res;
+        }
+      } catch (e) {
+        return e;
       }
-    } catch(e) {
-      return (e)
-    }
-  })
-  .catch((err) => {
-    console.log(err)
-  });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 // signin — авторизация пользователя
@@ -36,33 +35,31 @@ export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify({email, password})
+    body: JSON.stringify({ email, password }),
   })
-  .then((res) => {
-    try {
-      if (res.status === 200) {
-        return res.json();
-      } else {
-        //if (res.status === 400) {throw new Error('Не передано одно из полей!');}
-        //if (res.status === 401) {throw new Error('Пользователь с email не найден!');}
-        return res;
+    .then((res) => {
+      try {
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          return res;
+        }
+      } catch (e) {
+        return e;
       }
-    } catch(e) {
-      return (e)
-    }
-  })
-  .then((data) => {
-    if (data.token) {
-      localStorage.setItem('token', data.token);
-      return data;
-    } else {
-      return data;
-    }
-  })
-  .catch(err => console.log(err))
+    })
+    .then((data) => {
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        return data;
+      } else {
+        return data;
+      }
+    })
+    .catch((err) => console.log(err));
 };
 
 // Параметры запроса для проверки валидности токена
@@ -71,18 +68,18 @@ export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    }
+      Authorization: `Bearer ${token}`,
+    },
   })
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    return data;
-  })
-  .catch((err) => console.log(err));
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      return data;
+    })
+    .catch((err) => console.log(err));
 };
 
 // возвращает все сохранённые пользователем статьи
@@ -91,12 +88,11 @@ export const getSavedCards = (token) => {
   return fetch(`${BASE_URL}/articles`, {
     method: 'GET',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    }
-  })
-  .then((res) => {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => {
     if (res.ok) {
       return res.json();
     }
@@ -111,8 +107,8 @@ export const postNewCard = (keyword, articleData, token) => {
   return fetch(`${BASE_URL}/articles`, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       keyword: keyword,
@@ -122,9 +118,8 @@ export const postNewCard = (keyword, articleData, token) => {
       source: articleData.source.name,
       link: articleData.url,
       image: articleData.urlToImage,
-    })
-  })
-  .then((res) => {
+    }),
+  }).then((res) => {
     if (res.ok) {
       return res.json();
     }
@@ -138,10 +133,9 @@ export const deleteMyCard = (articleId, token) => {
   return fetch(`${BASE_URL}/articles/${articleId}`, {
     method: 'DELETE',
     headers: {
-      'Authorization': `Bearer ${token}`,
-    }
-  })
-  .then((res) => {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => {
     if (res.ok) {
       return res.json();
     }
