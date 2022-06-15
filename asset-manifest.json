@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/news-explorer-frontend/static/css/main.e9282e67.chunk.css",
-    "main.js": "/news-explorer-frontend/static/js/main.80759bf2.chunk.js",
-    "main.js.map": "/news-explorer-frontend/static/js/main.80759bf2.chunk.js.map",
+    "main.js": "/news-explorer-frontend/static/js/main.e39d50b6.chunk.js",
+    "main.js.map": "/news-explorer-frontend/static/js/main.e39d50b6.chunk.js.map",
     "runtime-main.js": "/news-explorer-frontend/static/js/runtime-main.0fc9bfae.js",
     "runtime-main.js.map": "/news-explorer-frontend/static/js/runtime-main.0fc9bfae.js.map",
-    "static/js/2.a1af9f0f.chunk.js": "/news-explorer-frontend/static/js/2.a1af9f0f.chunk.js",
-    "static/js/2.a1af9f0f.chunk.js.map": "/news-explorer-frontend/static/js/2.a1af9f0f.chunk.js.map",
+    "static/js/2.35e904a6.chunk.js": "/news-explorer-frontend/static/js/2.35e904a6.chunk.js",
+    "static/js/2.35e904a6.chunk.js.map": "/news-explorer-frontend/static/js/2.35e904a6.chunk.js.map",
     "index.html": "/news-explorer-frontend/index.html",
-    "precache-manifest.42c1386b29b1bd4d21c8d24586b0249b.js": "/news-explorer-frontend/precache-manifest.42c1386b29b1bd4d21c8d24586b0249b.js",
+    "precache-manifest.6e67c2abbf6807b79bde530671871151.js": "/news-explorer-frontend/precache-manifest.6e67c2abbf6807b79bde530671871151.js",
     "service-worker.js": "/news-explorer-frontend/service-worker.js",
     "static/css/main.e9282e67.chunk.css.map": "/news-explorer-frontend/static/css/main.e9282e67.chunk.css.map",
-    "static/js/2.a1af9f0f.chunk.js.LICENSE.txt": "/news-explorer-frontend/static/js/2.a1af9f0f.chunk.js.LICENSE.txt",
+    "static/js/2.35e904a6.chunk.js.LICENSE.txt": "/news-explorer-frontend/static/js/2.35e904a6.chunk.js.LICENSE.txt",
     "static/media/About.css": "/news-explorer-frontend/static/media/about-img.12d68994.jpeg",
     "static/media/btn_like_hover.svg": "/news-explorer-frontend/static/media/btn_like_hover.dfcf8893.svg",
     "static/media/btn_like_marked.svg": "/news-explorer-frontend/static/media/btn_like_marked.d69d34e7.svg",
@@ -28,8 +28,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.0fc9bfae.js",
-    "static/js/2.a1af9f0f.chunk.js",
+    "static/js/2.35e904a6.chunk.js",
     "static/css/main.e9282e67.chunk.css",
-    "static/js/main.80759bf2.chunk.js"
+    "static/js/main.e39d50b6.chunk.js"
   ]
 }
