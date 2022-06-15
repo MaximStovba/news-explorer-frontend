@@ -31,7 +31,7 @@ function Navigation({
   }
   return (
     <nav className={`navigation ${isVertical ? 'navigation_vertical' : ''} navigation_status_${loggedIn ? 'signin' : 'signout'}`}>
-      <a href="//news-explorer-frontend" className={
+      <a href="/news-explorer-frontend" className={
        `navigation__link
         navigation__link_style_${!isMain ? 'black' : 'white'}
         navigation__link_type_main
