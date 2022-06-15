@@ -469,7 +469,7 @@ import './App.css';
             isSavedNews={isSavedNews}
           />
         </Route>
-        <Route path="/">
+        <Route path="/news-explorer-frontend">
           <Main
             loggedIn={loggedIn}
             onSignOut={onSignOut}
