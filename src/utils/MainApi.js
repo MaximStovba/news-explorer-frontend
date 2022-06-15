@@ -2,7 +2,7 @@
 
 // signup — регистрация пользователя
 
-export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'https://news-explorer-api.herokuapp.com'; // http://localhost:3001
 export const token = localStorage.getItem('token');
 
 export const register = (email, password, name) => {
