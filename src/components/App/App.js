@@ -451,8 +451,8 @@ import './App.css';
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app" onKeyDown={handleKeyDown}>
       <Switch>
-        <Route path="/news-explorer-frontend/saved-news">
-          <ProtectedRoute path="/news-explorer-frontend/saved-news" component={SavedNews}
+        <Route path="/saved-news">
+          <ProtectedRoute path="/saved-news" component={SavedNews}
             loggedIn={loggedIn}
             onSignOut={onSignOut}
             isOpen={isPopupMenuOpen}
@@ -469,7 +469,7 @@ import './App.css';
             isSavedNews={isSavedNews}
           />
         </Route>
-        <Route path="/news-explorer-frontend">
+        <Route path="/">
           <Main
             loggedIn={loggedIn}
             onSignOut={onSignOut}
@@ -493,7 +493,7 @@ import './App.css';
           />
         </Route>
       </Switch>
-      <Route path="/news-explorer-frontend/sign-in">
+      <Route path="/sign-in">
         <Login
           onLogin={onLogin}
           isOpen={isLoginPopupOpen}
@@ -515,7 +515,7 @@ import './App.css';
           showSbmtError={showSbmtError}
         />
       </Route>
-      <Route path="/news-explorer-frontend/sign-up">
+      <Route path="/sign-up">
         <Register
           onRegister={onRegister}
           isOpen={isRegisterPopupOpen}
@@ -540,7 +540,7 @@ import './App.css';
           showSbmtError={showSbmtError}
         />
       </Route>
-      <Route path="/news-explorer-frontend/success">
+      <Route path="/success">
         <InfoTooltip
           isOpen={isInfoTooltipPopupOpen}
           isMiniOpen={isMiniOpen}
