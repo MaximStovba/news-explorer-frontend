@@ -1,6 +1,7 @@
 // Navigation.js
 
 import React from 'react';
+import { Link } from 'react-router-dom'
 // импортируем объект контекста
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Navigation.css';
@@ -31,22 +32,22 @@ function Navigation({
   }
   return (
     <nav className={`navigation ${isVertical ? 'navigation_vertical' : ''} navigation_status_${loggedIn ? 'signin' : 'signout'}`}>
-      <a href="/news-explorer-frontend" className={
+      <Link to="/" className={
        `navigation__link
         navigation__link_style_${!isMain ? 'black' : 'white'}
         navigation__link_type_main
         ${!isMain ? '' : 'navigation__link_status_active'}`
-      }>Главная</a>
+      }>Главная</Link>
 
       {
         loggedIn
         ? <>
-          <a href="/news-explorer-frontend/saved-news" className={
+          <Link to="/saved-news" className={
             `navigation__link
               navigation__link_style_${!isMain ? 'black' : 'white'}
               navigation__link_type_article
               ${!isMain ? 'navigation__link_status_active' : ''}`
-          }>Сохранённые&nbsp;статьи</a>
+          }>Сохранённые&nbsp;статьи</Link>
           <button type="button"
             onClick={logOut}
             className={
@@ -73,8 +74,8 @@ function Navigation({
         isVertical && loggedIn
         ?
         <nav className="nav-vertical">
-          <a href="/news-explorer-frontend" className="nav-vertical__link nav-vertical__link_type_main">Главная</a>
-          <a href="/news-explorer-frontend/saved-news" className="nav-vertical__link nav-vertical__link_type_article">Сохранённые&nbsp;статьи</a>
+          <Link to="/" className="nav-vertical__link nav-vertical__link_type_main">Главная</Link>
+          <Link to="/saved-news" className="nav-vertical__link nav-vertical__link_type_article">Сохранённые&nbsp;статьи</Link>
           <button onClick={logOut} className="nav-vertical__btn nav-vertical__btn_logout" type="button">{currentUser.name}</button>
         </nav>
         : ""

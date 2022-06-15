@@ -451,8 +451,8 @@ import './App.css';
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app" onKeyDown={handleKeyDown}>
       <Switch>
-        <Route path="/news-explorer-frontend/saved-news">
-          <ProtectedRoute path="/news-explorer-frontend/saved-news" component={SavedNews}
+        <Route path="/saved-news">
+          <ProtectedRoute path="/saved-news" component={SavedNews}
             loggedIn={loggedIn}
             onSignOut={onSignOut}
             isOpen={isPopupMenuOpen}

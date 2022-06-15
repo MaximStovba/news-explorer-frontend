@@ -9,7 +9,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer__container">
-        <p className="footer__copyright">&copy; 2020 Supersite, Powered by News API</p>
+        <p className="footer__copyright">&copy; 2022 Supersite, Powered by News API</p>
         <ul className="footer__column-links">
           <li className="footer__column footer__column_name_main"><a className="footer__link footer__link_name_main footer__link_type_text" href="/">Главная</a></li>
           <li className="footer__column footer__column_name_yap"><a className="footer__link footer__link_name_yap footer__link_type_text" href="https://praktikum.yandex.ru" rel="noopener noreferrer" target="_blank">Яндекс.Практикум</a></li>
