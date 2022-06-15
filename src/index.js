@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter } from 'react-router-dom'; // импортируем BrowserRouter
+import { BrowserRouter } from 'react-router-dom'; // импортируем BrowserRouter
 import './index.css';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <HashRouter>
+    <BrowserRouter basename="/news-explorer-frontend">
       <App />
-    </HashRouter>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
