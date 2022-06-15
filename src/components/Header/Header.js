@@ -18,7 +18,7 @@ function Header({
   return (
     <header className={`header header_style_${isMain || isOpen ? 'white' : 'black'} ${isMain ? '' : 'header_fixed'}`}>
       <div className="header__container">
-        <a href="/" className={`header__logo header__logo_style_${isMain || isOpen  ? 'white' : 'black'}`}>NewsExplorer</a>
+        <a href="/news-explorer-frontend/" className={`header__logo header__logo_style_${isMain || isOpen  ? 'white' : 'black'}`}>NewsExplorer</a>
         <Navigation
           loggedIn={loggedIn}
           onSignOut={onSignOut}
