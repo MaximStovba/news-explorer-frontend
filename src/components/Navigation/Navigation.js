@@ -31,7 +31,7 @@ function Navigation({
   }
   return (
     <nav className={`navigation ${isVertical ? 'navigation_vertical' : ''} navigation_status_${loggedIn ? 'signin' : 'signout'}`}>
-      <a href="/" className={
+      <a href="//news-explorer-frontend" className={
        `navigation__link
         navigation__link_style_${!isMain ? 'black' : 'white'}
         navigation__link_type_main
@@ -41,7 +41,7 @@ function Navigation({
       {
         loggedIn
         ? <>
-          <a href="/saved-news" className={
+          <a href="/news-explorer-frontend/saved-news" className={
             `navigation__link
               navigation__link_style_${!isMain ? 'black' : 'white'}
               navigation__link_type_article
@@ -73,8 +73,8 @@ function Navigation({
         isVertical && loggedIn
         ?
         <nav className="nav-vertical">
-          <a href="/" className="nav-vertical__link nav-vertical__link_type_main">Главная</a>
-          <a href="/saved-news" className="nav-vertical__link nav-vertical__link_type_article">Сохранённые&nbsp;статьи</a>
+          <a href="/news-explorer-frontend" className="nav-vertical__link nav-vertical__link_type_main">Главная</a>
+          <a href="/news-explorer-frontend/saved-news" className="nav-vertical__link nav-vertical__link_type_article">Сохранённые&nbsp;статьи</a>
           <button onClick={logOut} className="nav-vertical__btn nav-vertical__btn_logout" type="button">{currentUser.name}</button>
         </nav>
         : ""
