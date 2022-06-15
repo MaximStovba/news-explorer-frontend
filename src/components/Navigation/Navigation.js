@@ -1,7 +1,7 @@
 // Navigation.js
 
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 // импортируем объект контекста
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './Navigation.css';

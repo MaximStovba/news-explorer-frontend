@@ -1,6 +1,7 @@
 // Header.js
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
 
@@ -18,7 +19,7 @@ function Header({
   return (
     <header className={`header header_style_${isMain || isOpen ? 'white' : 'black'} ${isMain ? '' : 'header_fixed'}`}>
       <div className="header__container">
-        <a href="/" className={`header__logo header__logo_style_${isMain || isOpen  ? 'white' : 'black'}`}>NewsExplorer</a>
+        <Link to="/" className={`header__logo header__logo_style_${isMain || isOpen  ? 'white' : 'black'}`}>NewsExplorer</Link>
         <Navigation
           loggedIn={loggedIn}
           onSignOut={onSignOut}
